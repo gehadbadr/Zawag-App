@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="347" height="443" viewBox="0 0 347 443">
+  <defs>
+    <filter id="Subtraction_5" x="0" y="0" width="347" height="443" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_2037" data-name="Group 2037" transform="translate(-14 -97)">
+    <g transform="matrix(1, 0, 0, 1, 14, 97)" filter="url(#Subtraction_5)">
+      <path id="Subtraction_5-2" data-name="Subtraction 5" d="M-563-484H-872a10.011,10.011,0,0,1-10-10V-804.49c.161.011.329.017.5.017,4.687,0,8.5-4.38,8.5-9.763S-876.813-824-881.5-824c-.165,0-.334.006-.5.017V-899a10.011,10.011,0,0,1,10-10h309a10.012,10.012,0,0,1,10,10v75.016c-4.486.3-8,4.58-8,9.747s3.514,9.448,8,9.747V-494A10.012,10.012,0,0,1-563-484Z" transform="translate(891 915)" fill="#fff"/>
+    </g>
+    <line id="Line_119" data-name="Line 119" x2="291" transform="translate(42.5 198.5)" fill="none" stroke="#c7c7c7" stroke-linecap="round" stroke-width="4" stroke-dasharray="0 12"/>
+  </g>
+</svg>
