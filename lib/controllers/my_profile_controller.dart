@@ -1,11 +1,16 @@
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:effa/helper/dio_helper.dart';
+import 'package:effa/models/user/user_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:dio/dio.dart'as Dio;
 
 class MyProfileController extends GetxController{
   bool gender = false;
    bool parentDataShow = false;
    bool isRequest = false;
+  UserInfooo? user;
+  bool loader =false;
    requestFatherData(){
      isRequest = true;
      print(isRequest);
@@ -19,12 +24,7 @@ class MyProfileController extends GetxController{
      parentDataShow = true;
      update();
    }
-  List<String> userImages =[
-    "https://www.pngall.com/wp-content/uploads/5/Cool-Model-Man.png",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE7R3na3f6i4udmTbnaRyZce2nQiYwSFMiYUB82n1w_wvQ_xCHbOqhEe_6Eok-TDyIS-8&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkIzYybsGnqetUlTz4io4EBsimplksJJjfdOINua8PQxuCPyeLHGFWB6TzrywnJuBK95o&usqp=CAU",
-    "https://img.favpng.com/17/20/21/hairstyle-fashion-layered-hair-male-png-favpng-zjDeqZ0cBmzgv4ZA8h1TCvF2v.jpg",
-  ];
+  List<ImagesUser> userImages =[];
 
   List<String> interests =[
     "fgdgdg",
@@ -77,8 +77,27 @@ class MyProfileController extends GetxController{
   @override
   void onInit() {
     totalDots = userImages.length;
+    fetchUserData();
     // TODO: implement onInit
     super.onInit();
   }
-
+  Future <void> fetchUserData() async {
+    try {
+      loader = true;
+      final Dio.Response response = await dio().get(
+        'myData/4',
+      );
+      user = UserInfooo.fromJson(response.data);
+      userImages = user!.images!;
+      loader = false;
+      update();
+    } catch (err) {
+      loader = false;
+      update();
+      Get.snackbar('خطأ في الاتصال', "NETWORK_ERR",
+          snackPosition: SnackPosition.BOTTOM);
+      print(err);
+      // ignore: unnecessary_brace_in_string_interps
+    }
+  }
 }
