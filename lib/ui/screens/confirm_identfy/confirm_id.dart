@@ -53,7 +53,7 @@ class ConfirmInfo extends StatelessWidget {
                     SizedBox(
                       height: 40.h,
                     ),
-                    Directionality(
+                    controller.hide1?const SizedBox():Directionality(
                         textDirection: TextDirection.rtl,
                         child: Row(children: [
                           SvgPicture.asset("assets/icon/pic.svg"),
@@ -68,9 +68,10 @@ class ConfirmInfo extends StatelessWidget {
                             ),
                           ),
                         ])),
-                    SizedBox(
+                    controller.hide1?const SizedBox():SizedBox(
                       height: 15.h,
                     ),
+                    controller.hide1?const SizedBox():
                     Row(children: [
                       Expanded(
                           child: UploadID(
@@ -86,7 +87,6 @@ class ConfirmInfo extends StatelessWidget {
                             myWidget: Padding(
                               padding: EdgeInsets.only(top: 20.h, bottom: 5.h),
                               child:
-                              // model.identity_back != null &&
                                   controller.image1.uri
                                   .toString()
                                   .isEmpty?
@@ -97,7 +97,6 @@ class ConfirmInfo extends StatelessWidget {
                                     height: 96.0,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
-                                      //border: Border.all(color: Appc.colorPrimary,width: 1),
 
                                     ),
                                     child: CircleAvatar(
@@ -178,10 +177,10 @@ class ConfirmInfo extends StatelessWidget {
                             ),
                           )),
                     ]),
-                    SizedBox(
+                    controller.hide1?const SizedBox():SizedBox(
                       height: 30.h,
                     ),
-                    Row(
+                    controller.hide1||controller.hide2?const SizedBox():Row(
                       children: [
                         Expanded(
                           child: Padding(
@@ -208,10 +207,10 @@ class ConfirmInfo extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    controller.hide2?const SizedBox():const SizedBox(
                       height: 30,
                     ),
-                    Directionality(
+                    controller.hide2?const SizedBox(): Directionality(
                         textDirection: TextDirection.rtl,
                         child: Row(children: [
                           SvgPicture.asset("assets/icon/pic.svg"),
@@ -226,10 +225,10 @@ class ConfirmInfo extends StatelessWidget {
                             ),
                           ),
                         ])),
-                    SizedBox(
+                    controller.hide2?const SizedBox():SizedBox(
                       height: 15.h,
                     ),
-                    Expanded(
+                    controller.hide2?const SizedBox(): Expanded(
                         child: UploadID(
                           context: context,
                           myFile: controller.image3,
@@ -294,8 +293,10 @@ class ConfirmInfo extends StatelessWidget {
                             });
                       },
                       nav: (){
-                        // Get.to(
-                        //   DashBoardMale(),);
+                        if((UploadID.isUploadedImg1 &&
+                            UploadID.isUploadedImg2)  || UploadID.isUploadedImg3){
+                          controller.confirmInfo();
+                        }
                       },
                       color: ((UploadID.isUploadedImg1 &&
                                 UploadID.isUploadedImg2)  || UploadID.isUploadedImg3)

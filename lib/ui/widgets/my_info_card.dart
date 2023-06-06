@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyInfoCard extends StatelessWidget {
   MyInfoCard({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class MyInfoCard extends StatelessWidget {
                           ),
                           Text(
                             'البيانات الشخصية & الجسدية',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontSize: 16.sp,
                             ),
                           ),
@@ -52,7 +53,7 @@ class MyInfoCard extends StatelessWidget {
                         children: List<Widget>.generate(
                             controller.personal.length, (int index) {
                           return _editTitleChip(
-                            controller.personal[index],
+                            "${controller.personal[index].answerContent}",
                           );
                         }),
                       ),
@@ -71,7 +72,7 @@ class MyInfoCard extends StatelessWidget {
                           ),
                           Text(
                             'الدين & الحالة الإجتماعية ',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontSize: 16.sp,
                             ),
                           ),
@@ -85,7 +86,7 @@ class MyInfoCard extends StatelessWidget {
                         children: List<Widget>.generate(
                             controller.relegion.length, (int index) {
                           return _editTitleChip(
-                            controller.relegion[index],
+                           "${controller.relegion[index].answerContent}",
                           );
                         }),
                       ),
@@ -104,7 +105,7 @@ class MyInfoCard extends StatelessWidget {
                           ),
                           Text(
                             'التعليم & العمل',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontSize: 16.sp,
                             ),
                           ),
@@ -118,7 +119,7 @@ class MyInfoCard extends StatelessWidget {
                         children: List<Widget>.generate(controller.study.length,
                             (int index) {
                           return _editTitleChip(
-                            controller.study[index],
+                            "${controller.study[index].answerContent}",
                           );
                         }),
                       ),
@@ -137,7 +138,7 @@ class MyInfoCard extends StatelessWidget {
                           ),
                           Text(
                             'العائله',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontSize: 16.sp,
                             ),
                           ),
@@ -151,7 +152,7 @@ class MyInfoCard extends StatelessWidget {
                         children: List<Widget>.generate(
                             controller.family.length, (int index) {
                           return _editTitleChip(
-                            controller.family[index],
+                            "${controller.family[index].answerContent}",
                           );
                         }),
                       ),
@@ -170,7 +171,7 @@ class MyInfoCard extends StatelessWidget {
                           ),
                           Text(
                             'الاهتمامات',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontSize: 16.sp,
                             ),
                           ),
@@ -185,7 +186,7 @@ class MyInfoCard extends StatelessWidget {
                         children: List<Widget>.generate(
                             controller.interests.length, (int index) {
                           return _editTitleChip(
-                            controller.interests[index],
+                            "${controller.interests[index]}",
                           );
                         }),
                       ),
@@ -204,7 +205,7 @@ class MyInfoCard extends StatelessWidget {
                           ),
                           Text(
                             'وصف عنى',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontSize: 16.sp,
                             ),
                           ),
@@ -219,7 +220,7 @@ class MyInfoCard extends StatelessWidget {
                           bottom: 20.0.h,
                         ),
                         child: _editTitleTextField(
-                            "وصف عني", " snp.data!.user!.aboutYou!"),
+                            "وصف عني", "${controller.user?.user?.aboutYou}"),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -236,7 +237,7 @@ class MyInfoCard extends StatelessWidget {
                           ),
                           Text(
                             'وصف عن شريكة حياتى',
-                            style: TextStyle(
+                            style: GoogleFonts.cairo(
                               fontSize: 16.sp,
                             ),
                           ),
@@ -250,7 +251,7 @@ class MyInfoCard extends StatelessWidget {
                           top: 20.0.h,
                         ),
                         child: _editTitleTextField("وصف عن شريك حياتي",
-                            "snp.data!.user!.aboutPartner!"),
+                            "${controller.user?.user?.aboutPartner}"),
                       ),
                     ]),
               ),
@@ -269,7 +270,7 @@ class MyInfoCard extends StatelessWidget {
             side: BorderSide(
                 color: lightPink, width: 1.7.w, style: BorderStyle.solid),
             label: Text(txt,
-                style: TextStyle(
+                style: GoogleFonts.cairo(
                   color: black,
                   fontSize: 14.0.sp,
                 )),
@@ -281,7 +282,7 @@ class MyInfoCard extends StatelessWidget {
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: txt,
-          labelStyle: TextStyle(
+          labelStyle: GoogleFonts.cairo(
             color: basicPink,
             fontSize: 16.sp,
           ),
@@ -289,8 +290,8 @@ class MyInfoCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.0),
           ),
         ),
-        child: Text(txtValue,
-            style: TextStyle(
+        child: Text(txtValue == "null"?"لم يتم كتابة وصف":txtValue,
+            style: GoogleFonts.cairo(
               color: black,
               fontSize: 14.0.sp,
             )),

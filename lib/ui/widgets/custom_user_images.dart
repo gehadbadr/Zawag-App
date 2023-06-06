@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:effa/controllers/my_profile_controller.dart';
 import 'package:effa/helper/app_colors.dart';
+import 'package:effa/models/user/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,7 +13,7 @@ import 'dart:math' as math;
 import 'package:google_fonts/google_fonts.dart';
 
 class ImageUserCard extends StatelessWidget {
-  List<String> images;
+  List<ImagesUser> images;
   final Function(int index, CarouselPageChangedReason reason)? onPageChanged;
   String name;
   String age;
@@ -202,13 +203,13 @@ class ImageUserCard extends StatelessWidget {
     );
   }
 
-  List<Widget> generateImageTiles(List<String> images) {
+  List<Widget> generateImageTiles(List<ImagesUser> images) {
     return images
         .map(
           (element) => ClipRRect(
         borderRadius: BorderRadius.circular(18.0),
         child: CachedNetworkImage(
-          imageUrl: element,
+          imageUrl: element.image!,
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               image: DecorationImage(

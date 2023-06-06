@@ -47,17 +47,21 @@ class MyProfile extends StatelessWidget {
           ],
           leading: Container(),
         ),
-        body: SingleChildScrollView(
-                child: Padding(
-                  padding:
-                  EdgeInsets.only(right: 10.w, left: 10.w, top: 9.h, bottom: 30.h),
-                  child: Column(children: [
-                    ProfileCard(),
-                    MyInfoCard(),
-                    showEdit?const EditButton():const SizedBox()
-                  ]),
-                ),
-              )
+        body: GetBuilder<MyProfileController>(
+          builder: (controller){
+            return controller.loader?const Center(child: CircularProgressIndicator(color: basicPink,),):SingleChildScrollView(
+              child: Padding(
+                padding:
+                EdgeInsets.only(right: 10.w, left: 10.w, top: 9.h, bottom: 30.h),
+                child: Column(children: [
+                  ProfileCard(),
+                  MyInfoCard(),
+                  showEdit?const EditButton():const SizedBox()
+                ]),
+              ),
+            );
+          },
+        )
 
     );
   }

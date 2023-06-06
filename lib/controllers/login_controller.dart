@@ -31,12 +31,7 @@ class LoginController extends GetxController{
     checkNum = true;
     update();
   }
-  @override
-  void onInit() {
-    controllerr.text = "10042224444";
-    // TODO: implement onInit
-    super.onInit();
-  }
+
   @override
   void onClose() {
     controllerr.dispose();
@@ -48,7 +43,8 @@ class LoginController extends GetxController{
     loader = true;
     update();
     String phoneNumber = countryCode+controllerr.text;
-        FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    // Force reCAPTCHA flo
     await auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {
@@ -58,9 +54,9 @@ class LoginController extends GetxController{
       verificationFailed: (FirebaseAuthException e) {
         // Handle verification failed
       },
-      codeSent: (String verificationId, int? resendToken) {
-        storage.write("verificationId", verificationId);
-        storage.write("resendToken", resendToken);
+      codeSent: (String verificationId, int? resendToken)async {
+        await storage.write("verificationId", verificationId);
+        await storage.write("resendToken", resendToken);
 
         // Save the verification ID to use later
         // You can also use the resendToken to send another SMS

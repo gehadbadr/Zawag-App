@@ -1,6 +1,7 @@
 import 'package:custom_timer/custom_timer.dart';
 import 'package:effa/controllers/my_profile_controller.dart';
 import 'package:effa/helper/app_colors.dart';
+import 'package:effa/models/user/user_data.dart';
 import 'package:effa/ui/widgets/saprator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,12 +30,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomUserInfoCard extends StatefulWidget {
-  List<String> personalData;
-  List<String> relegion;
-  List<String> study;
-  List<String> family;
+  List<Question> personalData;
+  List<Question> relegion;
+  List<Question> study;
+  List<Question> family;
   List<String> interests;
-  List<String> userImages;
+  List<ImagesUser> userImages;
   String aboutMe;
   String aboutPartner;
   String cost;
@@ -113,7 +114,7 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard> with TickerProv
                               children: List<Widget>.generate(
                                 widget.personalData.length, (int index) {
                                 return _editTitleChip(
-                                  widget.personalData[index],
+                                  widget.personalData[index].answerContent!,
                                 );
                               }),
                             ),
@@ -146,7 +147,7 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard> with TickerProv
                               children: List<Widget>.generate(
                                   widget.relegion.length, (int index) {
                                 return _editTitleChip(
-                                  widget.relegion[index],
+                                  widget.relegion[index].answerContent!,
                                 );
                               }),
                             ),
@@ -179,7 +180,7 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard> with TickerProv
                               children: List<Widget>.generate(widget.study.length,
                                       (int index) {
                                     return _editTitleChip(
-                                      widget.study[index],
+                                      widget.study[index].answerContent!,
                                     );
                                   }),
                             ),
@@ -212,7 +213,7 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard> with TickerProv
                               children: List<Widget>.generate(
                                   widget.family.length, (int index) {
                                 return _editTitleChip(
-                                  widget.family[index],
+                                  widget.family[index].answerContent!,
                                 );
                               }),
                             ),
@@ -317,7 +318,7 @@ class _CustomUserInfoCardState extends State<CustomUserInfoCard> with TickerProv
                     ),
                   ),
                 )),
-            widget.isGirl?SizedBox():widget.isRequest?_cancel():_buildManButton()
+            widget.isGirl?const SizedBox():widget.isRequest?_cancel():_buildManButton()
           ],
         ),
       ),

@@ -26,45 +26,15 @@ class MyProfileController extends GetxController{
    }
   List<ImagesUser> userImages =[];
 
-  List<String> interests =[
-    "fgdgdg",
-    "jhkjk",
-    "khjkjh",
-    "hgfghfg",
-  ];
+  List<String> interests =[];
 
-  List<String> family =[
-    "fgdgddfdsfg",
-    "jhksdfjk",
-    "khdsfjkjh",
-    "hgdsfsdfghfg",
-  ];
+  List<Question> family =[];
 
-  List<String> study =[
-    "fgdgddfdsfg",
-    "jhksdfjk",
-    "khdsfjkjh",
-    "khdsfjkjh",
-    "hgdsfsdfghfg",
-  ];
+  List<Question> study =[];
 
-  List<String> relegion =[
-    "fgdgddfdsfg",
-    "jhksdfjk",
-    "jhksdfjk",
-    "jhksdfjk",
-    "jhksdfjk",
-    "khdsfjkjh",
-    "hgdsfsdfghfg",
-  ];
-  List<String> personal =[
-    "fgdgddfdsfg",
-    "fgdgddfdsfg",
-    "jhksdfjk",
-    "jhksdfjk",
-    "khdsfjkjh",
-    "hgdsfsdfghfg",
-  ];
+  List<Question> relegion =[];
+
+  List<Question> personal =[];
 
   int? totalDots;
 
@@ -76,7 +46,7 @@ class MyProfileController extends GetxController{
   }
   @override
   void onInit() {
-    totalDots = userImages.length;
+
     fetchUserData();
     // TODO: implement onInit
     super.onInit();
@@ -85,10 +55,21 @@ class MyProfileController extends GetxController{
     try {
       loader = true;
       final Dio.Response response = await dio().get(
-        'myData/4',
+        'myData',
       );
       user = UserInfooo.fromJson(response.data);
       userImages = user!.images!;
+      personal = user!.categories![0].questions!;
+      relegion = user!.categories![1].questions!;
+      study = user!.categories![2].questions!;
+      family = user!.categories![3].questions!;
+      interests = user!.interests!;
+
+      if(user!.images!.isEmpty){
+        totalDots = 1;
+      }else{
+        totalDots = userImages.length;
+      }
       loader = false;
       update();
     } catch (err) {

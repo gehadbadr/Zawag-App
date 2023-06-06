@@ -60,11 +60,11 @@ class ProfileCard extends StatelessWidget {
                             // Spacer(),
                             Row(children: [
                               Text(
-                                "احمد احمد",
+                                "${controller.user?.user?.fullName}",
                                 style: GoogleFonts.cairo(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22.sp,
-                                  color: Colors.white,
+                                  color: black,
                                 ),
                               ),
                               Text(
@@ -72,15 +72,15 @@ class ProfileCard extends StatelessWidget {
                                 style: GoogleFonts.cairo(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 22.sp,
-                                  color: Colors.black,
+                                  color: black,
                                 ),
                               ),
                               Text(
-                                "22",
+                                "${controller.user?.user?.age}ِ سنه",
                                 style: GoogleFonts.cairo(
                                   fontSize: 25.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: black,
                                 ),
                               ),
                             ]),
@@ -93,9 +93,9 @@ class ProfileCard extends StatelessWidget {
                                 width: 5.w,
                               ),
                               Text(
-                                'اعزب',
+                                "${controller.user?.socialSituation}",
                                 style: GoogleFonts.cairo(
-                                    fontSize: 14.sp, color: white),
+                                    fontSize: 14.sp, color: black),
                               ),
                               SizedBox(
                                 width: 12.w,
@@ -105,9 +105,9 @@ class ProfileCard extends StatelessWidget {
                                 width: 5.w,
                               ),
                               Text(
-                                'مصري',
+                                "${controller.user?.nationality}",
                                 style: GoogleFonts.cairo(
-                                    fontSize: 14.sp, color: white),
+                                    fontSize: 14.sp, color: black),
                               ),
                               SizedBox(
                                 width: 12.w,
@@ -117,9 +117,9 @@ class ProfileCard extends StatelessWidget {
                                 width: 5.w,
                               ),
                               Text(
-                                'مهندس',
+                                  "${controller.user?.job}",
                                 style: GoogleFonts.cairo(
-                                    fontSize: 14.sp, color: white),
+                                    fontSize: 14.sp, color: black),
                               ),
                             ]),
                           ]),
@@ -146,6 +146,10 @@ class ProfileCard extends StatelessWidget {
                       ),
                     ),
                   ),
+                  controller.userImages.isEmpty?Center(child: Text(
+                    'لا توجد صور شخصيه',
+                    style: GoogleFonts.cairo(fontSize: 18.sp, color: basicPink),
+                  ),):const Center(child: SizedBox(),)
                 ],
               );
             },
@@ -160,7 +164,7 @@ class ProfileCard extends StatelessWidget {
                   width: 4.w,
                 ),
                 Text(
-                  'تعليم عالي',
+                    "${controller.user?.education}",
                   style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
                 ),
                 SizedBox(
@@ -172,7 +176,7 @@ class ProfileCard extends StatelessWidget {
                   width: 4.w,
                 ),
                 Text(
-                  'القاهره',
+                  "${controller.user?.user?.country}",
                   style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
                 ),
               ]),
@@ -189,7 +193,7 @@ class ProfileCard extends StatelessWidget {
           (element) => ClipRRect(
             borderRadius: BorderRadius.circular(18.0),
             child: CachedNetworkImage(
-              imageUrl: element.image!,
+              imageUrl: 'https://elshakhs.net/effah/public/${element.image!}',
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -203,7 +207,7 @@ class ProfileCard extends StatelessWidget {
                       height: 30,
                       width: 30,
                       child: CircularProgressIndicator())),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         )

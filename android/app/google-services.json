@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "259660846115",
-    "project_id": "effah-ff3bd",
-    "storage_bucket": "effah-ff3bd.appspot.com"
+    "project_number": "866513282638",
+    "project_id": "effa-8c1cf",
+    "storage_bucket": "effa-8c1cf.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:259660846115:android:d5f8b2aa362d620ba64d96",
+        "mobilesdk_app_id": "1:866513282638:android:f49db1cc266b44aa40051f",
         "android_client_info": {
           "package_name": "com.example.effa"
         }
       },
       "oauth_client": [
         {
-          "client_id": "259660846115-c4jf0ns42d1q5f5e44h736s9gv3d0vrq.apps.googleusercontent.com",
+          "client_id": "866513282638-nll1tb3fpcsf4ss0nri6suma7jna7vdr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyABCoZNyu6QkkfALbaN6Kj1rzw9Wc6Jk7s"
+          "current_key": "AIzaSyC81HSMqSM-dRNxieSnHdk4B-Ru7PjfJaE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "259660846115-c4jf0ns42d1q5f5e44h736s9gv3d0vrq.apps.googleusercontent.com",
+              "client_id": "866513282638-nll1tb3fpcsf4ss0nri6suma7jna7vdr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

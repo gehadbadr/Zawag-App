@@ -28,7 +28,7 @@ class PersonalPic extends StatelessWidget {
                 return SingleChildScrollView(
                   child: Column(children: [
                     SizedBox(
-                      height: 65.h,
+                      height: 35.h,
                     ),
                     Directionality(
                       textDirection: TextDirection.rtl,
@@ -50,7 +50,6 @@ class PersonalPic extends StatelessWidget {
                     SizedBox(
                       height: 25.h,
                     ),
-                    UploadPicRigister(),
                     UploadPicRigister(),
                     SizedBox(
                       height: 35.h,
@@ -161,7 +160,7 @@ class PersonalPic extends StatelessWidget {
                     ),
                     controller.imageFileList!.isNotEmpty
                         ? RegisterButton(
-                      title: Text('تـأكيد',
+                      title: controller.loader?const CircularProgressIndicator(color: Colors.black,):Text('تـأكيد',
                           style: GoogleFonts.cairo(
                             color: white,
                             fontSize: 16.sp,
@@ -175,8 +174,7 @@ class PersonalPic extends StatelessWidget {
                             });
                       },
                       nav: (){
-                        // Get.to(
-                        //   DashBoardMale(),);
+                        controller.updateImgs();
                       },
                       color: basicPink
                     )

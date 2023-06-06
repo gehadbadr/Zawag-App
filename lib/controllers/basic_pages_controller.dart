@@ -121,8 +121,12 @@ class BasicPagesController extends GetxController {
             : "");
       }
       if (response.statusCode == 200) {
+        storage.write(
+          'gender',
+          choosenGender,
+        );
         loader = false;
-        Get.offAll(() => const DetailedInfo(),);
+        Get.offAll(() => DetailedInfo(),);
         update();
       }
     } on HttpExeption catch (e) {

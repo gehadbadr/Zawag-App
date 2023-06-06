@@ -9,96 +9,96 @@ UserAuth UserAuthFromJson(String str) => UserAuth.fromJson(json.decode(str));
 String UserAuthToJson(UserAuth data) => json.encode(data.toJson());
 
 class UserAuth {
-  String accessToken;
-  User user;
+  String? accessToken;
+  User? user;
 
   UserAuth({
-    required this.accessToken,
-    required this.user,
+    this.accessToken,
+    this.user,
   });
 
   factory UserAuth.fromJson(Map<String, dynamic> json) => UserAuth(
     accessToken: json["accessToken"],
-    user: User.fromJson(json["user"]),
+    user: json["user"] == null ? null : User.fromJson(json["user"]),
   );
 
   Map<String, dynamic> toJson() => {
     "accessToken": accessToken,
-    "user": user.toJson(),
+    "user": user?.toJson(),
   };
 }
 
 class User {
-  int id;
+  int? id;
   dynamic frName;
   dynamic lsName;
   dynamic faName;
   dynamic idNumber;
   dynamic image;
-  int isLogin;
-  int isComplet;
-  int gender;
-  int isBlock;
-  int isWait;
+  int? isLogin;
+  int? isComplet;
+  int? gender;
+  int? isBlock;
+  int? isWait;
   dynamic phoneCode;
-  String phone;
-  String userCode;
+  String? phone;
+  String? userCode;
   dynamic countryId;
   dynamic country;
-  int isNew;
+  int? isNew;
   dynamic govId;
   dynamic cityId;
   dynamic lastLoginAt;
-  int religionId;
+  int? religionId;
   dynamic birthDate;
-  String slug;
+  String? slug;
   dynamic identityFace;
   dynamic identityBack;
   dynamic passportImage;
-  int isApproved;
+  int? isApproved;
   dynamic rejectResson;
   dynamic aboutYou;
-  int isAcceptTerms;
+  int? isAcceptTerms;
   dynamic aboutPartner;
-  DateTime createdAt;
-  DateTime updatedAt;
-  String fullName;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? fullName;
 
   User({
-    required this.id,
+    this.id,
     this.frName,
     this.lsName,
     this.faName,
     this.idNumber,
     this.image,
-    required this.isLogin,
-    required this.isComplet,
-    required this.gender,
-    required this.isBlock,
-    required this.isWait,
+    this.isLogin,
+    this.isComplet,
+    this.gender,
+    this.isBlock,
+    this.isWait,
     this.phoneCode,
-    required this.phone,
-    required this.userCode,
+    this.phone,
+    this.userCode,
     this.countryId,
     this.country,
-    required this.isNew,
+    this.isNew,
     this.govId,
     this.cityId,
     this.lastLoginAt,
-    required this.religionId,
+    this.religionId,
     this.birthDate,
-    required this.slug,
+    this.slug,
     this.identityFace,
     this.identityBack,
     this.passportImage,
-    required this.isApproved,
+    this.isApproved,
     this.rejectResson,
     this.aboutYou,
-    required this.isAcceptTerms,
+    this.isAcceptTerms,
     this.aboutPartner,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.fullName,
+    this.createdAt,
+    this.updatedAt,
+    this.fullName,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -133,8 +133,8 @@ class User {
     aboutYou: json["about_you"],
     isAcceptTerms: json["is_accept_terms"],
     aboutPartner: json["about_partner"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     fullName: json["full_name"],
   );
 
@@ -170,8 +170,8 @@ class User {
     "about_you": aboutYou,
     "is_accept_terms": isAcceptTerms,
     "about_partner": aboutPartner,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
+    "created_at": createdAt?.toIso8601String(),
+    "updated_at": updatedAt?.toIso8601String(),
     "full_name": fullName,
   };
 }

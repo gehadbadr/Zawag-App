@@ -79,7 +79,7 @@ class PinCodeController extends GetxController {
     try {
       await auth.signInWithCredential(credential);
 
-      String tokenResult = await FirebaseAuth.instance.currentUser!.uid;
+      String tokenResult = FirebaseAuth.instance.currentUser!.uid;
      await authController.register(myPhone!,code!,tokenResult);
       loader = false;
       update();

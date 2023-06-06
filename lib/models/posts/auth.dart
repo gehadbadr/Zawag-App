@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:dio/dio.dart' as Dio;
 class AuthController extends GetxController{
+ bool loader = false;
   //register&login
   UserAuth? userAuth;
   Future<void> register(
@@ -42,19 +43,23 @@ class AuthController extends GetxController{
         );
         storage.write(
           'user_id',
-          userAuth!.user.id,
+          userAuth!.user?.id,
         );
-        if(userAuth!.user.isComplet == 1){
+        storage.write(
+          'gender',
+          userAuth!.user?.gender,
+        );
+        if(userAuth!.user?.isComplet == 1){
           print("is_complet");
           Get.offAll(() =>DashBoardMale());
-        }else if(userAuth!.user.isNew == 1){
+        }else if(userAuth!.user?.isNew == 1){
           print("is_complet_true");
           Get.offAll(() =>Terms());
-        }else if(userAuth!.user.isNew == 0){
+        }else if(userAuth!.user?.isNew == 0){
           print("is_complet_false");
-          if(userAuth!.user.isAcceptTerms == 1){
+          if(userAuth!.user?.isAcceptTerms == 1){
           Get.offAll(() =>MainData());}
-          else if(userAuth!.user.isAcceptTerms == 0){
+          else if(userAuth!.user?.isAcceptTerms == 0){
             print("is_accept_terms_false");
             Get.offAll(() =>Terms());
           }
@@ -66,6 +71,47 @@ class AuthController extends GetxController{
     }
     catch (error) {
       print(error);
+      throw (error);
+    }
+  }
+
+  //updateUser data
+  Future<void> updateUser(
+      String? about_you,
+      String? about_partner
+      ) async {
+    try {
+      loader = true;
+      update();
+      Dio.Response response = await dio().post(
+        'general/update_profile',
+        data: Dio.FormData.fromMap({
+          'about_partner': about_you,
+          'about_you': about_you,
+        }),
+      );
+      if (response.statusCode != 200) {
+        loader = false;
+        update();
+        throw HttpExeption(response.data['errors'] == "user code not correct" ?
+        "كود المستخدم غير صحيح"
+            : "");
+      }
+      if (response.statusCode == 200) {
+        loader = false;
+        print(response.data);
+        Get.back();
+        update();
+      }
+    } on HttpExeption catch (e) {
+      loader = false;
+      update();
+      Get.snackbar(e.message, "حاول مره اخري !",
+          showProgressIndicator: false, duration: const Duration(seconds: 4));
+    }
+    catch (error) {
+      Get.snackbar(error.toString(), "حاول مره اخري !",
+          showProgressIndicator: false, duration: const Duration(seconds: 4));
       throw (error);
     }
   }

@@ -23,7 +23,7 @@ class UserInfooo {
     this.interests,
   });
 
-  User? user;
+  UserDataLogin? user;
   List<ImagesUser>? images;
   List<Category>? categories;
   String? socialSituation;
@@ -34,7 +34,7 @@ class UserInfooo {
   List<String>? interests;
 
   factory UserInfooo.fromJson(Map<String, dynamic> json) => UserInfooo(
-    user: User.fromJson(json["user"]),
+    user: UserDataLogin.fromJson(json["user"]),
     images: List<ImagesUser>.from(json["images"].map((x) => ImagesUser.fromJson(x))),
     categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))),
     socialSituation: json["SocialSituation"],
@@ -211,5 +211,152 @@ class ImagesUser {
     "user_id": userId,
     "created_at": createdAt!.toIso8601String(),
     "updated_at": updatedAt!.toIso8601String(),
+  };
+}
+class UserDataLogin {
+  UserDataLogin({
+    this.id,
+    this.frName,
+    this.lsName,
+    this.faName,
+    this.idNumber,
+    this.image,
+    this.isLogin,
+    this.isComplet,
+    this.gender,
+    this.isBlock,
+    this.isWait,
+    this.phoneCode,
+    this.phone,
+    this.countryId,
+    this.country,
+    this.isNew,
+    this.govId,
+    this.cityId,
+    this.lastLoginAt,
+    this.religionId,
+    this.birthDate,
+    this.slug,
+    this.identityFace,
+    this.identityBack,
+    this.passportImage,
+    this.isApproved,
+    this.rejectResson,
+    this.aboutYou,
+    this.isAcceptTerms,
+    this.aboutPartner,
+    this.createdAt,
+    this.updatedAt,
+    this.age,
+    this.fullName,
+  });
+
+  int? id;
+  String? frName;
+  String? lsName;
+  dynamic faName;
+  dynamic idNumber;
+  String? image;
+  int? isLogin;
+  int? isComplet;
+  int? gender;
+  int? isBlock;
+  int? isWait;
+  dynamic phoneCode;
+  String? phone;
+  int? countryId;
+  String? country;
+  int? isNew;
+  dynamic govId;
+  dynamic cityId;
+  dynamic lastLoginAt;
+  int? religionId;
+  DateTime? birthDate;
+  String? slug;
+  String? identityFace;
+  String? identityBack;
+  String? passportImage;
+  int? isApproved;
+  dynamic rejectResson;
+  String? aboutYou;
+  int? isAcceptTerms;
+  String? aboutPartner;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? age;
+  String? fullName;
+
+  factory UserDataLogin.fromJson(Map<String, dynamic> json) => UserDataLogin(
+    id: json["id"],
+    frName: json["frName"],
+    lsName: json["lsName"],
+    faName: json["FaName"],
+    idNumber: json["idNumber"],
+    image: json["image"],
+    isLogin: json["is_login"],
+    isComplet: json["is_complet"],
+    gender: json["gender"],
+    isBlock: json["is_block"],
+    isWait: json["is_wait"],
+    phoneCode: json["phone_Code"],
+    phone: json["phone"],
+    countryId: json["country_id"],
+    country: json["country"],
+    isNew: json["is_new"],
+    govId: json["gov_id"],
+    cityId: json["city_id"],
+    lastLoginAt: json["lastLoginAt"],
+    religionId: json["religion_id"],
+    // birthDate: DateTime.parse(json["birth_date"]),
+    slug: json["slug"],
+    identityFace: json["identity_face"],
+    identityBack: json["identity_back"],
+    passportImage: json["passport_image"],
+    isApproved: json["is_approved"],
+    rejectResson: json["reject_resson"],
+    aboutYou: json["about_you"],
+    isAcceptTerms: json["is_accept_terms"],
+    aboutPartner: json["about_partner"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    age: json["age"],
+    fullName: json["full_name"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "frName": frName,
+    "lsName": lsName,
+    "FaName": faName,
+    "idNumber": idNumber,
+    "image": image,
+    "is_login": isLogin,
+    "is_complet": isComplet,
+    "gender": gender,
+    "is_block": isBlock,
+    "is_wait": isWait,
+    "phone_Code": phoneCode,
+    "phone": phone,
+    "country_id": countryId,
+    "country": country,
+    "is_new": isNew,
+    "gov_id": govId,
+    "city_id": cityId,
+    "lastLoginAt": lastLoginAt,
+    "religion_id": religionId,
+    "birth_date": "${birthDate!.year.toString().padLeft(4, '0')}-${birthDate!.month.toString().padLeft(2, '0')}-${birthDate!.day.toString().padLeft(2, '0')}",
+    "slug": slug,
+    "identity_face": identityFace,
+    "identity_back": identityBack,
+    "passport_image": passportImage,
+    "is_approved": isApproved,
+    "reject_resson": rejectResson,
+    "about_you": aboutYou,
+    "is_accept_terms": isAcceptTerms,
+    "about_partner": aboutPartner,
+    "created_at": createdAt!.toIso8601String(),
+    "updated_at": updatedAt!.toIso8601String(),
+    "age": age,
+    "full_name": fullName,
   };
 }
