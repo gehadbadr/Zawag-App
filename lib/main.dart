@@ -1,4 +1,5 @@
 
+import 'package:country_picker/country_picker.dart';
 import 'package:effa/controllers/transition.dart';
 import 'package:effa/firebase_options.dart';
 import 'package:effa/helper/app_colors.dart';
@@ -11,12 +12,13 @@ import 'package:effa/ui/screens/main_data/main_data.dart';
 import 'package:effa/ui/screens/terms/trems.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dio/dio.dart'as Dio;
 void main() async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +27,14 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    // Status bar color
+    statusBarColor: Colors.white,
+
+    // Status bar brightness (optional)
+    statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+    statusBarBrightness: Brightness.light, // For iOS (dark icons)
+  ));
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
 }
@@ -112,13 +122,25 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      builder: ((context,child)=> Directionality(
-          textDirection: TextDirection.rtl,
-          child: SafeArea(
+    return SafeArea(
+      // minimum: EdgeInsets.only(top: 60),
+      child: ScreenUtilInit(
+        designSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
+        builder: ((context,child)=> Directionality(
+            textDirection: TextDirection.rtl,
             child: GetMaterialApp(
               title: 'عفه',
+              supportedLocales: const [
+                Locale('ar'),
+              ],
+              locale: const Locale('ar'),
+                localizationsDelegates: const [
+                  CountryLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                textDirection: TextDirection.ltr,
               theme: ThemeData(
                 primaryColor: basicPink,
                 primarySwatch: MaterialColor(
@@ -142,9 +164,10 @@ class _MyAppState extends State<MyApp> {
               onInit: (){
                 trans();
               },
-              home:page ?? const Scaffold(body: Center(child: CircularProgressIndicator(color: basicPink,),),)
-            ),
-          ),)),
+              home: LoginPage()
+              // page ?? const Scaffold(body: Center(child: CircularProgressIndicator(color: basicPink,),),)
+            ),)),
+      ),
     );
   }
 }

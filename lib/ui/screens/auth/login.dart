@@ -58,7 +58,8 @@ class LoginPage extends StatelessWidget {
                       builder: (controller) {
                         return RoundedCard(
                             width: MediaQuery.of(context).size.width * .9,
-                            height: MediaQuery.of(context).size.height / 5,
+                            height:controller.checkNum
+                                ?  MediaQuery.of(context).size.height / 4.2:MediaQuery.of(context).size.height / 5,
                             mywidget: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -82,15 +83,9 @@ class LoginPage extends StatelessWidget {
                                               0.7,
                                           child: DropdownButtonHideUnderline(
                                             child: DropDownLogin(
-                                              icon: controller.myCode != null
-                                                  ? controller.myCode!.flagImage
-                                                  : controller
-                                                      .countryPicker
-                                                      .countryCodes[63]
-                                                      .flagImage,
+                                              countrycode: controller.countrdyCode == null? '🇪🇬': controller.countrdyCode!,
                                               txt: controller.countryName == ""
-                                                  ? controller.countryPicker
-                                                      .countryCodes[63].name
+                                                  ? "مصر"
                                                   : controller.countryName,
                                               phoneController:
                                                   controller.phoneController,
@@ -108,26 +103,18 @@ class LoginPage extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFieldLogin(
+
                                     txt: controller.countryCode == ""
                                         ? controller.countryPicker
                                             .countryCodes[63].dialCode
                                         : controller.countryCode,
-                                    // form: form,
-                                    validator: (text) {
-                                      if (text!.length +
-                                              controller.countryCode.length !=
-                                          13) {
-                                        controller.setNum();
-                                      }
-                                      return null;
-                                    },
                                     controller: controller.controllerr,
                                   ),
                                 ),
                                 controller.checkNum
-                                    ? const Text(
+                                    ?  Text(
                                         "الرجاء ادخال رقم صحيح",
-                                        style: TextStyle(color: Colors.red),
+                                        style: GoogleFonts.cairo(color: Colors.red),
                                       )
                                     : const SizedBox()
                               ],
@@ -150,7 +137,11 @@ class LoginPage extends StatelessWidget {
                                       fontWeight: FontWeight.normal)),
                               raduis: 10,
                               myfun: () async {
-                                await controller.sendOTP();
+                                if(controller.controllerr.text.isEmpty){
+                                  controller.setNum();
+                                }else {
+                                  await controller.sendOTP();
+                                }
                               },
                             ),
                           )

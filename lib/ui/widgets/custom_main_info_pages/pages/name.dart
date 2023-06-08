@@ -36,6 +36,7 @@ class FullName extends StatelessWidget {
                   child: Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
+                      style: GoogleFonts.cairo(),
                       onTap: () {
                         if (controller.firstName.selection ==
                             TextSelection.fromPosition(TextPosition(
@@ -56,8 +57,8 @@ class FullName extends StatelessWidget {
                       },
                       maxLength: 12,
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp('[\u0600-\u06FF\s]'), // Arabic Unicode range
+                        FilteringTextInputFormatter.deny(
+                          RegExp("[a-zA-Z]"), // Arabic Unicode range
                         ),
                       ],
                       decoration: InputDecoration(
@@ -85,6 +86,7 @@ class FullName extends StatelessWidget {
                   child: Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
+                      style: GoogleFonts.cairo(),
                       onTap: () {
                         if (controller.secondName.selection ==
                             TextSelection.fromPosition(TextPosition(
@@ -95,8 +97,8 @@ class FullName extends StatelessWidget {
                       },
                       controller: controller.secondName,
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp('[\u0600-\u06FF\s]'), // Arabic Unicode range
+                        FilteringTextInputFormatter.deny(
+                          RegExp("[a-zA-Z]"), // Arabic Unicode range
                         ),
                       ],
                       textAlign: TextAlign.right,

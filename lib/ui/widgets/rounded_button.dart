@@ -17,6 +17,7 @@ class RoundedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+
         style: TextButton.styleFrom(
           backgroundColor: color,
           shape: const RoundedRectangleBorder(

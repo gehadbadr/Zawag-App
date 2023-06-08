@@ -1,31 +1,41 @@
+import 'package:country_picker/country_picker.dart';
+import 'package:effa/helper/app_colors.dart';
 import 'package:effa/ui/screens/pin_page/pin_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginController extends GetxController{
   String countryName = "";
   String countryCode = "+20";
-  CountryCode? myCode;
   bool checkNum = false;
   bool loader = false;
+  String? countrdyCode;
   TextEditingController phoneController = TextEditingController();
   final controllerr = TextEditingController();
   final countryPicker = const FlCountryCodePicker(
+
     favorites: ['EG', 'JO', 'IQ', 'LY', 'QA', 'SE', 'SY', 'TN', 'PS', 'KW', 'YE', 'AE', 'SA', 'OM'],
   );
   choseCountry(BuildContext ctx)async{
-    final code = await countryPicker.showPicker(
-        context: ctx);
-    if (code != null) {
-      myCode = code;
-      countryName = code.name;
-      countryCode = code.dialCode;
-      update();
+    showCountryPicker(
+      useSafeArea: true,
+      countryListTheme: CountryListThemeData(textStyle: GoogleFonts.cairo(),searchTextStyle:GoogleFonts.cairo()),
 
-    }
+      favorite: ['EG', 'JO', 'IQ', 'LY', 'QA', 'SE', 'SY', 'TN', 'PS', 'KW', 'YE', 'AE', 'SA', 'OM'],
+      context: ctx,
+      showPhoneCode: true, // optional. Shows phone code before the country name.
+      onSelect: (Country country)
+      {
+        countryName = country.nameLocalized!;
+        countryCode = "+${country.phoneCode}";
+        countrdyCode = country.flagEmoji;
+        update();
+      },
+    );
   }
   setNum(){
     checkNum = true;
@@ -42,6 +52,9 @@ class LoginController extends GetxController{
     GetStorage storage = GetStorage();
     loader = true;
     update();
+    if(controllerr.text.startsWith("0")&&countryCode ==("+20")){
+      controllerr.text = controllerr.text.replaceFirst(RegExp('^0'), '');
+    }
     String phoneNumber = countryCode+controllerr.text;
     FirebaseAuth auth = FirebaseAuth.instance;
     // Force reCAPTCHA flo
@@ -52,6 +65,39 @@ class LoginController extends GetxController{
         auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException e) {
+        loader = false;
+        update();
+        switch (e.code) {
+          case "invalid-verification-id":
+            Get.snackbar('خطاء في id', e.code.toString(),
+                snackPosition: SnackPosition.BOTTOM);
+            loader = false;
+            update();
+            break;
+
+          case "invalid-verification-code":
+            Get.snackbar('فشل التحقق من الكود', e.code.toString(),
+                snackPosition: SnackPosition.BOTTOM);
+            loader = false;
+            update();
+            break;
+
+          case "invalid-phone-number":
+            Get.snackbar('رقم الهاتف الذي أدخلته غير صحيح', e.code.toString(),
+                backgroundColor: Colors.red,
+                snackPosition: SnackPosition.BOTTOM);
+            break;
+
+          case "session-expired":
+            Get.snackbar('من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد', e.code.toString(),
+              snackPosition: SnackPosition.BOTTOM,
+
+            );
+
+            loader = false;
+            update();
+            break;
+        }
         // Handle verification failed
       },
       codeSent: (String verificationId, int? resendToken)async {

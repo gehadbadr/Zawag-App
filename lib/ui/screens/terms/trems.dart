@@ -17,7 +17,7 @@ class Terms extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding:
-            EdgeInsets.only(top: 20.h, bottom: 20.h, left: 10.h, right: 10.h),
+            EdgeInsets.only( bottom: 20.h, left: 10.h, right: 10.h),
         child: Column(children: [
           SizedBox(
             height: 65.h,
@@ -31,7 +31,7 @@ class Terms extends StatelessWidget {
                     fontWeight: FontWeight.bold),
                 children: <TextSpan>[
                   TextSpan(
-                    text: 'أهلا بك في  ',
+                    text: 'أهلا بك في ',
                     style: GoogleFonts.cairo(
                       fontWeight: FontWeight.bold,
                       fontSize: 24.sp,
@@ -41,6 +41,7 @@ class Terms extends StatelessWidget {
                       text: 'عفة',
                       style: GoogleFonts.cairo(
                         color: basicPink,
+                        fontSize: 24.sp,
                         // fontWeight: FontWeight.w700,
                       ))
                 ],
@@ -160,15 +161,32 @@ class Terms extends StatelessWidget {
                       ),
                     ],
                   ),
+                  !controller.agree ? Container(
+                      width: 148.w,
+                      height: 46.h,
+                      decoration: BoxDecoration(
+                        color:  lwhite,
+                        borderRadius: BorderRadius.circular(10),
+
+                      ),
+                      child: Center(
+                        child: Text('إبدأ',
+                            style: GoogleFonts.cairo(
+                              color: controller.agree ? white : darkgrey,
+                              fontSize: 16.sp,
+                              //fontWeight: FontWeight.w500
+                            )),
+                      ) // your content here
+                  ):
                   SizedBox(
                     width: 148.w,
                     height: 46.h,
                     child: controller.posted?const Center(child:CircularProgressIndicator(
                       color: basicPink,
                     )): RoundedButton(
-                      mywidget: Text('ابدأ',
+                      mywidget: Text('إبدأ',
                           style: GoogleFonts.cairo(
-                            color: controller.agree ? white : darkgrey,
+                            color: white ,
                             fontSize: 16.sp,
                             //fontWeight: FontWeight.w500
                           )),
@@ -178,7 +196,7 @@ class Terms extends StatelessWidget {
                             }
                           : () {},
                       raduis: 10,
-                      color: controller.agree ? basicPink : lwhite,
+                      color: basicPink ,
                     ),
                   )
                 ],
