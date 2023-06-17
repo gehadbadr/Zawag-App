@@ -27,7 +27,7 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     // Status bar color
     statusBarColor: Colors.white,
 
@@ -125,7 +125,7 @@ class _MyAppState extends State<MyApp> {
     return SafeArea(
       // minimum: EdgeInsets.only(top: 60),
       child: ScreenUtilInit(
-        designSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
+        designSize: const Size(375, 812),
         builder: ((context,child)=> Directionality(
             textDirection: TextDirection.rtl,
             child: GetMaterialApp(

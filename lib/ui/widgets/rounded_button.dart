@@ -16,14 +16,25 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-
-        style: TextButton.styleFrom(
-          backgroundColor: color,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12))),
+    return InkWell(
+      onTap: myfun,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: color,
         ),
-        onPressed: myfun,
-        child: mywidget);
+        child: Center(child:mywidget ,),
+        // other properties
+      ),
+    );
   }
 }
+// TextButton(
+//
+// style: TextButton.styleFrom(
+// backgroundColor: color,
+// shape: const RoundedRectangleBorder(
+// borderRadius: BorderRadius.all(Radius.circular(12))),
+// ),
+// onPressed: myfun,
+// child: mywidget);
