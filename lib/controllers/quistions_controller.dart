@@ -137,6 +137,7 @@ class QuestionsController extends GetxController{
       if(len==0){
         Get.back();
         Get.snackbar("تم ارسال البيانات","في انتظار المراجعه",
+            borderRadius: 0,
             showProgressIndicator: false, duration: const Duration(seconds: 4));
       }
     } catch (err) {
@@ -179,6 +180,7 @@ class QuestionsController extends GetxController{
       }
     } on HttpExeption catch (e) {
       Get.snackbar(e.message,"حاول مره اخري !",
+          borderRadius: 0,
           showProgressIndicator: false, duration: const Duration(seconds: 4));
     }
     catch (error) {
@@ -218,6 +220,7 @@ class QuestionsController extends GetxController{
       }
     } on HttpExeption catch (e) {
       Get.snackbar(e.message,"حاول مره اخري !",
+          borderRadius: 0,
           showProgressIndicator: false, duration: const Duration(seconds: 4));
     }
     catch (error) {
@@ -257,6 +260,7 @@ class QuestionsController extends GetxController{
       }
     } on HttpExeption catch (e) {
       Get.snackbar(e.message,"حاول مره اخري !",
+          borderRadius: 0,
           showProgressIndicator: false, duration: const Duration(seconds: 4));
     }
     catch (error) {

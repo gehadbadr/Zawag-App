@@ -34,14 +34,14 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      height: 70.h,
+                      height: 90.h,
                     ),
                     SvgPicture.asset(
                       "assets/image/logo.svg",
                       width:165.22.w,
                     ),
                     SizedBox(
-                      height: 70.h,
+                      height: 90.h,
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: 10.h),
@@ -149,13 +149,13 @@ class LoginPage extends StatelessWidget {
                         color: basicPink,
                       ),
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 35.h),
                     Container(
                       alignment: Alignment.center, // use aligment
                       child: SvgPicture.asset(
                         'assets/image/wedding.svg',
-                        height: 215.71.h,
-                        fit: BoxFit.fill,
+                        height: 188.71.h,
+                        // fit: BoxFit.fill,
                       ),
                     ),
                   ],

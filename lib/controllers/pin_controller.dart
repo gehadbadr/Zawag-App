@@ -87,6 +87,7 @@ class PinCodeController extends GetxController {
       switch (e.code) {
         case "invalid-verification-id":
           Get.snackbar('خطاء في id', e.code.toString(),
+              borderRadius: 0,
               snackPosition: SnackPosition.BOTTOM);
           loader = false;
           update();
@@ -94,6 +95,7 @@ class PinCodeController extends GetxController {
 
         case "invalid-verification-code":
           Get.snackbar('فشل التحقق من الكود', e.code.toString(),
+              borderRadius: 0,
               snackPosition: SnackPosition.BOTTOM);
           loader = false;
           update();
@@ -101,11 +103,13 @@ class PinCodeController extends GetxController {
 
         case "invalid-phone-number":
           Get.snackbar('رقم الهاتف الذي أدخلته غير صحيح', e.code.toString(),
+              borderRadius: 0,
               snackPosition: SnackPosition.BOTTOM);
           break;
 
         case "session-expired":
           Get.snackbar('من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد', e.code.toString(),
+            borderRadius: 0,
               snackPosition: SnackPosition.BOTTOM,
 
           );
@@ -116,6 +120,7 @@ class PinCodeController extends GetxController {
       }
     } catch (e) {
       Get.snackbar(e.toString(), "خطاء",
+          borderRadius: 0,
           snackPosition: SnackPosition.BOTTOM);
       loader = false;
       update();

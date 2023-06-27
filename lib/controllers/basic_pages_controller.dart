@@ -16,7 +16,7 @@ class BasicPagesController extends GetxController {
 
   TextEditingController searchController  = TextEditingController();
 
-  double position = 0.20;
+  double position = 0.0;
 
   bool isFemale = false;
 
@@ -34,7 +34,7 @@ class BasicPagesController extends GetxController {
 
   List<String> demoList = ["كويتي", "يمني", "عراقي", "مصري", "سعودي"];
 
-  List<String> religionList = ["مسيحي", "مسلم"];
+  List<String> religionList = [ "الاسلام","المسيحيه"];
 
   DateTime myDate = DateTime(2002);
 
@@ -133,10 +133,12 @@ class BasicPagesController extends GetxController {
       loader = false;
       update();
       Get.snackbar(e.message, "حاول مره اخري !",
+          borderRadius: 0,
           showProgressIndicator: false, duration: const Duration(seconds: 4));
     }
     catch (error) {
       Get.snackbar(error.toString(), "حاول مره اخري !",
+          borderRadius: 0,
           showProgressIndicator: false, duration: const Duration(seconds: 4));
       throw (error);
     }

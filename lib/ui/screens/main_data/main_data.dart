@@ -23,7 +23,7 @@ class MainData extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Column(children: [
             SizedBox(
-              height: 65.h,
+              height: 25.h,
             ),
             Directionality(
               textDirection: TextDirection.rtl,

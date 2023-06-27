@@ -19,15 +19,13 @@ class TextFieldLogin extends StatelessWidget {
     return Row(
       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Flexible(
-          child: Center(
-            child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(txt!,
-                    style: GoogleFonts.cairo(
-                      color: Colors.black,
-                    ))),
-          ),
+        Center(
+          child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Text(txt!,
+                  style: GoogleFonts.cairo(
+                    color: Colors.black,
+                  ))),
         ),
         SizedBox(
             height: 25.h, child: const VerticalDivider(color: Colors.black)),
@@ -68,6 +66,9 @@ class TextFieldLogin extends StatelessWidget {
                 border: InputBorder.none,
                 filled: false,
                 hintText: "رقم الهاتف",
+                hintStyle: const TextStyle(
+                  color: grey
+                )
               ),
               // onSaved: (String? value) {},
             ),

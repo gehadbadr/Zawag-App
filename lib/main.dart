@@ -164,7 +164,7 @@ class _MyAppState extends State<MyApp> {
               onInit: (){
                 trans();
               },
-              home: LoginPage()
+              home: MainData()
               // page ?? const Scaffold(body: Center(child: CircularProgressIndicator(color: basicPink,),),)
             ),)),
       ),

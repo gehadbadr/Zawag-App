@@ -167,6 +167,7 @@ class _PersonalDataState extends State<PersonalData> {
                                  print("error33333");
                                }
                                Get.snackbar("","برجاء اختيار اجراء",
+                                   borderRadius: 0,
                                    showProgressIndicator: false, duration: const Duration(seconds: 2));
                              }
                            },
@@ -220,6 +221,7 @@ class _PersonalDataState extends State<PersonalData> {
                                }
                              }else{
                                Get.snackbar(
+                                 borderRadius: 0,
                                  "خطأ",
                                  "برجاء اختيار اجراء",
                                  colorText: Colors.white,
@@ -274,6 +276,7 @@ class _PersonalDataState extends State<PersonalData> {
                                }
                              }else{
                                Get.snackbar(
+                                 borderRadius: 0,
                                  "خطأ",
                                  "برجاء اختيار اجراء",
                                  colorText: Colors.white,

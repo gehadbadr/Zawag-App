@@ -155,6 +155,7 @@ class AboutMe extends StatelessWidget {
                                     if (aboutmeController.text == "" ||
                                         partenerController.text == "") {
                                       Get.snackbar( " من فضلك تأكد من تكملة البيانات","",
+                                          borderRadius: 0,
                                           showProgressIndicator: false, duration: const Duration(seconds: 4));
                                     } else {
                                       controller.updateUser(aboutmeController.text,

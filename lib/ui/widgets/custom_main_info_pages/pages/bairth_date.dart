@@ -29,25 +29,66 @@ class BirthDate extends StatelessWidget {
               bottom: 18.0.h,
             ),
             child: Card(
-              elevation: 6,
+              elevation: 4,
               shape: RoundedRectangleBorder(
                 side: BorderSide(color: llgrey, width: 1.w),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: SizedBox(
-                child: CupertinoDatePicker(
-                  dateOrder: DatePickerDateOrder.ymd,
-                  mode: CupertinoDatePickerMode.date,
-                  initialDateTime: controller.myDate,
-                  minimumYear: 1960,
-                  minimumDate: DateTime(1960, 12, 31),
-                  // maximumYear: 2002,
-                  maximumDate: DateTime(2005, 12, 31),
-                  onDateTimeChanged: (dateTime) {
-                    controller.myDate = dateTime == null ? controller.myDate : dateTime;
-                    debugPrint("$dateTime");
-                  },
-                ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 70.0),
+                        child: Text('يوم',
+                            style: GoogleFonts.cairo(
+                              fontSize: 16.sp,
+                            )),
+                      ),
+                      Text('شهر',
+                          style: GoogleFonts.cairo(
+
+                            fontSize: 16.sp,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 70.0),
+                        child: Text('سنه',
+                            style: GoogleFonts.cairo(
+                              fontSize: 16.sp,
+                            )),
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 392.h,
+                    child: CupertinoTheme(
+                      data: CupertinoThemeData(
+                        brightness: Theme.of(context).brightness,
+                        textTheme: CupertinoTextThemeData(
+                          dateTimePickerTextStyle:GoogleFonts.cairo(
+                            fontSize:20.sp,
+
+                          )
+                        ),
+                      ),
+                      child: CupertinoDatePicker(
+                        dateOrder: DatePickerDateOrder.dmy,
+                        mode: CupertinoDatePickerMode.date,
+                        initialDateTime: controller.myDate,
+                        minimumYear: 1960,
+                        minimumDate: DateTime(1960, 12, 31),
+                        // maximumYear: 2002,
+                        maximumDate: DateTime(2005, 12, 31),
+                        onDateTimeChanged: (dateTime) {
+                          controller.myDate = dateTime == null ? controller.myDate : dateTime;
+                          debugPrint("$dateTime");
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -56,15 +97,13 @@ class BirthDate extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 50),
           child: SizedBox(
             width: 264.w,
+            height:44.h,
             child: RoundedButton(
-                mywidget: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 7),
-                  child: Text('التالي',
-                      style: GoogleFonts.cairo(
-                        color: white,
-                        fontSize: 16.sp,
-                      )),
-                ),
+                mywidget: Text('التالي',
+                    style: GoogleFonts.cairo(
+                      color: white,
+                      fontSize: 16.sp,
+                    )),
                 raduis: 10,
                 myfun: () {
                   controller.onTap();

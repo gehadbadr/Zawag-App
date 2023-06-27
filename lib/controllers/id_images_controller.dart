@@ -37,6 +37,7 @@ class IdImagesController extends GetxController{
     var fields = Dio.FormData.fromMap({});
     try {
       Get.snackbar("يتم رفع الصوره", "برجاء الانتظار",
+          borderRadius: 0,
           showProgressIndicator: true, duration: const Duration(seconds: 20));
       fields = Dio.FormData.fromMap({
         if(user.image1.path.isNotEmpty)
@@ -51,6 +52,7 @@ class IdImagesController extends GetxController{
       if(response.statusCode == 200){
         Get.closeAllSnackbars();
         Get.snackbar("تم رفع الصور بنجاح", "",
+            borderRadius: 0,
             backgroundColor: Colors.greenAccent,
             showProgressIndicator: false, duration: const Duration(seconds: 4));
       }

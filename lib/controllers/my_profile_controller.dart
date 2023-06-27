@@ -76,6 +76,7 @@ class MyProfileController extends GetxController{
       loader = false;
       update();
       Get.snackbar('خطأ في الاتصال', "NETWORK_ERR",
+          borderRadius: 0,
           snackPosition: SnackPosition.BOTTOM);
       print(err);
       // ignore: unnecessary_brace_in_string_interps

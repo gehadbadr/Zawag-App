@@ -60,6 +60,7 @@ class PersonalImagesController extends GetxController{
       api['images[$i]'] = await Dio.MultipartFile.fromFile(selectedImages![i].path, filename: selectedImages![i].path);
     }
     Get.snackbar("يتم رفع الصوره", "برجاء الانتظار",
+        borderRadius: 0,
         showProgressIndicator: true, duration: const Duration(seconds: 20));
     try {
       Dio.Response response = await dio().post(
@@ -77,6 +78,7 @@ class PersonalImagesController extends GetxController{
         Get.closeAllSnackbars();
         Get.snackbar("تم رفع الصور بنجاح", "",
             backgroundColor: Colors.greenAccent,
+            borderRadius: 0,
             showProgressIndicator: false, duration: const Duration(seconds: 4));
       }
 
@@ -100,6 +102,7 @@ class PersonalImagesController extends GetxController{
               .last,
       );
       Get.snackbar("يتم رفع الصوره", "برجاء الانتظار",
+          borderRadius: 0,
           showProgressIndicator: true, duration: const Duration(seconds: 10));
       Dio.Response response = await dio().post(
         'update_profile_image',
@@ -138,6 +141,7 @@ class PersonalImagesController extends GetxController{
             .last,
       );
       Get.snackbar("يتم رفع الصوره", "برجاء الانتظار",
+          borderRadius: 0,
           showProgressIndicator: true, duration: const Duration(seconds: 10));
       Dio.Response response = await dio().post(
         'update_profile_image',

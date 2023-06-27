@@ -22,7 +22,7 @@ class FullName extends StatelessWidget {
             child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10.h),
           child: Text(
-            'اسمك ؟',
+            'اسم المستخدم بالعربي ؟',
             style: GoogleFonts.cairo(fontSize: 20.sp),
           ),
         )),
@@ -137,15 +137,13 @@ class FullName extends StatelessWidget {
         const Expanded(flex: 3, child: SizedBox()),
         SizedBox(
           width: 264.w,
+          height: 44.h,
           child: RoundedButton(
-              mywidget: Padding(
-                padding: EdgeInsets.symmetric(vertical: 7.h),
-                child: Text('التالي',
-                    style: GoogleFonts.cairo(
-                      color: white,
-                      fontSize: 16,
-                    )),
-              ),
+              mywidget: Text('التالي',
+                  style: GoogleFonts.cairo(
+                    color: white,
+                    fontSize: 16,
+                  )),
               raduis: 10,
               myfun: () {
                 if (!form.currentState!.validate()) {

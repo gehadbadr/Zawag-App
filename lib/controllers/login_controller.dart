@@ -4,6 +4,7 @@ import 'package:effa/ui/screens/pin_page/pin_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +24,23 @@ class LoginController extends GetxController{
   choseCountry(BuildContext ctx)async{
     showCountryPicker(
       useSafeArea: true,
-      countryListTheme: CountryListThemeData(textStyle: GoogleFonts.cairo(),searchTextStyle:GoogleFonts.cairo()),
+
+      countryListTheme: CountryListThemeData(
+          textStyle: GoogleFonts.cairo(),
+          searchTextStyle:GoogleFonts.cairo(),
+        bottomSheetHeight: 600.h,
+        inputDecoration:  InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical:6.h),
+          isDense: true,
+          hintText: "بحث",
+          prefixIcon: const Icon(Icons.search),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: const Color(0xFF8C98A8).withOpacity(0.2),
+            ),
+          ),
+        ),
+      ),
 
       favorite: ['EG', 'JO', 'IQ', 'LY', 'QA', 'SE', 'SY', 'TN', 'PS', 'KW', 'YE', 'AE', 'SA', 'OM'],
       context: ctx,
@@ -70,6 +87,7 @@ class LoginController extends GetxController{
         switch (e.code) {
           case "invalid-verification-id":
             Get.snackbar('خطاء في id', e.code.toString(),
+                borderRadius: 0,
                 snackPosition: SnackPosition.BOTTOM);
             loader = false;
             update();
@@ -77,6 +95,7 @@ class LoginController extends GetxController{
 
           case "invalid-verification-code":
             Get.snackbar('فشل التحقق من الكود', e.code.toString(),
+                borderRadius: 0,
                 snackPosition: SnackPosition.BOTTOM);
             loader = false;
             update();
@@ -85,11 +104,13 @@ class LoginController extends GetxController{
           case "invalid-phone-number":
             Get.snackbar('رقم الهاتف الذي أدخلته غير صحيح', e.code.toString(),
                 backgroundColor: Colors.red,
+                borderRadius: 0,
                 snackPosition: SnackPosition.BOTTOM);
             break;
 
           case "session-expired":
             Get.snackbar('من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد', e.code.toString(),
+              borderRadius: 0,
               snackPosition: SnackPosition.BOTTOM,
 
             );

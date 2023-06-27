@@ -24,14 +24,12 @@ class DropDownLogin extends StatelessWidget {
     return DropdownButtonHideUnderline(
       child: Directionality(
         textDirection: TextDirection.rtl,
-        child: Container(
+        child: SizedBox(
           height: 50.h,
           // decoration: const InputDecoration(),
           child: Row(
             children: [
-              Container(
-                child: Text(countrycode!),
-              ),
+              Text(countrycode!),
               SizedBox(
                 width: 5.w,
               ),

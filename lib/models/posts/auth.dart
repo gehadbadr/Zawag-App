@@ -67,6 +67,7 @@ class AuthController extends GetxController{
       }
     } on HttpExeption catch (e) {
       Get.snackbar(e.message,"حاول مره اخري !",
+          borderRadius: 0,
           showProgressIndicator: false, duration: const Duration(seconds: 4));
     }
     catch (error) {
@@ -107,10 +108,12 @@ class AuthController extends GetxController{
       loader = false;
       update();
       Get.snackbar(e.message, "حاول مره اخري !",
+          borderRadius: 0,
           showProgressIndicator: false, duration: const Duration(seconds: 4));
     }
     catch (error) {
       Get.snackbar(error.toString(), "حاول مره اخري !",
+          borderRadius: 0,
           showProgressIndicator: false, duration: const Duration(seconds: 4));
       throw (error);
     }
