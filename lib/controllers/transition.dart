@@ -33,7 +33,7 @@ class TransitionController extends GetxController{
         page =  MainData();
         update();
       }else if(userState?.state == 3){
-        page = DetailedInfo();
+        page = DetailedInfo(showEdit: false,);
         update();
       }else if(userState?.state == 4){
         page = DashBoardMale();

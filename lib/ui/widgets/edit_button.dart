@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 class EditButton extends StatelessWidget {
-  const EditButton({Key? key}) : super(key: key);
+  String title;
+  EditButton({Key? key,required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class EditButton extends StatelessWidget {
         mainAxisAlignment:MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            "تعديل الحساب",
+            title,
             style: GoogleFonts.cairo(
                 color: Colors.white,
                 fontSize: 14.sp,

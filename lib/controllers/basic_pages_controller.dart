@@ -126,7 +126,7 @@ class BasicPagesController extends GetxController {
           choosenGender,
         );
         loader = false;
-        Get.offAll(() => DetailedInfo(),);
+        Get.offAll(() => DetailedInfo(showEdit: false,),);
         update();
       }
     } on HttpExeption catch (e) {

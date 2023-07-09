@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
         FlutterNativeSplash.remove();
       }else if(userState?.state == 3){
         setState(() {
-          page = DetailedInfo();
+          page = DetailedInfo(showEdit: false,);
         });
         FlutterNativeSplash.remove();
       }else if(userState?.state == 4){
@@ -164,8 +164,7 @@ class _MyAppState extends State<MyApp> {
               onInit: (){
                 trans();
               },
-              home: MainData()
-              // page ?? const Scaffold(body: Center(child: CircularProgressIndicator(color: basicPink,),),)
+              home: page ?? const Scaffold(body: Center(child: CircularProgressIndicator(color: basicPink,),),)
             ),)),
       ),
     );

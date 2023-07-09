@@ -10,6 +10,7 @@ import 'package:effa/ui/screens/personal_data/personal_data.dart';
 import 'package:effa/ui/screens/personal_photo/personal_photos.dart';
 import 'package:effa/ui/screens/r_social_status/social_status.dart';
 import 'package:effa/ui/widgets/detailed_widget.dart';
+import 'package:effa/ui/widgets/edit_button.dart';
 import 'package:effa/ui/widgets/info_bottom_sheet.dart';
 import 'package:effa/ui/widgets/saprator.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/register_button.dart';
 class DetailedInfo extends StatelessWidget {
-   DetailedInfo({Key? key}) : super(key: key);
+  bool showEdit;
+   DetailedInfo({Key? key,required this.showEdit}) : super(key: key);
   final gender = GetStorage();
 
   @override
@@ -142,7 +144,7 @@ class DetailedInfo extends StatelessWidget {
             SizedBox(height: 30.h,),
             Padding(
               padding: const EdgeInsets.only(left: 10.0,right: 10),
-              child: RegisterButton(
+              child: showEdit?EditButton(title: "رجوع"):RegisterButton(
                 title: Text('تسجيل الحساب',
                     style: GoogleFonts.cairo(
                       color: white,

@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:effa/controllers/my_profile_controller.dart';
 import 'package:effa/helper/app_colors.dart';
+import 'package:effa/ui/screens/detailed%20_personal_data/detaild_data.dart';
 import 'package:effa/ui/widgets/edit_button.dart';
 import 'package:effa/ui/widgets/my_info_card.dart';
 import 'package:effa/ui/widgets/profile_card.dart';
@@ -56,7 +57,12 @@ class MyProfile extends StatelessWidget {
                 child: Column(children: [
                   ProfileCard(),
                   MyInfoCard(),
-                  showEdit?const EditButton():const SizedBox()
+                  showEdit?InkWell(
+                      onTap: (){
+                        Get.to(
+                          DetailedInfo(showEdit: true,),);
+                      },
+                      child: EditButton(title: "تعديل الحساب")):const SizedBox()
                 ]),
               ),
             );
