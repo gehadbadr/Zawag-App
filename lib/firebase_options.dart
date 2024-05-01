@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC81HSMqSM-dRNxieSnHdk4B-Ru7PjfJaE',
-    appId: '1:866513282638:android:f49db1cc266b44aa40051f',
-    messagingSenderId: '866513282638',
-    projectId: 'effa-8c1cf',
-    storageBucket: 'effa-8c1cf.appspot.com',
+    apiKey: 'AIzaSyD-k7xVAGsilh3GvRiJeiaIgVI7mPc0nEE',
+    appId: '1:725052884229:android:71f8f114259730843d236c',
+    messagingSenderId: '725052884229',
+    projectId: 'effah-app',
+    storageBucket: 'effah-app.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA5DRrGuwV5e37MkuyIR9j2imweburp4_8',
-    appId: '1:866513282638:ios:8d59d8e1cd4eba2240051f',
-    messagingSenderId: '866513282638',
-    projectId: 'effa-8c1cf',
-    storageBucket: 'effa-8c1cf.appspot.com',
-    iosClientId: '866513282638-bkml6rlcm3mqsu38vuedjn16osnb3g1c.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCEOBqwKURqm-OCDQOAhHAnQfmUSzZFMQk',
+    appId: '1:725052884229:ios:21f18eefdbf6e61a3d236c',
+    messagingSenderId: '725052884229',
+    projectId: 'effah-app',
+    storageBucket: 'effah-app.appspot.com',
     iosBundleId: 'com.example.effa',
   );
 }

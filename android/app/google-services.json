@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "866513282638",
-    "project_id": "effa-8c1cf",
-    "storage_bucket": "effa-8c1cf.appspot.com"
+    "project_number": "725052884229",
+    "project_id": "effah-app",
+    "storage_bucket": "effah-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:866513282638:android:f49db1cc266b44aa40051f",
+        "mobilesdk_app_id": "1:725052884229:android:71f8f114259730843d236c",
         "android_client_info": {
           "package_name": "com.example.effa"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "866513282638-nll1tb3fpcsf4ss0nri6suma7jna7vdr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC81HSMqSM-dRNxieSnHdk4B-Ru7PjfJaE"
+          "current_key": "AIzaSyD-k7xVAGsilh3GvRiJeiaIgVI7mPc0nEE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "866513282638-nll1tb3fpcsf4ss0nri6suma7jna7vdr.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
