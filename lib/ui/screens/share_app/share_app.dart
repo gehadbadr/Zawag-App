@@ -1,8 +1,12 @@
 import 'package:effa/helper/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:share_plus/share_plus.dart' as ShareApp;
+import 'package:share_plus/share_plus.dart';
 
 class Share extends StatelessWidget {
   @override
@@ -11,41 +15,54 @@ class Share extends StatelessWidget {
     return Scaffold(
       backgroundColor: bGround,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        elevation: 7,
-        shadowColor: lliGrey,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
-        ),
-        backgroundColor: white,
-        title: Center(
-          child: Text(
-            "مشاركة التطبيق",
-            style: GoogleFonts.cairo(
-                color: black,
-                fontSize: 20),
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: const ImageIcon(
-              AssetImage("./././assets/icon/arrow_back.png"),
-              color: black,
+      appBar:  PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: const BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: lliGrey,
+              offset: Offset(0, 4.0),
+              blurRadius: 5.0,
+            )
+          ]),
+          child: AppBar(
+            scrolledUnderElevation: 0,
+            elevation: 0.0,
+            // foregroundColor: Colors.white,
+            // shadowColor: lliGrey,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(20),
+              ),
             ),
+            backgroundColor: white,
+            title: Center(
+              child: Text(
+                "مشاركة التطبيق",
+                style: GoogleFonts.cairo(color: black, fontSize: 18.sp),
+              ),
+            ),
+            actions: [
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child:  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset("./././assets/icon/arrow_back.png"),
+                ),
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+            ],
+            leading: Container(),
           ),
-          const SizedBox(
-            width: 15,
-          ),
-        ],
-        leading: Container(),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
         child: Center(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,6 +75,7 @@ class Share extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  SizedBox(height: 20.h,),
                   Container(
                     // height: 300,
                     decoration: const BoxDecoration(
@@ -149,9 +167,8 @@ class Share extends StatelessWidget {
                           Center(
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 20),
-                              child: QrImage(
+                              child: QrImageView(
                                 data: "https://github.com/AhmedElmagdob",
-
                                 version: QrVersions.auto,
                                 size: 200.0,
                                 backgroundColor: Colors.white,
@@ -184,7 +201,7 @@ class Share extends StatelessWidget {
                           width: 25,
                           height: 25,
                           decoration: const BoxDecoration(
-                            color: Color(0xffF0F0F0),
+                            color: bGround,
                             shape: BoxShape.circle,
                           ),
                         )
@@ -192,68 +209,83 @@ class Share extends StatelessWidget {
                       ),
                     ]),
                   ),
-                  SizedBox(height: 10.h,),
+                  SizedBox(height: 20.h,),
                   Row(
                     children: [
                       const Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(right: 25, left: 10),
+                          padding: EdgeInsets.only(right: 20, left: 10),
                           child: Divider(
-                            thickness: 1.5,
-                            color: Color.fromARGB(255, 45, 45, 45),
+                            thickness: 2,
+                            color: lliGrey ,
+
                           ),
                         ),
                       ),
                       Text(
                         "أو",
                         style: GoogleFonts.cairo(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20,),
                       ),
                       const Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(right: 10, left: 25),
+                          padding: EdgeInsets.only(right: 10, left: 20),
                           child: Divider(
-                            thickness: 1.5,
-                            color: Color.fromARGB(255, 45, 45, 45),
+                            thickness: 2,
+                            color:lliGrey,
                           ),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Center(
-                    child: Container(
-                      width: 208.h,
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(35),
-                          border: Border.all(
-                            color: basicPink,
-                            width: 2,
-                          )),
-                      child: TextButton(
-                          onPressed: () {
-                           
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children:  [
-                              Text(
-                                "اضغط للمشاركة  ",
-                                style: GoogleFonts.cairo(
-                                    color: basicPink,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                              const Image(
-                                image: AssetImage(
-                                    "././assets/icon/Mask Group 297.png"),
-                                color: basicPink,
-                              ),
-                            ],
-                          )),
+                    child: Padding(
+                      padding: EdgeInsets.only(left:60.w,right: 60.w,top: 5,bottom: 5),
+                      child: Container(
+                        // width: 208.h,
+//height: 50.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(35),
+                            border: Border.all(
+                              color: basicPink,
+                              width: 2,
+                            )),
+                        child: TextButton(
+                            onPressed: () async{
+                              ShareResult shareResult;
+                               shareResult =
+                               await  ShareApp.Share.shareWithResult('check out my website https://github.com/AhmedElmagdob', subject: 'Look what I made!');
+                              if(shareResult.status == ShareResultStatus.success){
+                                Get.snackbar(
+                                  "تمت المشاركه",
+                                  "Thank You!",backgroundColor: const Color(
+                                    0xffffd5e0),
+                                  borderRadius: 10,
+
+                                );
+                              }
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:  [
+                                Text(
+                                  "اضغط للمشاركة  ",
+                                  style: GoogleFonts.cairo(
+                                      color: basicPink,
+                                      fontSize: 18),
+                                ),
+                              Image(
+                                  height: 20.h,
+                                  image: const AssetImage(
+                                      "././assets/icon/Mask Group 297.png",),
+                                  color: basicPink,
+                                ),
+                              ],
+                            )),
+                      ),
                     ),
                   ),
                 ]),

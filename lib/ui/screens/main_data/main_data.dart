@@ -19,54 +19,67 @@ class MainData extends StatelessWidget {
       return result;
     }, child: GetBuilder<BasicPagesController>(builder: (controller) {
       return Scaffold(
-        body: controller.loaderN?const Center(child: CircularProgressIndicator(color: basicPink,),):Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.w),
-          child: Column(children: [
-            SizedBox(
-              height: 25.h,
-            ),
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: Row(children: [
-                SvgPicture.asset("assets/icon/nextto.svg"),
-                SizedBox(
-                  width: 10.w,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Color(0xffFCFCFC),
+        body: controller.loaderN
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: basicPink,
                 ),
-                Text(
-                  'البيانات الأساسية',
-                  textAlign: TextAlign.right,
-                  style: GoogleFonts.cairo(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.bold,
+              )
+            : Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: Column(children: [
+                  SizedBox(
+                    height: 25.h,
                   ),
-                ),
-              ]),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 45.h, top: 20.h),
-              child: Container(
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(40.0))),
-                child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    child: Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TweenAnimationBuilder(
-                        duration: const Duration(milliseconds: 250),
-                        tween: Tween(begin: 0.0, end: controller.position),
-                        builder: (context, val, _) => LinearProgressIndicator(
-                            minHeight: 9.h,
-                            backgroundColor: bgrey,
-                            valueColor:
-                                const AlwaysStoppedAnimation<Color>(basicPink),
-                            value: val),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Row(children: [
+                      SvgPicture.asset("assets/icon/nextto.svg"),
+                      SizedBox(
+                        width: 10.w,
                       ),
-                    )),
+                      Text(
+                        'البيانات الأساسية',
+                        textAlign: TextAlign.right,
+                        style: GoogleFonts.cairo(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 45.h, top: 20.h),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(40.0))),
+                      child: ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: TweenAnimationBuilder(
+                              duration: const Duration(milliseconds: 250),
+                              tween:
+                                  Tween(begin: 0.0, end: controller.position),
+                              builder: (context, val, _) =>
+                                  LinearProgressIndicator(
+                                      minHeight: 9.h,
+                                      backgroundColor: bgrey,
+                                      valueColor:
+                                          const AlwaysStoppedAnimation<Color>(
+                                              basicPink),
+                                      value: val),
+                            ),
+                          )),
+                    ),
+                  ),
+                  Expanded(child: CustomRegisterView())
+                ]),
               ),
-            ),
-            Expanded(child: CustomRegisterView())
-          ]),
-        ),
       );
     }));
   }

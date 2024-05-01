@@ -37,18 +37,16 @@ class _DropDownFilterState extends State<DropDownFilter> {
         child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           ImageIcon(
             AssetImage(widget.icon),
-            size: 40,
+            size: 27.h,
             color: basicPink,
             // ),
           ),
-          const Expanded(
-            child: SizedBox(),
-          ),
+          SizedBox(width: 10.w,),
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Align(
               child: Text(
                 widget.txt,
-                style: GoogleFonts.cairo(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                style: GoogleFonts.cairo(fontSize: 14.sp, fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(
@@ -59,16 +57,13 @@ class _DropDownFilterState extends State<DropDownFilter> {
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton(
                       isExpanded: true,
-                      icon: const ImageIcon(
-                        AssetImage("assets/icon/combo.png"),
-                        size: 40,
-                        color: black,
-                      ),
+                      icon: Icon(Icons.keyboard_arrow_down_rounded,color: Colors.black,size: 30.h,),
                       hint: Text(
                         "اختر",
                         style: GoogleFonts.cairo(
                           color: black,
                           fontSize: 14.sp,
+                          fontWeight: FontWeight.w300
                         ),
                       ),
                       value: selectedValue,

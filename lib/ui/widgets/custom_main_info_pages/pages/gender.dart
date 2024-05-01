@@ -31,40 +31,48 @@ class Gender extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        controller.choseGender(true,2);
+                        controller.choseGender(true, 2);
                       },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
                             color: controller.isFemale ? basicPink : ligthtGrey,
                             width: 1.3.w,
                           ),
-                          borderRadius: BorderRadius.circular(
-                            10.0,
-                          ),
+                          boxShadow: [
+                            controller.isFemale
+                                ? const BoxShadow(
+                                    color: gGrey,
+                                    spreadRadius: 0.2,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 3))
+                                : const BoxShadow(),
+                          ],
                         ),
-                        elevation: controller.isFemale ? 15 : 0,
-                        child: Container(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 15.h,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset('assets/image/female.svg'),
-                                SizedBox(
-                                  height: 15.0.h,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15.h,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset('assets/image/female.svg'),
+                              SizedBox(
+                                height: 15.0.h,
+                              ),
+                              Text(
+                                'أنثي',
+                                style: GoogleFonts.cairo(
+                                  fontSize:
+                                      MediaQuery.of(context).size.height <= 500
+                                          ? 10.sp
+                                          : 16.0.sp,
+                                  fontWeight: FontWeight.normal,
                                 ),
-                                Text(
-                                  'أنثي',
-                                  style: GoogleFonts.cairo(
-                                    fontSize: 16.0.sp,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -76,23 +84,28 @@ class Gender extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        controller.choseGender(false,1);
+                        controller.choseGender(false, 1);
                       },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                              color: controller.pressed && !controller.isFemale
-                                  ? basicPink
-                                  : ligthtGrey,
-                              width: 1.3.w,
-                              style: BorderStyle.solid),
-                          borderRadius: BorderRadius.circular(
-                            10.0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color: controller.pressed && !controller.isFemale
+                                ? basicPink
+                                : ligthtGrey,
+                            width: 1.3.w,
                           ),
+                          boxShadow: [
+                            controller.pressed && !controller.isFemale
+                                ? const BoxShadow(
+                                    color: gGrey,
+                                    spreadRadius: 0.2,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 3))
+                                : const BoxShadow(),
+                          ],
                         ),
-                        elevation:
-                            controller.pressed && !controller.isFemale ? 15 : 0,
-                        shadowColor: ligthtGrey,
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: 15.h,
@@ -107,7 +120,10 @@ class Gender extends StatelessWidget {
                               Text(
                                 'ذكر',
                                 style: GoogleFonts.cairo(
-                                  fontSize: 16.sp,
+                                  fontSize:
+                                      MediaQuery.of(context).size.height <= 500
+                                          ? 10.sp
+                                          : 16.0.sp,
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),

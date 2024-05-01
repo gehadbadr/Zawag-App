@@ -247,6 +247,7 @@ class UserDataLogin {
     this.aboutPartner,
     this.createdAt,
     this.updatedAt,
+    this.points,
     this.age,
     this.fullName,
   });
@@ -283,6 +284,7 @@ class UserDataLogin {
   String? aboutPartner;
   DateTime? createdAt;
   DateTime? updatedAt;
+  int? points;
   int? age;
   String? fullName;
 
@@ -319,6 +321,7 @@ class UserDataLogin {
     aboutPartner: json["about_partner"],
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
+    points: json["points"],
     age: json["age"],
     fullName: json["full_name"],
   );
@@ -356,6 +359,7 @@ class UserDataLogin {
     "about_partner": aboutPartner,
     "created_at": createdAt!.toIso8601String(),
     "updated_at": updatedAt!.toIso8601String(),
+    "points": points,
     "age": age,
     "full_name": fullName,
   };

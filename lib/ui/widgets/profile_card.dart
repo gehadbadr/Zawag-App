@@ -20,12 +20,22 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Card(
-        elevation: 6.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+              color: Colors.white70, width: 1
+          ),
+          boxShadow: const [
+            BoxShadow(
+                color: gGrey,
+                spreadRadius: 0.2,
+                blurRadius:4,
+                offset: Offset(0,3)
+            ),
+          ],
         ),
-        color: white,
         child: Column(children: [
           GetBuilder<MyProfileController>(
             builder: (controller) {
@@ -131,7 +141,7 @@ class ProfileCard extends StatelessWidget {
                     child: Transform.rotate(
                       angle: -math.pi / -1,
                       child: DotsIndicator(
-                        dotsCount: controller.totalDots!,
+                        dotsCount:4, //controller.totalDots!,
                         position: controller.currentIndex,
                         axis: Axis.vertical,
                         reversed: true,
@@ -193,7 +203,7 @@ class ProfileCard extends StatelessWidget {
           (element) => ClipRRect(
             borderRadius: BorderRadius.circular(18.0),
             child: CachedNetworkImage(
-              imageUrl: 'https://elshakhs.net/effah/public/${element.image!}',
+              imageUrl: 'https://analyzes.online/effah/effah/public/${element.image!}',
               imageBuilder: (context, imageProvider) => Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -206,7 +216,7 @@ class ProfileCard extends StatelessWidget {
                   child: SizedBox(
                       height: 30,
                       width: 30,
-                      child: CircularProgressIndicator())),
+                      child: CircularProgressIndicator(color: basicPink,))),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),

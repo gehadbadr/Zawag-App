@@ -17,12 +17,19 @@ class MyInfoCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 20.0.h),
       child: SizedBox(
           width: double.infinity,
-          child: Card(
-            elevation: 6.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.white70, width: 1),
+              boxShadow: const [
+                BoxShadow(
+                    color: gGrey,
+                    spreadRadius: 0.2,
+                    blurRadius: 4,
+                    offset: Offset(0, 3)),
+              ],
             ),
-            color: white,
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: Padding(
@@ -86,7 +93,7 @@ class MyInfoCard extends StatelessWidget {
                         children: List<Widget>.generate(
                             controller.relegion.length, (int index) {
                           return _editTitleChip(
-                           "${controller.relegion[index].answerContent}",
+                            "${controller.relegion[index].answerContent}",
                           );
                         }),
                       ),
@@ -290,7 +297,7 @@ class MyInfoCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.0),
           ),
         ),
-        child: Text(txtValue == "null"?"لم يتم كتابة وصف":txtValue,
+        child: Text(txtValue == "null" ? "لم يتم كتابة وصف" : txtValue,
             style: GoogleFonts.cairo(
               color: black,
               fontSize: 14.0.sp,

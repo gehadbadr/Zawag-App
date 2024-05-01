@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:scroll_date_picker/scroll_date_picker.dart';
 
 class BirthDate extends StatelessWidget {
   BasicPagesController controller = Get.find();
@@ -16,79 +16,82 @@ class BirthDate extends StatelessWidget {
       children: [
         Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
-              child: Text(
-                'تاريخ ميلادك ؟',
-                style: GoogleFonts.cairo(fontSize: 20.sp),
-              ),
-            )),
-        Expanded(
-          flex: 5,
-          child: Padding(
-            padding: EdgeInsets.only(
-              bottom: 18.0.h,
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: Text(
+            'تاريخ ميلادك ؟',
+            style: GoogleFonts.cairo(
+              fontSize:
+                  MediaQuery.of(context).size.height <= 500 ? 14.sp : 20.0.sp,
             ),
-            child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: llgrey, width: 1.w),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 70.0),
-                        child: Text('يوم',
-                            style: GoogleFonts.cairo(
-                              fontSize: 16.sp,
-                            )),
-                      ),
-                      Text('شهر',
-                          style: GoogleFonts.cairo(
-
-                            fontSize: 16.sp,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 70.0),
-                        child: Text('سنه',
-                            style: GoogleFonts.cairo(
-                              fontSize: 16.sp,
-                            )),
-                      ),
-                    ],
-                  ),
-                  Divider(),
-                  SizedBox(
-                    height: 392.h,
-                    child: CupertinoTheme(
-                      data: CupertinoThemeData(
-                        brightness: Theme.of(context).brightness,
-                        textTheme: CupertinoTextThemeData(
-                          dateTimePickerTextStyle:GoogleFonts.cairo(
-                            fontSize:20.sp,
-
-                          )
+          ),
+        )),
+        Padding(
+          padding: EdgeInsets.only(
+            bottom: 45.0.h,
+          ),
+          child: Card(
+            elevation: 3,
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: llgrey, width: 1.w),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height <= 500 ? 200.h : 392.h,
+              child: ScrollDatePicker(
+                selectedDate: controller.myDate,
+                scrollViewOptions: DatePickerScrollViewOptions(
+                    year: ScrollViewDetailOptions(
+                        selectedTextStyle: GoogleFonts.cairo(
+                          fontSize: MediaQuery.of(context).size.height <= 500
+                              ? 10.sp
+                              : 22.0.sp,
                         ),
-                      ),
-                      child: CupertinoDatePicker(
-                        dateOrder: DatePickerDateOrder.dmy,
-                        mode: CupertinoDatePickerMode.date,
-                        initialDateTime: controller.myDate,
-                        minimumYear: 1960,
-                        minimumDate: DateTime(1960, 12, 31),
-                        // maximumYear: 2002,
-                        maximumDate: DateTime(2005, 12, 31),
-                        onDateTimeChanged: (dateTime) {
-                          controller.myDate = dateTime == null ? controller.myDate : dateTime;
-                          debugPrint("$dateTime");
-                        },
-                      ),
-                    ),
-                  ),
+                        alignment: Alignment.centerRight,
+                        textStyle: GoogleFonts.cairo(
+                          fontSize: MediaQuery.of(context).size.height <= 500
+                              ? 10.sp
+                              : 22.0.sp,
+                        )),
+                    day: ScrollViewDetailOptions(
+                        selectedTextStyle: GoogleFonts.cairo(
+                          fontSize: MediaQuery.of(context).size.height <= 500
+                              ? 10.sp
+                              : 22.0.sp,
+                        ),
+                        alignment: Alignment.centerLeft,
+                        textStyle: GoogleFonts.cairo(
+                          fontSize: MediaQuery.of(context).size.height <= 500
+                              ? 10.sp
+                              : 22.0.sp,
+                        )),
+                    month: ScrollViewDetailOptions(
+                        selectedTextStyle: GoogleFonts.cairo(
+                          fontSize: MediaQuery.of(context).size.height <= 500
+                              ? 10.sp
+                              : 22.0.sp,
+                        ),
+                        alignment: Alignment.center,
+                        textStyle: GoogleFonts.cairo(
+                          fontSize: MediaQuery.of(context).size.height <= 500
+                              ? 10.sp
+                              : 22.0.sp,
+                        ))),
+                maximumDate: DateTime(2010, 12, 31),
+                minimumDate: DateTime(1960, 12, 31),
+                viewType: const [
+                  DatePickerViewType.year,
+                  DatePickerViewType.month,
+                  DatePickerViewType.day,
                 ],
+                options: const DatePickerOptions(
+                  isLoop: true,
+                ),
+                locale: const Locale('ar'),
+                onDateTimeChanged: (DateTime value) {
+                  controller.myDate = value == null ? controller.myDate : value;
+                  debugPrint("$value");
+                },
               ),
             ),
           ),
@@ -97,12 +100,14 @@ class BirthDate extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 50),
           child: SizedBox(
             width: 264.w,
-            height:44.h,
+            // height: 44.h,
             child: RoundedButton(
                 mywidget: Text('التالي',
                     style: GoogleFonts.cairo(
                       color: white,
-                      fontSize: 16.sp,
+                      fontSize: MediaQuery.of(context).size.height <= 500
+                          ? 10.sp
+                          : 16.0.sp,
                     )),
                 raduis: 10,
                 myfun: () {
@@ -111,13 +116,43 @@ class BirthDate extends StatelessWidget {
                 color: basicPink),
           ),
         ),
-        const Expanded(
-          flex: 1,
-          child: SizedBox(
-            // height: 10,
-          ),
-        )
+        // const Expanded(
+        //   flex: 1,
+        //   child: SizedBox(
+        //     // height: 10,
+        //   ),
+        // )
       ],
     );
   }
 }
+// CupertinoTheme(
+// data: CupertinoThemeData(
+//
+// brightness: Brightness.light,
+// // primaryColor: Colors.white,
+// textTheme: CupertinoTextThemeData(
+//
+// dateTimePickerTextStyle:GoogleFonts.cairo(
+// fontSize:22.sp,
+//
+// )
+// ),
+// ),
+// child: CupertinoDatePicker(
+//
+// dateOrder: DatePickerDateOrder.ymd,
+// mode: CupertinoDatePickerMode.date,
+//
+// initialDateTime: controller.myDate,
+// minimumYear: 1960,
+// minimumDate: DateTime(1960, 12, 31),
+// use24hFormat: true,
+// // maximumYear: 2002,
+// maximumDate: DateTime(2005, 12, 31),
+// onDateTimeChanged: (dateTime) {
+// controller.myDate = dateTime == null ? controller.myDate : dateTime;
+// debugPrint("$dateTime");
+// },
+// ),
+// ),

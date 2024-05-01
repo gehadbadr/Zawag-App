@@ -51,7 +51,7 @@ class AboutMe extends StatelessWidget {
                                     'وصف عني & عن شريك حياتي',
                                     textAlign: TextAlign.right,
                                     style: GoogleFonts.cairo(
-                                      fontSize: 22.sp,
+                                      fontSize: 20.sp,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -136,7 +136,7 @@ class AboutMe extends StatelessWidget {
                               height: 20.h,
                             ),
                             RegisterButton(
-                                title: controller.loader? const Center(child: CircularProgressIndicator(color: Colors.black,),):Text('تـأكيد',
+                                title: controller.loader? const Center(child: CircularProgressIndicator(color: basicPink,),):Text('تـأكيد',
                                     style: GoogleFonts.cairo(
                                       color: white,
                                       fontSize: 16.sp,
@@ -146,7 +146,7 @@ class AboutMe extends StatelessWidget {
                                       context: context,
                                       backgroundColor: transparnt,
                                       builder: (context) {
-                                        return const WaitBottomSheet();
+                                        return WaitBottomSheet(id: 2);
                                       });
                                 },
                                 nav: (){

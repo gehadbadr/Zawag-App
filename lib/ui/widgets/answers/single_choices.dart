@@ -73,120 +73,128 @@ class SingleChoice extends StatelessWidget {
               // ),
               Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h,),
                     child: Container(
                       alignment: Alignment.centerRight,
-                      child: Card(
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(color: llgrey, width: 1.w),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          color: white,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10.h,
-                            ),
-                            child: ListView.builder(
-                                padding: const EdgeInsets.all(0),
-                                shrinkWrap: true,
-                                itemCount: answers.length,
-                                itemBuilder: (context, index) {
-                                  if (editingController.text.isEmpty) {
-                                    return InkWell(
-                                      onTap: () async {
-                                        controller.changeIndex(index);
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color:  llgrey,
+                          width: 1.3.w,),
+                        boxShadow: const[
+                          BoxShadow(
+                              color: gGrey,
+                              spreadRadius: 0.2,
+                              blurRadius: 4,
+                              offset: Offset(0, 3)),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.h,
+                        ),
+                        child: ListView.builder(
+                            padding: const EdgeInsets.all(0),
+                            shrinkWrap: true,
+                            itemCount: answers.length,
+                            itemBuilder: (context, index) {
+                              if (editingController.text.isEmpty) {
+                                return InkWell(
+                                  onTap: () async {
+                                    controller.changeIndex(index);
 
-                                          for(int i =0;i < answers.length ; i++){
-                                           answers[i].isAnswer = 0;
-                                          }
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 12.0.h,
-                                            top: 12.0.h,
-                                            right: 10.w,
-                                            left: 10.w),
-                                        child: Center(
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.check,
-                                                size: 30,
-                                                color: (controller.tapIndex == index && controller.press == true)
-                                                    || answers[index].isAnswer == 1
-                                                    ? basicPink
-                                                    : transparnt,
-                                              ),
-                                              const Spacer(),
-                                              Text(
-                                                answers[index]
-                                                    .content,
-                                                style:  GoogleFonts.cairo(
-                                                    fontSize: 16.sp,
-                                                    color: (controller.tapIndex ==
-                                                        index &&
-                                                        controller.press ==
-                                                            true) ||
-                                                        answers[index].isAnswer == 1
-                                                        ? basicPink
-                                                        : black),
-                                              ),
-                                            ],
+                                      for(int i =0;i < answers.length ; i++){
+                                       answers[i].isAnswer = 0;
+                                      }
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom: 12.0.h,
+                                        top: 12.0.h,
+                                        right: 10.w,
+                                        left: 10.w),
+                                    child: Center(
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.check,
+                                            size: 30,
+                                            color: (controller.tapIndex == index && controller.press == true)
+                                                || answers[index].isAnswer == 1
+                                                ? basicPink
+                                                : transparnt,
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  } else if (answers[index].content
-                                      .contains(editingController.text) ||
-                                      answers[index].content
-                                          .contains(editingController.text)) {
-                                    return InkWell(
-                                      onTap: () async {
-                                        controller.changeIndex(index);
-                                        // setState(() {
-                                          for(int i =0;i < answers.length ; i++){
-                                            answers[i].isAnswer = 0;
-                                          }
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            bottom: 12.0.h,
-                                            top: 12.0.h,
-                                            right: 10.w,
-                                            left: 10.w),
-                                        child: Center(
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.check,
-                                                size: 30,
-                                                color: (controller.tapIndex == index && controller.press == true) || answers[index].isAnswer == 1
+                                          const Spacer(),
+                                          Text(
+                                            answers[index]
+                                                .content,
+                                            style:  GoogleFonts.cairo(
+                                                fontSize: 16.sp,
+                                                color: (controller.tapIndex ==
+                                                    index &&
+                                                    controller.press ==
+                                                        true) ||
+                                                    answers[index].isAnswer == 1
                                                     ? basicPink
-                                                    : transparnt,
-                                              ),
-                                              const Spacer(),
-                                              Text(
-                                                answers[index].content,
-                                                style: GoogleFonts.cairo(
-                                                    fontSize: 16.sp,
-                                                    color: (controller.tapIndex == index &&
-                                                        controller.press == true) ||
-                                                      answers[index].isAnswer == 1
-                                                        ? basicPink
-                                                        : black),
-                                              ),
-                                            ],
+                                                    : black),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    );
-                                  } else {
-                                    return Container();
-                                  }
-                                }),
-                          )),
+                                    ),
+                                  ),
+                                );
+                              } else if (answers[index].content
+                                  .contains(editingController.text) ||
+                                  answers[index].content
+                                      .contains(editingController.text)) {
+                                return InkWell(
+                                  onTap: () async {
+                                    controller.changeIndex(index);
+                                    // setState(() {
+                                      for(int i =0;i < answers.length ; i++){
+                                        answers[i].isAnswer = 0;
+                                      }
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        bottom: 12.0.h,
+                                        top: 12.0.h,
+                                        right: 10.w,
+                                        left: 10.w),
+                                    child: Center(
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.check,
+                                            size: 30,
+                                            color: (controller.tapIndex == index && controller.press == true) || answers[index].isAnswer == 1
+                                                ? basicPink
+                                                : transparnt,
+                                          ),
+                                          const Spacer(),
+                                          Text(
+                                            answers[index].content,
+                                            style: GoogleFonts.cairo(
+                                                fontSize: 16.sp,
+                                                color: (controller.tapIndex == index &&
+                                                    controller.press == true) ||
+                                                  answers[index].isAnswer == 1
+                                                    ? basicPink
+                                                    : black),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Container();
+                              }
+                            }),
+                      ),
                     ),
                   ))
             ],

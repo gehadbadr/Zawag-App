@@ -26,10 +26,22 @@ class GirlWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Card(
-        elevation: 6.0,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0)),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(
+              color: Colors.white70, width: 1
+          ),
+          boxShadow: [
+            const BoxShadow(
+                color: gGrey,
+                spreadRadius: 0.2,
+                blurRadius:4,
+                offset: Offset(0,3)
+            ),
+          ],
+        ),
         child: Column(
           children: [
             Directionality(
@@ -57,97 +69,121 @@ class GirlWidget extends StatelessWidget {
             ),
             Directionality(
               textDirection: TextDirection.rtl,
-              child: Row(
-                children: [
-                  const ImageIcon(
-                    AssetImage("assets/icon/person.png"),
-                    size: 40,
-                    color: red,
-                  ),
-                  Text(
-                    age,
-                    style: GoogleFonts.cairo(
-                        fontSize: 16.sp,
-                        color: black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    ' سنة',
-                    style: GoogleFonts.cairo(fontSize: 14.sp, color: black),
-                  ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  SizedBox(
-                      height: 25.h,
-                      child: const VerticalDivider(color: grey)),
-                  const ImageIcon(
-                    AssetImage("assets/icon/ba.png"),
-                    size: 40,
-                    color: red,
-                  ),
-                  Text(
-                    job,
-                    style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
-                  ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  SizedBox(
-                      height: 25.h,
-                      child: const VerticalDivider(color: grey)),
-                  const ImageIcon(
-                    AssetImage("assets/icon/stu.png"),
-                    size: 40,
-                    color: red,
-                  ),
-                  Text(
-                    education,
-                    style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
-                  ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                ],
+              child: Padding(
+                padding:  EdgeInsets.only(left: 8.0.w,right: 8.0.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                     ImageIcon(
+                      const AssetImage("assets/icon/person.png"),
+                      size: 25.h,
+                      color: red,
+                    ),
+                    Text(
+                      age,
+                      style: GoogleFonts.cairo(
+                          fontSize: 16.sp,
+                          color: black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      ' سنة',
+                      style: GoogleFonts.cairo(fontSize: 14.sp, color: black),
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    SizedBox(
+                        height: 25.h,
+                        child: const VerticalDivider(color: Color(0xffECECEC))),
+                    ImageIcon(
+                      const AssetImage("assets/icon/ba.png"),
+                      size: 25.h,
+                      color: red,
+                    ),
+                    Text(
+                      job,
+                      style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    SizedBox(
+                        height: 25.h,
+                        child: const VerticalDivider(color: Color(0xffECECEC))),
+                    ImageIcon(
+                      const AssetImage("assets/icon/stu.png"),
+                      size: 25.h,
+                      color: red,
+                    ),
+                    Text(
+                      education,
+                      style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
               padding:
               EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
               child: Divider(
-                thickness: 2.w,
+                thickness: 1.w,
+                color: const Color(0xffECECEC),
               ),
             ),
             Directionality(
               textDirection: TextDirection.rtl,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const ImageIcon(
-                    AssetImage("assets/icon/stat.png"),
-                    size: 40,
-                    color: red,
-                  ),
-                  Text(
-                    socialSituation,
-                    style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
-                  ),
                   SizedBox(
-                    width: 5.w,
+                    width: 7.w,
                   ),
+                   Row(
+
+                     children: [
+                       ImageIcon(
+                        const AssetImage("assets/icon/stat.png"),
+                        size: 25.h,
+                        color: red,
+                                         ),
+                                         SizedBox(
+                                           width: 7.w,
+                                         ),
+                                         Text(
+                        socialSituation,
+                        style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
+                                         ),
+                     ],
+                   ),
+
                   Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25.w),
                       child: SizedBox(
                           height: 25.h,
-                          child: const VerticalDivider(color: grey))),
-                  const ImageIcon(
-                    AssetImage("assets/icon/al.png"),
-                    size: 40,
-                    color: red,
+                          child: const VerticalDivider(color: Color(0xffECECEC)))),
+                  Row(
+                    children: [
+                      ImageIcon(
+                        const AssetImage("assets/icon/al.png"),
+                        size: 25.h,
+                        color: red,
+                      ),
+                      SizedBox(
+                        width: 7.w,
+                      ),
+                      Text(
+                        nationality,
+                        style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
+                      ),
+                    ],
                   ),
-                  Text(
-                    nationality,
-                    style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
+                  SizedBox(
+                    width: 7.w,
                   ),
                 ],
               ),
@@ -156,7 +192,8 @@ class GirlWidget extends StatelessWidget {
               padding:
               EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
               child: Divider(
-                thickness: 2.w,
+                thickness: 1.w,
+                color: const Color(0xffECECEC),
               ),
             ),
             Directionality(
@@ -164,10 +201,13 @@ class GirlWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const ImageIcon(
-                    AssetImage("assets/icon/loc.png"),
-                    size: 40,
+                  ImageIcon(
+                    const AssetImage("assets/icon/loc.png"),
+                    size: 25.h,
                     color: red,
+                  ),
+                  const SizedBox(
+                    width: 5,
                   ),
                   Text(
                     address,
@@ -182,6 +222,7 @@ class GirlWidget extends StatelessWidget {
             Image.asset(
               "assets/image/flower.png",
               fit: BoxFit.cover,
+              height: 38.h,
             ),
           ],
         ),

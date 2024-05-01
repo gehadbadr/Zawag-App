@@ -27,3 +27,25 @@ class TermsModel {
     "content": content,
   };
 }
+ShareLinkModel shareLinkModelFromJson(String str) => ShareLinkModel.fromJson(json.decode(str));
+String shareLinkModelToJson(TermsModel data) => json.encode(data.toJson());
+
+class ShareLinkModel {
+  String title;
+
+
+  ShareLinkModel({
+    required this.title,
+
+  });
+
+  factory ShareLinkModel.fromJson(Map<String, dynamic> json) => ShareLinkModel(
+    title: json["title"],
+
+  );
+
+  Map<String, dynamic> toJson() => {
+    "title": title,
+
+  };
+}

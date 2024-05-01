@@ -9,67 +9,83 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/male_dashboard_controller.dart';
+import '../../../helper/dio_helper.dart';
+import '../detailed _personal_data/detaild_data.dart';
+
 
 class AccountSettings extends StatelessWidget {
   AccountSettings({Key? key}) : super(key: key);
-
+  final controller = Get.lazyPut(() => MaleDashboardController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bGround,
       body: SingleChildScrollView(
-        child: Column(
-            children: [
-              Stack(children: [
-                Container(
-                  height: 155.h,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("././assets/image/account_img.png"),
-                        fit: BoxFit.cover),
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                      padding: EdgeInsets.only(top: 105.h),
-                      child: CustomImage(
-                        isNetwork: false,
-                        "././assets/icon/profiles.png",
-                        height: 96.h,
-                        width: 96.w,
-                        shape: true,
-                        isShadow: false,
-                      )
-                  ),
-                ),
-              ]),
-              Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 20.h, bottom: 30.h),
-                    child: Text(
-                      "ahmed ahmed",
-                      style:
-                       GoogleFonts.cairo(fontWeight: FontWeight.bold, fontSize: 22.sp),
+        child: GetBuilder<MaleDashboardController>(builder: (controller) {
+          return Column(
+              children: [
+                Stack(children: [
+                  Container(
+                    height: 120.h,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("././assets/image/account_img.png"),
+                          fit: BoxFit.cover),
                     ),
-                  )),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0.w),
-                child: Card(
-                    elevation: 6,
-                    shadowColor: black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  Center(
+                    child: Padding(
+                        padding: EdgeInsets.only(top: 60.h),
+                        child: CustomImage(
+                          isNetwork: true,
+                       //   "${controller.user?.images?.isEmpty}" == "true"?"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png":"${ApiConstants.baseUrl}${controller.user?.images?.first}",
+                          "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
+                          height: 96.h,
+                          width: 96.w,
+                          shape: true,
+                          isShadow: false,
+                        )
+                    ),
+                  ),
+                ]),
+                Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
+                      child: Text(
+                        " ${controller.user?.user?.frName} ${controller.user?.user?.lsName}",
+                        style: GoogleFonts.cairo(
+                            fontWeight: FontWeight.bold, fontSize: 22.sp),
+                      ),
+                    )),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                          color: Colors.white70, width: 1
+                      ),
+                      boxShadow: const [
+                        BoxShadow(
+                            color: gGrey,
+                            spreadRadius: 0.2,
+                            blurRadius:4,
+                            offset: Offset(0,3)
+                        ),
+                      ],
                     ),
                     child: Padding(
                         padding: EdgeInsets.symmetric(
-                            vertical: 20.0.h, horizontal: 15.w),
+                            vertical: 12.0.h, horizontal: 12.w),
                         child: Directionality(
                           textDirection: TextDirection.rtl,
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(bottom: 18.0.h),
+                                padding: EdgeInsets.only(bottom: 12.0.h),
                                 child: Row(
                                   children: [
                                     Expanded(
@@ -89,20 +105,20 @@ class AccountSettings extends StatelessWidget {
                                               mainAxisAlignment:
                                               MainAxisAlignment.center,
                                               children: [
-                                                const Image(
-                                                  image: AssetImage(
+                                                Image(
+                                                  image: const AssetImage(
                                                       "././assets/icon/filt.png"),
+                                                  height: 36.h,
                                                 ),
                                                 SizedBox(
                                                   width: 15.w,
                                                 ),
                                                 Text(
-                                                  "100",
-                                                  style:  GoogleFonts.cairo(
+                                                  "${controller.user?.user?.points}",
+                                                  style: GoogleFonts.cairo(
                                                       color: white,
                                                       fontSize: 30.sp,
-                                                      fontWeight:
-                                                      FontWeight.bold),
+                                                      fontWeight: FontWeight.bold),
                                                 ),
                                               ],
                                             ),
@@ -120,7 +136,7 @@ class AccountSettings extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 20.w,
+                                      width: 18.w,
                                     ),
                                     Expanded(
                                       child: Container(
@@ -138,9 +154,11 @@ class AccountSettings extends StatelessWidget {
                                               mainAxisAlignment:
                                               MainAxisAlignment.center,
                                               children: [
-                                                const Image(
-                                                  image: AssetImage(
-                                                      "././assets/icon/profiles.png"),
+                                                Image(
+                                                  image: const AssetImage(
+                                                    "././assets/icon/profiles.png",
+                                                  ),
+                                                  height: 36.h,
                                                 ),
                                                 SizedBox(
                                                   width: 20.w,
@@ -183,7 +201,7 @@ class AccountSettings extends StatelessWidget {
                                   );
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5.0.h),
+                                  padding: EdgeInsets.symmetric(vertical: 3.0.h),
                                   child: _rowOption("././assets/icon/watch.png",
                                       "مشاهدة حسابي"
                                   ),
@@ -191,13 +209,10 @@ class AccountSettings extends StatelessWidget {
                               ),
                               GestureDetector
                                 (onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => Report()));
+                                Get.to( () =>DetailedInfo(showEdit: true,));
                               },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5.0.h),
+                                  padding: EdgeInsets.symmetric(vertical: 3.0.h),
                                   child: _rowOption(
                                     "././assets/icon/edit2.png", "تعديل الحساب",
                                   ),
@@ -212,14 +227,14 @@ class AccountSettings extends StatelessWidget {
                                   //         builder: (context) => Report()));
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5.0.h),
+                                  padding: EdgeInsets.symmetric(vertical: 3.0.h),
                                   child: _rowOption("././assets/icon/unwatch.png",
                                       "تعطيل الحساب"),
                                 ),
                               ),
                               GestureDetector
                                 (onTap: () {
-                                Get.to(
+                                Get.to(() =>
                                     Report(), //next page class
                                     duration: const Duration(milliseconds: 400), //duration of transitions, default 1 sec
                                     transition: Transition.leftToRight //transition effect
@@ -227,7 +242,7 @@ class AccountSettings extends StatelessWidget {
 
                               },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5.0.h),
+                                  padding: EdgeInsets.symmetric(vertical: 3.0.h),
                                   child: _rowOption("././assets/icon/report.png",
                                       "الابلاغ عن الحسابات"),
                                 ),
@@ -241,18 +256,20 @@ class AccountSettings extends StatelessWidget {
                                 );
                               },
                                 child: Padding(
-                                  padding: EdgeInsets.only(top: 5.0.h),
+                                  padding: EdgeInsets.only(top: 3.0.h),
                                   child: _rowOption("././assets/icon/logout.png",
                                       "تسجيل الخروج"),
                                 ),
                               )
                             ],
                           ),
-                        ))),
-              ),
-            ]),
+                        )),
+                  ),
+                ),
+              ]);
+    },
       ),
-    );
+    ));
   }
 
   Widget _rowOption(String icon, String txt) => Container(
@@ -262,12 +279,12 @@ class AccountSettings extends StatelessWidget {
       borderRadius: BorderRadius.circular(10.0),
     ),
     child: Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.0.h),
+      padding: EdgeInsets.symmetric(vertical: 12.0.h,horizontal: 10.w),
       child: Row(
         children: [
           ImageIcon(
             AssetImage(icon),
-            size: 40,
+            size: 25.h,
             color: basicPink,
           ),
           SizedBox(

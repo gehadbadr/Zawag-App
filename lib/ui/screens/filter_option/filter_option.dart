@@ -22,7 +22,7 @@ class _FilterOptionsState extends State<FilterOptions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bGround,
+      backgroundColor: Colors.white,
       // appBar: AppBar(
       //   elevation: 4,
       //   foregroundColor: black,
@@ -57,9 +57,13 @@ class _FilterOptionsState extends State<FilterOptions> {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 1,
+                    flex: MediaQuery.of(context).size.height <= 500
+                                          ? 2
+                                          :1,
                     child: SizedBox(
-                      height: 44.h,
+                      height: MediaQuery.of(context).size.height <= 500
+                                          ? 140.h
+                                          :44.h,
                       child: TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor: basicPink,
@@ -82,14 +86,16 @@ class _FilterOptionsState extends State<FilterOptions> {
                   SizedBox(
                     width: 15.w,
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      height: 44.h,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: mlliGrey),
-                      ),
+                  Container(
+                    height: MediaQuery.of(context).size.height <= 500
+                                          ? 140.h
+                                          :44.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: mlliGrey),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0,right: 8),
                       child: Center(
                           child: Directionality(
                             textDirection: TextDirection.rtl,
@@ -97,20 +103,20 @@ class _FilterOptionsState extends State<FilterOptions> {
                               Text(
                                 " عدد النتائج اكثر من ",
                                 style: GoogleFonts.cairo(
-                                  fontSize: 16.sp,
+                                  fontSize: 14.sp,
                                 ),
                               ),
                               Text(
                                 "100 ",
                                 style: GoogleFonts.cairo(
-                                    fontSize: 18.sp,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.bold,
                                     color: basicPink),
                               ),
                               Text(
                                 "مماثلة",
                                 style: GoogleFonts.cairo(
-                                  fontSize: 16.sp,
+                                  fontSize: 14.sp,
                                 ),
                               ),
                             ]),
@@ -143,72 +149,72 @@ class _FilterOptionsState extends State<FilterOptions> {
                         txt: "الجنسية", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon: "assets/icon/status.png",
                         txt: "الحالة الاجتماعية", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon: "assets/icon/gps.png",
                         txt:  "بلد الاقامة", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon: "assets/icon/gover.png",
                         txt:  "المحافظة", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon:  "assets/icon/study.png",
                         txt:   "التعليم", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon: "assets/icon/faculty.png",
                         txt:   "الكلية", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon:  "assets/icon/faculty.png",
                         txt:  "الجامعة", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon:  "assets/icon/bag.png",
                         txt:  "هل تعمل", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon:  "assets/icon/bag.png",
                         txt:  "مجال عملها", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       SliderWidget(
                           icon: "assets/icon/tall.png",
@@ -216,8 +222,8 @@ class _FilterOptionsState extends State<FilterOptions> {
                          onSelect: (value){},
                          txt2: "${controller.currentRangeValuesTall.start.round()} : ${controller.currentRangeValuesTall.end.round()}سم"),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon: "assets/icon/hijab.png",
@@ -225,8 +231,8 @@ class _FilterOptionsState extends State<FilterOptions> {
 
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon: "assets/icon/skin.png",
@@ -234,8 +240,8 @@ class _FilterOptionsState extends State<FilterOptions> {
                         menuItems: ["dfdsfdafhgthr","dsfsdfsdfs","dsfsdfsdfkkv"],
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       GetBuilder<FilterOptionsControllers>(
                         builder: (controller){
@@ -250,16 +256,16 @@ class _FilterOptionsState extends State<FilterOptions> {
                         },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon:"assets/icon/newhome.png",
                         txt: "محافظة شقة الزوجية", onSelect: (value) {  },
                       ),
                       Divider(
-                        color: liliGrey,
-                        thickness: 1.6.w,
+                        color: lbg,
+                        thickness: 1.w,
                       ),
                       DropDownFilter(
                         icon:  "assets/icon/l.png",

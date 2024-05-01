@@ -20,35 +20,50 @@ class Report extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffFCFCFC),
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          elevation: 7,
-          shadowColor: lliGrey,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
-            ),
-          ),
-          backgroundColor: white,
-          title: Center(
-            child: Text(
-              "الابلاغ عن الحسابات",
-              style: GoogleFonts.cairo(color: black, fontSize: 18.sp),
-            ),
-          ),
-          actions: [
-            GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: const ImageIcon(
-                AssetImage("./././assets/icon/arrow_back.png"),
-                color: black,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: Container(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: lliGrey,
+                offset: Offset(0, 4.0),
+                blurRadius: 5.0,
+              )
+            ]),
+            child: AppBar(
+              elevation: 0.0,
+              scrolledUnderElevation: 0,
+              // foregroundColor: Colors.white,
+              // shadowColor: lliGrey,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(20),
+                ),
               ),
+              backgroundColor: white,
+              title: Center(
+                child: Text(
+                  "الابلاغ عن الحسابات",
+                  style: GoogleFonts.cairo(color: black, fontSize: 18.sp),
+                ),
+              ),
+              actions: [
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child:  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset("./././assets/icon/arrow_back.png"),
+                  ),
+                ),
+                SizedBox(
+                  width: 15.w,
+                ),
+              ],
+              leading: Container(),
             ),
-            SizedBox(
-              width: 15.w,
-            ),
-          ],
-          leading: Container(),
+          ),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 12.w),
@@ -56,10 +71,19 @@ class Report extends StatelessWidget {
               itemCount: names.length,
               itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.0.h),
-                child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    // border: Border.all(
+                    //     color: Colors.white70, width: 1),
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       color: gGrey,
+                    //       spreadRadius: 0.2,
+                    //       blurRadius: 4,
+                    //       offset: Offset(0, 3)),
+                    // ],
                   ),
                   child: Directionality(
                     textDirection: TextDirection.rtl,
@@ -67,19 +91,19 @@ class Report extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 15.0.h),
                       child: Row(
                         children: [
-                          Expanded(
-                              child:
-                              CachedNetworkImage(
-                                imageUrl:names[index]["img"],
-                                height: 72.w ,
-                                width: 72.w ,
-                                placeholder: (context, url) =>Center(child: SizedBox(
-                                    width: 72.w,
-                                    height: 72.h,
-                                    child: const CircularProgressIndicator())),
-                                errorWidget: (context, url, error) => const Icon(Icons.error),
-                              )
-                          ),
+                          // Expanded(
+                          //     child:
+                          //     CachedNetworkImage(
+                          //       imageUrl:names[index]["img"],
+                          //       height: 72.w ,
+                          //       width: 72.w ,
+                          //       placeholder: (context, url) =>Center(child: SizedBox(
+                          //           width: 20.w,
+                          //           height: 20.h,
+                          //           child: const CircularProgressIndicator(color: basicPink,))),
+                          //       errorWidget: (context, url, error) => const Icon(Icons.error),
+                          //     )
+                          // ),
                           Expanded(
                               child: Text(
                                 names[index]["name"],
@@ -100,7 +124,9 @@ class Report extends StatelessWidget {
                                 ),
                                 builder: (context) {
                                   return SizedBox(
-                                    height: 290.h,
+                                    height: MediaQuery.of(context).size.height <= 500
+                                          ? 550.h
+                                          : 290.h,
                                     child: Column(
                                       children: [
                                         SizedBox(
@@ -114,21 +140,29 @@ class Report extends StatelessWidget {
                                             "الابلاغ عن حساب",
                                             style: GoogleFonts.cairo(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 18.sp),
+                                                fontSize: MediaQuery.of(context).size.height <= 500
+                                          ? 14.sp
+                                          : 18.sp),
                                           ),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.symmetric(
-                                              vertical: 20.h),
+                                              vertical: MediaQuery.of(context).size.height <= 500
+                                          ? 5.h
+                                          : 20.h,),
                                           child: Text(
                                             "${names[index]["name"]} هل تريد تأكيد الابلاغ عن ",
                                             style:
-                                            GoogleFonts.cairo(fontSize: 16.sp),
+                                            GoogleFonts.cairo(fontSize: MediaQuery.of(context).size.height <= 500
+                                          ? 12.sp
+                                          : 16.sp),
                                           ),
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(
-                                              top: 20.h,
+                                              top: MediaQuery.of(context).size.height <= 500
+                                          ? 5.h
+                                          : 20.h,
                                               left: 22.w,
                                               right: 22.w),
                                           child: Row(
@@ -155,7 +189,9 @@ class Report extends StatelessWidget {
                                                         padding: EdgeInsets
                                                             .symmetric(
                                                             vertical:
-                                                            5.h),
+                                                              MediaQuery.of(context).size.height <= 500
+                                                              ? 1.h
+                                                              : 5.h),
                                                         child: TextButton(
                                                             onPressed: () {
                                                               Navigator.pop(
@@ -167,7 +203,9 @@ class Report extends StatelessWidget {
                                                                   color:
                                                                   white,
                                                                   fontSize:
-                                                                  16.sp),
+                                                                  MediaQuery.of(context).size.height <= 500
+                                          ? 12.sp
+                                          : 16.sp),
                                                             )),
                                                       ))),
                                               SizedBox(
@@ -192,7 +230,9 @@ class Report extends StatelessWidget {
                                                       padding: EdgeInsets
                                                           .symmetric(
                                                           vertical:
-                                                          5.h),
+                                                           MediaQuery.of(context).size.height <= 500
+                                          ? 1.h
+                                          : 5.h),
                                                       child: TextButton(
                                                           onPressed: () {
                                                             Navigator.pop(
@@ -204,7 +244,9 @@ class Report extends StatelessWidget {
                                                                 color:
                                                                 white,
                                                                 fontSize:
-                                                                16.sp),
+                                                                MediaQuery.of(context).size.height <= 500
+                                          ? 12.sp
+                                          : 16.sp),
                                                           )),
                                                     )),
                                               )

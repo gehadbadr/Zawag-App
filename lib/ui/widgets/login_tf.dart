@@ -32,7 +32,7 @@ class TextFieldLogin extends StatelessWidget {
         Expanded(
           flex: 6,
           child: Padding(
-            padding:  EdgeInsets.only(top: 0.h),
+            padding: EdgeInsets.only(top: 0.h),
             child: TextFormField(
               scrollPadding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom + 165.h),
@@ -60,16 +60,13 @@ class TextFieldLogin extends StatelessWidget {
               cursorColor: basicPink,
               // cursorHeight: 24.h,
               style: GoogleFonts.cairo(),
-              decoration:  InputDecoration(
-                isDense: true,
-                contentPadding: EdgeInsets.symmetric(vertical:6.h),
-                border: InputBorder.none,
-                filled: false,
-                hintText: "رقم الهاتف",
-                hintStyle: const TextStyle(
-                  color: grey
-                )
-              ),
+              decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(vertical: 6.h),
+                  border: InputBorder.none,
+                  filled: false,
+                  hintText: "رقم الهاتف",
+                  hintStyle: const TextStyle(color: grey)),
               // onSaved: (String? value) {},
             ),
           ),

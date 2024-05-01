@@ -1,7 +1,7 @@
-
 import 'package:effa/controllers/male_dashboard_controller.dart';
 import 'package:effa/controllers/switch_filter_controllrt.dart';
 import 'package:effa/helper/app_colors.dart';
+import 'package:effa/ui/screens/notification/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,21 +10,24 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class DashBoardMale extends StatelessWidget {
   DashBoardMale({Key? key}) : super(key: key);
-  MaleDashboardController controller =Get.put(MaleDashboardController(), permanent: false);
+  MaleDashboardController controller =
+      Get.put(MaleDashboardController(), permanent: false);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MaleDashboardController>(
-      builder: (controller){
+      builder: (controller) {
         return Scaffold(
-          backgroundColor: bGround,
+          backgroundColor: Colors.white,
           appBar: AppBar(
-            elevation: 0,
-            foregroundColor: black,
-            backgroundColor: white,
+            scrolledUnderElevation: 0,
+            // elevation: 1,
+
+            shadowColor: Color(0xff707070),
+            // foregroundColor: black,
+            backgroundColor: Colors.white,
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: 14.w),
@@ -43,14 +46,14 @@ class DashBoardMale extends StatelessWidget {
                   "assets/icon/notif.svg",
                 ),
                 onPressed: () {
+                  Get.to(() =>  Notifications());
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (context) => Notifications()));
                 },
               ),
             ),
           ),
-          body:
-          controller.pages.elementAt(controller.selectedIndex),
+          body: controller.pages.elementAt(controller.selectedIndex),
           bottomNavigationBar: Directionality(
             textDirection: TextDirection.rtl,
             child: BottomNavigationBar(
@@ -58,7 +61,7 @@ class DashBoardMale extends StatelessWidget {
               unselectedIconTheme: IconThemeData(color: lGrey, size: 40),
               showUnselectedLabels: true,
               unselectedLabelStyle:
-              GoogleFonts.cairo(color: lGrey, fontWeight: FontWeight.bold),
+                  GoogleFonts.cairo(color: lGrey, fontWeight: FontWeight.bold),
               unselectedItemColor: lGrey,
               //mouseCursor: SystemMouseCursors.grab,
               selectedFontSize: 12.sp,
@@ -70,24 +73,39 @@ class DashBoardMale extends StatelessWidget {
               onTap: controller.onItemTapped,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: SvgPicture.asset("assets/icon/tab4.svg", ),
+                  icon: SvgPicture.asset(
+                    "assets/icon/tab4.svg",
+                  ),
                   label: 'الرئيسية',
-                  activeIcon: SvgPicture.asset("assets/icon/tab4.svg", color: basicPink),
+                  activeIcon: SvgPicture.asset("assets/icon/tab4.svg",
+                      color: basicPink),
                 ),
                 BottomNavigationBarItem(
-                  icon: SvgPicture.asset("assets/icon/tab3.svg" ,color: grey,),
+                  icon: SvgPicture.asset(
+                    "assets/icon/tab3.svg",
+                    color: grey,
+                  ),
                   label: 'فلتر',
-                  activeIcon: SvgPicture.asset("assets/icon/tab3.svg", color: basicPink,),
+                  activeIcon: SvgPicture.asset(
+                    "assets/icon/tab3.svg",
+                    color: basicPink,
+                  ),
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset("assets/icon/tab2.svg"),
                   label: 'حسابي',
-                  activeIcon: SvgPicture.asset("assets/icon/tab2.svg" , color: basicPink,),
+                  activeIcon: SvgPicture.asset(
+                    "assets/icon/tab2.svg",
+                    color: basicPink,
+                  ),
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset("assets/icon/tab1.svg"),
                   label: 'الاعدادات',
-                  activeIcon: SvgPicture.asset("assets/icon/tab1.svg" , color: basicPink,),
+                  activeIcon: SvgPicture.asset(
+                    "assets/icon/tab1.svg",
+                    color: basicPink,
+                  ),
                 ),
               ],
             ),

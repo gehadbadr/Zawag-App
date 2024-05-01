@@ -18,7 +18,10 @@ class Religion extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10.h),
           child: Text(
             ' الديانة ؟',
-            style: GoogleFonts.cairo(fontSize: 20.sp),
+            style: GoogleFonts.cairo(
+              fontSize:
+                  MediaQuery.of(context).size.height <= 500 ? 14.sp : 20.0.sp,
+            ),
           ),
         )),
         SizedBox(
@@ -27,6 +30,7 @@ class Religion extends StatelessWidget {
         Container(
           alignment: Alignment.centerRight,
           child: Card(
+            elevation: 0,
             shape: RoundedRectangleBorder(
               side: BorderSide(color: llgrey, width: 1.w),
               borderRadius: BorderRadius.circular(15),
@@ -55,7 +59,11 @@ class Religion extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.check,
-                                      size: 30,
+                                      size:
+                                          MediaQuery.of(context).size.height <=
+                                                  500
+                                              ? 20
+                                              : 30,
                                       color: controller.religionTapIndex ==
                                                   index &&
                                               controller.religionPress == true
@@ -66,7 +74,12 @@ class Religion extends StatelessWidget {
                                     Text(
                                       controller.religionList[index],
                                       style: GoogleFonts.cairo(
-                                          fontSize: 16.sp,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height <=
+                                                  500
+                                              ? 14.sp
+                                              : 16.0.sp,
                                           color: controller.religionTapIndex ==
                                                       index &&
                                                   controller.religionPress ==

@@ -22,7 +22,9 @@ class PinPage extends StatelessWidget {
   final controller = Get.lazyPut(() => PinCodeController(),fenix: true);
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    double height =MediaQuery.of(context).size.height <= 500
+                                          ? 1000
+                                          : MediaQuery.of(context).size.height;
 
     return GestureDetector(
       onTap: () {
@@ -31,6 +33,7 @@ class PinPage extends StatelessWidget {
       child: GetBuilder<PinCodeController>(
         builder: (controller){
           return Scaffold(
+          
             body: SingleChildScrollView(
               child: SizedBox(
                 height: height,

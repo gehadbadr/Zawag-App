@@ -42,164 +42,161 @@ class ImageUserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        elevation: 6.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-        ),
-        color: white,
-        child: Column(children: [
-          Stack(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                child: CarouselSlider(
-                  items: generateImageTiles(images),
-                  options: CarouselOptions(
-                      padEnds: false,
-                      aspectRatio: 1,
-                      viewportFraction: 1,
-                      enlargeCenterPage: true,
-                      enableInfiniteScroll: false,
-                      scrollDirection: Axis.vertical,
-                      onPageChanged: (index, reason) {
-                        onPageChanged!(index,reason);
-                      }),
-                  carouselController:controllerImages,
-                ),
+    return Card(
+      elevation: 6.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0),
+      ),
+      color: white,
+      child: Column(children: [
+        Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: CarouselSlider(
+                items: generateImageTiles(images),
+                options: CarouselOptions(
+                    padEnds: false,
+                    aspectRatio: 1,
+                    viewportFraction: 1,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: false,
+                    scrollDirection: Axis.vertical,
+                    onPageChanged: (index, reason) {
+                      onPageChanged!(index,reason);
+                    }),
+                carouselController:controllerImages,
               ),
-              Directionality(
-                textDirection: TextDirection.rtl,
-                child: Positioned(
-                  bottom: 18.h,
-                  right: 30.w,
-                  child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Spacer(),
-                        Row(children: [
-                          Text(
-                            name,
-                            style: GoogleFonts.cairo(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22.sp,
-                              color: Colors.white,
-                            ),
+            ),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: Positioned(
+                bottom: 18.h,
+                right: 30.w,
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Spacer(),
+                      Row(children: [
+                        Text(
+                          name,
+                          style: GoogleFonts.cairo(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22.sp,
+                            color: Colors.white,
                           ),
-                          Text(
-                            ",",
-                            style: GoogleFonts.cairo(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22.sp,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            age,
-                            style: GoogleFonts.cairo(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ]),
-                        SizedBox(
-                          height: 12.h,
                         ),
-                        Row(children: [
-                          SvgPicture.asset("assets/icon/stat.svg"),
-                          SizedBox(
-                            width: 5.w,
+                        Text(
+                          ",",
+                          style: GoogleFonts.cairo(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22.sp,
+                            color: Colors.black,
                           ),
-                          Text(
-                            socialStatus,
-                            style: GoogleFonts.cairo(
-                                fontSize: 14.sp, color: white),
+                        ),
+                        Text(
+                          age,
+                          style: GoogleFonts.cairo(
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          SvgPicture.asset("assets/icon/al.svg"),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            nationality,
-                            style: GoogleFonts.cairo(
-                                fontSize: 14.sp, color: white),
-                          ),
-                          SizedBox(
-                            width: 12.w,
-                          ),
-                          SvgPicture.asset("assets/icon/ba.svg"),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            job,
-                            style: GoogleFonts.cairo(
-                                fontSize: 14.sp, color: white),
-                          ),
-                        ]),
+                        ),
                       ]),
-                ),
+                      SizedBox(
+                        height: 12.h,
+                      ),
+                      Row(children: [
+                        SvgPicture.asset("assets/icon/stat.svg"),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Text(
+                          socialStatus,
+                          style: GoogleFonts.cairo(
+                              fontSize: 14.sp, color: white),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        SvgPicture.asset("assets/icon/al.svg"),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Text(
+                          nationality,
+                          style: GoogleFonts.cairo(
+                              fontSize: 14.sp, color: white),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        SvgPicture.asset("assets/icon/ba.svg"),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Text(
+                          job,
+                          style: GoogleFonts.cairo(
+                              fontSize: 14.sp, color: white),
+                        ),
+                      ]),
+                    ]),
               ),
-              Positioned(
-                left: 10.w,
-                top: 10.h,
-                child: Transform.rotate(
-                  angle: -math.pi / -1,
-                  child: DotsIndicator(
-                    dotsCount: dotsCount,
-                    position: position,
-                    axis: Axis.vertical,
-                    reversed: true,
-                    decorator: DotsDecorator(
-                      size: const Size.square(8.0),
-                      activeColor: red,
-                      color: white,
-                      activeSize: Size(8.0.w, 25.0.h),
-                      activeShape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0)),
-                    ),
+            ),
+            Positioned(
+              left: 10.w,
+              top: 10.h,
+              child: Transform.rotate(
+                angle: -math.pi / -1,
+                child: DotsIndicator(
+                  dotsCount: dotsCount,
+                  position: position,
+                  axis: Axis.vertical,
+                  reversed: true,
+                  decorator: DotsDecorator(
+                    size: const Size.square(8.0),
+                    activeColor: red,
+                    color: white,
+                    activeSize: Size(8.0.w, 25.0.h),
+                    activeShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
                   ),
                 ),
               ),
-            ],
-          ),
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
-              child: Row(children: [
-                SvgPicture.asset("assets/icon/stu.svg"),
-                SizedBox(
-                  width: 4.w,
-                ),
-                Text(
-                  study,
-                  style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
-                ),
-                SizedBox(
-                  width: 16.h,
-                ),
-                const SizedBox(height: 25, child: VerticalDivider(color: grey)),
-                SvgPicture.asset("assets/icon/loc.svg"),
-                SizedBox(
-                  width: 4.w,
-                ),
-                Text(
-                  city,
-                  style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
-                ),
-              ]),
             ),
-          )
-        ]),
-      ),
+          ],
+        ),
+        Directionality(
+          textDirection: TextDirection.rtl,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+            child: Row(children: [
+              SvgPicture.asset("assets/icon/stu.svg"),
+              SizedBox(
+                width: 4.w,
+              ),
+              Text(
+                study,
+                style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
+              ),
+              SizedBox(
+                width: 16.h,
+              ),
+              const SizedBox(height: 25, child: VerticalDivider(color: grey)),
+              SvgPicture.asset("assets/icon/loc.svg"),
+              SizedBox(
+                width: 4.w,
+              ),
+              Text(
+                city,
+                style: GoogleFonts.cairo(fontSize: 12.sp, color: black),
+              ),
+            ]),
+          ),
+        )
+      ]),
     );
   }
 
@@ -222,7 +219,7 @@ class ImageUserCard extends StatelessWidget {
               child: SizedBox(
                   height: 30,
                   width: 30,
-                  child: CircularProgressIndicator())),
+                  child: CircularProgressIndicator(color: basicPink,))),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),

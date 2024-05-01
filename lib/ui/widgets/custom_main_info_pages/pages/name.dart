@@ -3,14 +3,13 @@ import 'package:effa/helper/app_colors.dart';
 import 'package:effa/ui/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FullName extends StatelessWidget {
   GlobalKey<FormState> form = GlobalKey<FormState>();
-
-
 
   BasicPagesController controller = Get.find();
 
@@ -23,7 +22,10 @@ class FullName extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10.h),
           child: Text(
             'اسم المستخدم بالعربي ؟',
-            style: GoogleFonts.cairo(fontSize: 20.sp),
+            style: GoogleFonts.cairo(
+              fontSize:
+                  MediaQuery.of(context).size.height <= 500 ? 14.sp : 20.0.sp,
+            ),
           ),
         )),
         Padding(
@@ -40,9 +42,11 @@ class FullName extends StatelessWidget {
                       onTap: () {
                         if (controller.firstName.selection ==
                             TextSelection.fromPosition(TextPosition(
-                                offset: controller.firstName.text.length - 1))) {
-                          controller.firstName.selection = TextSelection.fromPosition(
-                              TextPosition(offset: controller.firstName.text.length));
+                                offset:
+                                    controller.firstName.text.length - 1))) {
+                          controller.firstName.selection =
+                              TextSelection.fromPosition(TextPosition(
+                                  offset: controller.firstName.text.length));
                         }
                       },
                       controller: controller.firstName,
@@ -65,14 +69,18 @@ class FullName extends StatelessWidget {
                         labelText: 'الاسم الأول',
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                          BorderSide(color: basicPink, width: 1.5.w),
+                              BorderSide(color: basicPink, width: 1.5.w),
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         focusColor: basicPink,
                         floatingLabelStyle: const TextStyle(
                           color: basicPink,
                         ),
-                        labelStyle: TextStyle(fontSize: 14.sp),
+                        labelStyle: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height <= 500
+                              ? 10.sp
+                              : 14.0.sp,
+                        ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
@@ -90,9 +98,11 @@ class FullName extends StatelessWidget {
                       onTap: () {
                         if (controller.secondName.selection ==
                             TextSelection.fromPosition(TextPosition(
-                                offset: controller.secondName.text.length - 1))) {
-                          controller.secondName.selection = TextSelection.fromPosition(
-                              TextPosition(offset: controller.secondName.text.length));
+                                offset:
+                                    controller.secondName.text.length - 1))) {
+                          controller.secondName.selection =
+                              TextSelection.fromPosition(TextPosition(
+                                  offset: controller.secondName.text.length));
                         }
                       },
                       controller: controller.secondName,
@@ -115,7 +125,11 @@ class FullName extends StatelessWidget {
                       maxLength: 12,
                       decoration: InputDecoration(
                         labelText: 'الاسم الأخير',
-                        labelStyle: TextStyle(fontSize: 14.sp),
+                        labelStyle: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height <= 500
+                              ? 10.sp
+                              : 14.0.sp,
+                        ),
                         floatingLabelStyle: const TextStyle(
                           color: basicPink,
                         ),
@@ -135,23 +149,37 @@ class FullName extends StatelessWidget {
           ),
         ),
         const Expanded(flex: 3, child: SizedBox()),
-        SizedBox(
+        Container(
           width: 264.w,
-          height: 44.h,
-          child: RoundedButton(
-              mywidget: Text('التالي',
-                  style: GoogleFonts.cairo(
-                    color: white,
-                    fontSize: 16,
-                  )),
-              raduis: 10,
-              myfun: () {
-                if (!form.currentState!.validate()) {
-                  return;
-                }
-                controller.onTap();
-              },
-              color: basicPink),
+          // padding: EdgeInsets.all(5.0),
+          // height: 44.h,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: basicPink,
+              padding: const EdgeInsets.all(2),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text('التالي',
+                style: GoogleFonts.cairo(
+                  color: white,
+                  fontSize: MediaQuery.of(context).size.height <= 500
+                      ? 10.sp
+                      : 16.0.sp,
+                )),
+            // raduis: 10,
+            // myfun: () {
+
+            // },
+            // color: basicPink,
+            onPressed: () {
+              if (!form.currentState!.validate()) {
+                return;
+              }
+              controller.onTap();
+            },
+          ),
         ),
         const Expanded(
           flex: 1,

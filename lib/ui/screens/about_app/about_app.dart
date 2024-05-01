@@ -1,9 +1,13 @@
 import 'package:effa/helper/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/setting_page_controller.dart';
+
 class AboutApp extends StatelessWidget {
+  final controller = Get.lazyPut(() => SettingPageController());
   @override
   Widget build(BuildContext context) {
 
@@ -25,18 +29,18 @@ class AboutApp extends StatelessWidget {
                 fontSize: 18.sp),
           ),
         ),
-        actions: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: const ImageIcon(
-              AssetImage("./././assets/icon/arrow_back.png"),
-              color: black,
-            ),
-          ),
-          SizedBox(
-            width: 15.w,
-          ),
-        ],
+          actions: [
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child:  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset("./././assets/icon/arrow_back.png"),
+                ),
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+            ],
         leading: Container(),
       ),
       body: Padding(
@@ -58,56 +62,70 @@ class AboutApp extends StatelessWidget {
           Expanded(
             child: Center(
               child: Container(
-                height: 578.h,
-                margin: EdgeInsets.all(5.0.h),
-                padding: EdgeInsets.all(12.0.h),
+                width: 343.w,
+                height: 498.h,
+                margin: const EdgeInsets.all(10.0),
+                padding:
+                const EdgeInsets.only(bottom: 9.0, left: 9.0, right: 9.0),
                 decoration: BoxDecoration(
                     border: Border.all(
-                        color: gGrey, width: 1.5.w, style: BorderStyle.solid),
+                        color: gGrey, width: 0.7.w, style: BorderStyle.solid),
                     borderRadius: BorderRadius.circular(10)),
                 child: SafeArea(
-                  child: Scrollbar(
+                  child: RawScrollbar(
+                    thumbColor: basicPink,
+                    radius: const Radius.circular(20),
+                    thickness: 5,
                     interactive: true,
                     child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(), 
+                      // for Vertical scrolling
                       scrollDirection: Axis.vertical,
                       child: Directionality(
                         textDirection: TextDirection.rtl,
-                        child: Text(
-                          "  ببساطة نص شكلي (بمعنى أن الغاية هي الشكل "
-                              "و ليس المحتوى) ويُستخدم في صناعات المطابع"
-                              "ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص "
-                              "الشكلي منذ القرن الخامس عشر عندما قامت مطبعة "
-                              "مجهولة برص مجموعة من الأحرف بشكل عشوائي"
-                              "أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع "
-                              "شكلي لهذه الأحرف. خمسة قرون من الزمن لم "
-                              "تقضي على هذا النص، بل انه حتى صار مستخدماً "
-                              "وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. "
-                              "انتشر بشكل كبير في ستينيّات هذا القرن  ببساطة نص "
-                              "شكلي (بمعنى أن الغاية هي الشكل وليس "
-                              "المحتوى) ويُستخدم في صناعات المطابع ودور "
-                              "النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي "
-                              "منذ القرن الخامس عشر عندما قامت مطبعة مجهولة "
-                              "برص مجموعة من الأحرف بشكل عشوائي أخذتها من "
-                              " نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه "
-                              "الأحرف. خمسة قرون من الزمن لم تقضي على هذا "
-                              "النص، بل انه حتى صار مستخدماً وبشكله الأصلي في "
-                              "الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في "
-                              "ستينيّات هذا القرن  ببساطة نص شكلي (بمعنى أن "
-                              "الغاية هي الشكل وليس المحتوى) ويُستخدم في "
-                              "صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال "
-                              "المعيار للنص الشكلي منذ القرن الخامس عشر عندما"
-                              "قامت مطبعة مجهولة برص مجموعة من الأحرف "
-                              "بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة "
-                              "دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من "
-                              "الزمن لم تقضي على هذا النص، بل انه حتى صار "
-                              "مستخدماً وبشكله الأصلي في الطباعة والتنضيد "
-                              "الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن",
-                          style: GoogleFonts.cairo(
-                            color: lGrey,
-                            fontSize: 14.sp,
-                            letterSpacing: 1,
-                            wordSpacing: 1,
-                          ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 8.0.w,
+                              right: 8.0.w,
+                              bottom: 10.0.h),
+                          child: GetBuilder<SettingPageController>(
+                              builder: (controller) {
+                                return controller.loader
+                                    ?  Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top:175.h),
+                                    child: const CircularProgressIndicator(
+                                      color: basicPink,
+                                    ),
+                                  ),
+                                )
+                                    : Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 10.h,
+                                            bottom: 30.h),
+                                        child: Text(
+                                          "controller.aboutModel!.title",
+                                          style: GoogleFonts.cairo(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Text(
+                                       " controller.aboutModel!.content",
+                                        style: GoogleFonts.cairo(
+                                          color: lGrey,
+                                          // fontWeight: FontWeight.bold,
+                                          fontSize: 14.sp,
+                                          letterSpacing: 1,
+                                          wordSpacing: 1,
+                                        ),
+                                      )
+                                    ]);
+                              }),
                         ),
                       ),
                     ),

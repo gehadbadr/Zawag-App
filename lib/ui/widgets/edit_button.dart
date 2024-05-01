@@ -10,7 +10,9 @@ class EditButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 148.w,
-      height: 48.h,
+      height: MediaQuery.of(context).size.height <= 500
+                                          ? 200.h
+                                          : 48.h,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(25)),
         color:ggrey

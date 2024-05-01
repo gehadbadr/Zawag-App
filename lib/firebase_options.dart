@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,20 +46,29 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAV4pOAettiIDr9wnjP_LawkaDJ9_vWHbk',
+    appId: '1:378429873654:web:1f1908ab194db5e9e67bd7',
+    messagingSenderId: '378429873654',
+    projectId: 'effa-6c6d7',
+    authDomain: 'effa-6c6d7.firebaseapp.com',
+    storageBucket: 'effa-6c6d7.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD-k7xVAGsilh3GvRiJeiaIgVI7mPc0nEE',
-    appId: '1:725052884229:android:71f8f114259730843d236c',
-    messagingSenderId: '725052884229',
-    projectId: 'effah-app',
-    storageBucket: 'effah-app.appspot.com',
+    apiKey: 'AIzaSyBVWckozKH6gJs35SWCQ2tun1TdWvFQvF4',
+    appId: '1:378429873654:android:c720900d98e8d3d3e67bd7',
+    messagingSenderId: '378429873654',
+    projectId: 'effa-6c6d7',
+    storageBucket: 'effa-6c6d7.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCEOBqwKURqm-OCDQOAhHAnQfmUSzZFMQk',
-    appId: '1:725052884229:ios:21f18eefdbf6e61a3d236c',
-    messagingSenderId: '725052884229',
-    projectId: 'effah-app',
-    storageBucket: 'effah-app.appspot.com',
+    apiKey: 'AIzaSyC_0xhsZduvMlhg1YTk_Ya6hO8hoVAHvxo',
+    appId: '1:378429873654:ios:147e21b95aab1b88e67bd7',
+    messagingSenderId: '378429873654',
+    projectId: 'effa-6c6d7',
+    storageBucket: 'effa-6c6d7.appspot.com',
     iosBundleId: 'com.example.effa',
   );
 }

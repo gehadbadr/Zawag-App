@@ -18,34 +18,48 @@ class Contact extends StatelessWidget {
     return Scaffold(
       backgroundColor: bGround,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        elevation: 7,
-        shadowColor: lliGrey,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
-        ),
-        backgroundColor: white,
-        title: Center(
-          child: Text(
-            "تواصل معنا",
-            style: GoogleFonts.cairo(color: black, fontSize: 18.sp),
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: const ImageIcon(
-              AssetImage("./././assets/icon/arrow_back.png"),
-              color: black,
+      appBar:  PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Container(
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: lliGrey,
+              offset: Offset(0, 4.0),
+              blurRadius: 5.0,
+            )
+          ]),
+          child: AppBar(
+            scrolledUnderElevation: 0,
+            elevation: 0.0,
+            // foregroundColor: Colors.white,
+            // shadowColor: lliGrey,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(20),
+              ),
             ),
+            backgroundColor: white,
+            title: Center(
+              child: Text(
+                "تواصل معنا",
+                style: GoogleFonts.cairo(color: black, fontSize: 18.sp),
+              ),
+            ),
+            actions: [
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child:  Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset("./././assets/icon/arrow_back.png"),
+                ),
+              ),
+              SizedBox(
+                width: 15.w,
+              ),
+            ],
+            leading: Container(),
           ),
-          SizedBox(
-            width: 15.w,
-          ),
-        ],
-        leading: Container(),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(children: [
@@ -64,11 +78,21 @@ class Contact extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 6.w),
-            child: Card(
-              elevation: 6,
-              shadowColor: black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                    color: Colors.white70, width: 1
+                ),
+                boxShadow: const [
+                  BoxShadow(
+                      color: gGrey,
+                      spreadRadius: 0.2,
+                      blurRadius:4,
+                      offset: Offset(0,3)
+                  ),
+                ],
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 21.w, vertical: 35.h),
@@ -90,7 +114,7 @@ class Contact extends StatelessWidget {
                       padding: EdgeInsets.only(top: 10.h, bottom: 5.h),
                       child: SizedBox(
                         width: 100.w,
-                       height: 44.h,
+                     //  height: 44.h,
                         child: TextButton(
                             style: TextButton.styleFrom(
                               backgroundColor: basicPink,
@@ -122,13 +146,14 @@ class Contact extends StatelessWidget {
       Directionality(
         textDirection: TextDirection.rtl,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
+          padding: EdgeInsets.symmetric(vertical: 6.h),
           child: TextFormField(
             controller: cont,
             keyboardType: TextInputType.name,
             textAlignVertical: TextAlignVertical.top,
             onFieldSubmitted: (String value) {},
             maxLines:line ,
+            style: GoogleFonts.cairo(fontSize: 14.sp,height: 1),
             onChanged: (String value) {},
             decoration: InputDecoration(
               hintText:txt ,
@@ -139,9 +164,11 @@ class Contact extends StatelessWidget {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(color: basicPink, width: 1.5),
+                borderSide: const BorderSide(color: basicPink, width: 1),
               ),
-              border: const OutlineInputBorder(),
+              border: const OutlineInputBorder(
+                borderSide: const BorderSide(color: basicPink, width: 1),
+              ),
             ),
           ),
         ),

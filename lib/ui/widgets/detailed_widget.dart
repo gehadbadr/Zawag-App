@@ -16,7 +16,7 @@ final bool done;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top:15.h,left: 18.w, right: 18.w, bottom: 15.h),
+      padding: EdgeInsets.only(top:20.h,left: 18.w, right: 18.w, bottom: 20.h),
       child:  Directionality(
           textDirection: TextDirection.rtl,
           child: Row(

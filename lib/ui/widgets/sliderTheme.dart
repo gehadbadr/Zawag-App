@@ -27,17 +27,19 @@ class _SliderState extends State<SliderWidget> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      child: Row(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
         ImageIcon(
           AssetImage(widget.icon),
-          size: 40,
+          size: 27.h,
           color: basicPink,
           // ),
         ),
-        const Expanded(
-          child: SizedBox(),
-        ),
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        SizedBox(width:10.w,),
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
           Row(children: [
             Align(
               child: Text(

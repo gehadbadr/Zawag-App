@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "725052884229",
-    "project_id": "effah-app",
-    "storage_bucket": "effah-app.appspot.com"
+    "project_number": "378429873654",
+    "project_id": "effa-6c6d7",
+    "storage_bucket": "effa-6c6d7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:725052884229:android:71f8f114259730843d236c",
+        "mobilesdk_app_id": "1:378429873654:android:c720900d98e8d3d3e67bd7",
         "android_client_info": {
           "package_name": "com.example.effa"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD-k7xVAGsilh3GvRiJeiaIgVI7mPc0nEE"
+          "current_key": "AIzaSyBVWckozKH6gJs35SWCQ2tun1TdWvFQvF4"
         }
       ],
       "services": {

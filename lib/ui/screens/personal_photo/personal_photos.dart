@@ -40,7 +40,7 @@ class PersonalPic extends StatelessWidget {
                         'الصور الشخصية',
                         // textAlign: TextAlign.right,
                         style: GoogleFonts.cairo(
-                          fontSize: 22.sp,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -71,7 +71,7 @@ class PersonalPic extends StatelessWidget {
                   SizedBox(
                     height: 20.h,
                   ),
-                  controller.imageFileList!.isNotEmpty
+                  controller.imageFileList!.isNotEmpty && controller.imageFileList!.length <=6
                       ? SingleChildScrollView(
                           child: Directionality(
                             textDirection: TextDirection.rtl,
@@ -159,7 +159,7 @@ class PersonalPic extends StatelessWidget {
                   ),
                   controller.imageFileList!.isNotEmpty
                       ? RegisterButton(
-                    title: controller.loader?const CircularProgressIndicator(color: Colors.black,):Text('تـأكيد',
+                    title: controller.loader?const CircularProgressIndicator(color: basicPink,):Text('تـأكيد',
                         style: GoogleFonts.cairo(
                           color: white,
                           fontSize: 16.sp,
@@ -169,7 +169,7 @@ class PersonalPic extends StatelessWidget {
                           context: context,
                           backgroundColor: transparnt,
                           builder: (context) {
-                            return const WaitBottomSheet();
+                            return WaitBottomSheet(id:4);
                           });
                     },
                     nav: (){

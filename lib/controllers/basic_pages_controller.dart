@@ -16,7 +16,7 @@ class BasicPagesController extends GetxController {
 
   TextEditingController searchController  = TextEditingController();
 
-  double position = 0.0;
+  double position = 0.20;
 
   bool isFemale = false;
 
