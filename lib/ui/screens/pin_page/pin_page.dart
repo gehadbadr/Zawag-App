@@ -12,28 +12,25 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class PinPage extends StatelessWidget {
-  PinPage({Key? key, this.name, this.code, this.myPhone})
-      : super(key: key);
+  PinPage({Key? key, this.name, this.code, this.myPhone}) : super(key: key);
   final String? name;
   final String? code;
   final String? myPhone;
-  final controller = Get.lazyPut(() => PinCodeController(),fenix: true);
+  final controller = Get.lazyPut(() => PinCodeController(), fenix: true);
   @override
   Widget build(BuildContext context) {
-    double height =MediaQuery.of(context).size.height <= 500
-                                          ? 1000
-                                          : MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height <= 500
+        ? 1000
+        : MediaQuery.of(context).size.height;
 
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: GetBuilder<PinCodeController>(
-        builder: (controller){
+        builder: (controller) {
           return Scaffold(
-          
             body: SingleChildScrollView(
               child: SizedBox(
                 height: height,
@@ -86,7 +83,7 @@ class PinPage extends StatelessWidget {
                             first: true,
                             last: false,
                             focusNode0: controller.focusDigit1,
-                            controller:  controller.codeController1,
+                            controller: controller.codeController1,
                           ),
                           SizedBox(
                             width: 12.w,
@@ -95,14 +92,14 @@ class PinPage extends StatelessWidget {
                             first: false,
                             last: false,
                             focusNode0: controller.focusDigit2,
-                            controller:  controller.codeController2,
+                            controller: controller.codeController2,
                           ),
                           SizedBox(
                             width: 12.w,
                           ),
                           CodeInput(
                             focusNode0: controller.focusDigit3,
-                            controller:  controller.codeController3,
+                            controller: controller.codeController3,
                             first: false,
                             last: false,
                           ),
@@ -113,7 +110,7 @@ class PinPage extends StatelessWidget {
                             first: false,
                             last: false,
                             focusNode0: controller.focusDigit4,
-                            controller:  controller.codeController4,
+                            controller: controller.codeController4,
                           ),
                           SizedBox(
                             width: 12.w,
@@ -122,7 +119,7 @@ class PinPage extends StatelessWidget {
                             first: false,
                             last: false,
                             focusNode0: controller.focusDigit5,
-                            controller:  controller.codeController5,
+                            controller: controller.codeController5,
                           ),
                           SizedBox(
                             width: 12.w,
@@ -131,7 +128,7 @@ class PinPage extends StatelessWidget {
                             first: false,
                             last: true,
                             focusNode0: controller.focusDigit6,
-                            controller:  controller.codeController6,
+                            controller: controller.codeController6,
                           ),
                         ],
                       ),
@@ -142,12 +139,11 @@ class PinPage extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal:
-                        // 14.w
-                        MediaQuery.of(context).size.width * 0.12,
+                            // 14.w
+                            MediaQuery.of(context).size.width * 0.12,
                       ),
                       child: Obx(
-                        ()=>
-                        Row(
+                        () => Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -162,9 +158,9 @@ class PinPage extends StatelessWidget {
                               onTap: () {
                                 if (controller.remainingTime == 0) {
                                   Get.back();
-                                }
-                                else {
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
                                     backgroundColor: orginalRed,
                                     content: Directionality(
                                         textDirection: TextDirection.rtl,
@@ -181,8 +177,9 @@ class PinPage extends StatelessWidget {
                                 'إعادة ارسال الكود',
                                 style: GoogleFonts.cairo(
                                   fontSize: 14.sp,
-                                  fontWeight:controller.remainingTime == 0
-                                      ? FontWeight.bold:FontWeight.normal,
+                                  fontWeight: controller.remainingTime == 0
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
                                   color: controller.remainingTime == 0
                                       ? bblack
                                       : gmGrey,
@@ -196,24 +193,27 @@ class PinPage extends StatelessWidget {
                     SizedBox(
                       height: 60.h,
                     ),
-                  !controller.loader?SizedBox(
-                      width: 148.w,
-                      height: 44.w,
-                      child: RoundedButton(
-                        color: basicPink,
-                        mywidget: Text('تأكيد',
-                            style: GoogleFonts.cairo(
-                                color: white,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500)),
-                        raduis: 10,
-                        myfun: () async {
-                          controller.withoutsendOTPCode(context,myPhone,code);
-                        },
-                      )
-                    ):const CircularProgressIndicator(
-                    color: basicPink,
-                  ),
+                    !controller.loader
+                        ? SizedBox(
+                            width: 148.w,
+                            height: 44.w,
+                            child: RoundedButton(
+                              color: basicPink,
+                              mywidget: Text('تأكيد',
+                                  style: GoogleFonts.cairo(
+                                      color: white,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w500)),
+                              raduis: 10,
+                              myfun: () async {
+                                controller.withoutsendOTPCode(
+                                    context, myPhone, code);
+                                print("object0");
+                              },
+                            ))
+                        : const CircularProgressIndicator(
+                            color: basicPink,
+                          ),
                     Spacer()
                   ]),
                 ),

@@ -16,11 +16,11 @@ class AuthController extends GetxController {
   //register&login
   UserAuth? userAuth;
   Future<void> testregister(
-  /*  String phone,
+      /*  String phone,
     //  String countryCode,
     String userCode,*/
-  ) async {
-   // int phoneInt = int.parse(phone);
+      ) async {
+    // int phoneInt = int.parse(phone);
     GetStorage storage = GetStorage();
     try {
       Dio.Response response = await dio().post(
@@ -30,39 +30,39 @@ class AuthController extends GetxController {
           // // 'phone_code':countryCode,
           // 'user_code': 541515,
           "id": 8,
-    "frName": "جهاد",
-    "lsName": null,
-    "FaName": null,
-    "idNumber": null,
-    "image": null,
-    "is_login": 1,
-    "is_complet": 0,
-    "gender": 1,
-    "is_block": 1,
-    "is_wait": 0,
-    "phone_Code": "+20",
-    "phone": "43456576",
-    "user_code": "123",
-    "country_id": null,
-    "country": null,
-    "is_new": 0,
-    "gov_id": null,
-    "city_id": null,
-    "lastLoginAt": null,
-    "religion_id": 1,
-    "birth_date": null,
-    "slug": "ME5002837",
-    "identity_face": null,
-    "identity_back": null,
-    "passport_image": null,
-    "is_approved": 0,
-    "reject_resson": null,
-    "about_you": null,
-    "is_accept_terms": 1,
-    "about_partner": null,
-    "created_at": "2022-11-30T07:35:55.000000Z",
-    "updated_at": "2023-05-18T20:04:46.000000Z",
-    "full_name": "محمد "
+          "frName": "جهاد",
+          "lsName": null,
+          "FaName": null,
+          "idNumber": null,
+          "image": null,
+          "is_login": 1,
+          "is_complet": 0,
+          "gender": 1,
+          "is_block": 1,
+          "is_wait": 0,
+          "phone_Code": "+20",
+          "phone": "43456576",
+          "user_code": "123",
+          "country_id": null,
+          "country": null,
+          "is_new": 0,
+          "gov_id": null,
+          "city_id": null,
+          "lastLoginAt": null,
+          "religion_id": 1,
+          "birth_date": null,
+          "slug": "ME5002837",
+          "identity_face": null,
+          "identity_back": null,
+          "passport_image": null,
+          "is_approved": 0,
+          "reject_resson": null,
+          "about_you": null,
+          "is_accept_terms": 1,
+          "about_partner": null,
+          "created_at": "2022-11-30T07:35:55.000000Z",
+          "updated_at": "2023-05-18T20:04:46.000000Z",
+          "full_name": "محمد "
         }),
       );
       print(response.data);
@@ -108,8 +108,8 @@ class AuthController extends GetxController {
           showProgressIndicator: false,
           duration: const Duration(seconds: 4));
     } catch (error) {
-       print(error);
-       throw (error);
+      print(error);
+      throw (error);
     }
   }
 
@@ -126,7 +126,6 @@ class AuthController extends GetxController {
           'phone': phone,
           // 'phone_code':countryCode,
           'user_code': userCode,
-          
         }),
       );
       print(response.data);

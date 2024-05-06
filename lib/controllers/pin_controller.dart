@@ -66,9 +66,9 @@ class PinCodeController extends GetxController {
   Future<void> withoutsendOTPCode(
       BuildContext ctx, String? myPhone, String? code) async {
     GetStorage storage = GetStorage();
-  //  FirebaseAuth auth = FirebaseAuth.instance;
-   // var codetest = storage.read("verificationId");
-  //  print("===========${codetest}");
+    //  FirebaseAuth auth = FirebaseAuth.instance;
+    // var codetest = storage.read("verificationId");
+    //  print("===========${codetest}");
     loader = true;
     update();
     // PhoneAuthCredential credential = PhoneAuthProvider.credential(
@@ -80,17 +80,18 @@ class PinCodeController extends GetxController {
     //         codeController5.text +
     //         codeController6.text);
     try {
-    //  await auth.signInWithCredential(credential);
-  //  print("========verificationId===${codetest}");
+      //  await auth.signInWithCredential(credential);
+      //  print("========verificationId===${codetest}");
 
-   //   String tokenResult = FirebaseAuth.instance.currentUser!.uid;
-       //   print("========tokenResult===${tokenResult}");
+      //   String tokenResult = FirebaseAuth.instance.currentUser!.uid;
+      //   print("========tokenResult===${tokenResult}");
 
-   //   await authController.testregister('222222',/* code!,*/ "123456789123");
+      //   await authController.testregister('222222',/* code!,*/ "123456789123");
       await authController.testregister();
+      print("object1");
       loader = false;
       update();
-   /* } on FirebaseAuthException catch (e) {
+      /* } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "invalid-verification-id":
           Get.snackbar('خطاء في id', e.code.toString(),
@@ -126,8 +127,9 @@ class PinCodeController extends GetxController {
     } catch (e) {
       Get.snackbar(e.toString(), "nbvmbvmbnvmnbخطاء",
           borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+      print("object2== ${e.toString()}");
       loader = false;
-        //  print(codetest);
+      //  print(codetest);
 
       update();
     }
@@ -151,12 +153,12 @@ class PinCodeController extends GetxController {
             codeController6.text);
     try {
       await auth.signInWithCredential(credential);
-    print("========verificationId===${codetest}");
+      print("========verificationId===${codetest}");
 
       String tokenResult = FirebaseAuth.instance.currentUser!.uid;
-          print("========tokenResult===${tokenResult}");
+      print("========tokenResult===${tokenResult}");
 
-      await authController.register(myPhone!,/* code!,*/ tokenResult);
+      await authController.register(myPhone!, /* code!,*/ tokenResult);
       loader = false;
       update();
     } on FirebaseAuthException catch (e) {
@@ -196,10 +198,9 @@ class PinCodeController extends GetxController {
       Get.snackbar(e.toString(), "nbvmbvmbnvmnbخطاء",
           borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
       loader = false;
-          print(codetest);
+      print(codetest);
 
       update();
     }
   }
-
 }
