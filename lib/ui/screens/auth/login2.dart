@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
           child: Form(
             key: form,
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(), 
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -166,25 +166,21 @@ class LoginPage extends StatelessWidget {
                             //     ? 170.h
                             //     : 44.h,
                             width: 148.w,
-                            child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular((20!))),
-                              padding: const EdgeInsets.all(
-                                5,
-                              ),
-                              onPressed: () async {
-                                if (controller.controllerr.text.isEmpty) {
-                                  controller.setNum();
-                                } else {
-                                  await controller.withoutsendOTP();
-                                }
-                              },
+                            child: RoundedButton(
                               color: basicPink,
-                              child: Text('دخول',
+                              mywidget: Text('دخول',
                                   style: GoogleFonts.cairo(
                                       color: white,
                                       fontSize: 18.sp,
                                       fontWeight: FontWeight.normal)),
+                              raduis: 10,
+                              myfun: () async {
+                                if (controller.controllerr.text.isEmpty) {
+                                  controller.setNum();
+                                } else {
+                                  await controller.sendOTP();
+                                }
+                              },
                             ),
                           )
                         : const CircularProgressIndicator(

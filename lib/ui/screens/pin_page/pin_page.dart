@@ -208,7 +208,7 @@ class PinPage extends StatelessWidget {
                                 fontWeight: FontWeight.w500)),
                         raduis: 10,
                         myfun: () async {
-                          controller.sendOTPCode(context,myPhone,code);
+                          controller.withoutsendOTPCode(context,myPhone,code);
                         },
                       )
                     ):const CircularProgressIndicator(

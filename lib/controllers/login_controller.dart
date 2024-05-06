@@ -65,7 +65,91 @@ class LoginController extends GetxController{
     // TODO: implement onClose
     super.onClose();
   }
-  Future<void> sendOTP() async {
+  Future<void> withoutsendOTP() async {
+    GetStorage storage = GetStorage();
+    loader = true;
+    update();
+    if(controllerr.text.startsWith("0")&&countryCode ==("+20")){
+      controllerr.text = controllerr.text.replaceFirst(RegExp('^0'), '');
+    }
+    String phoneNumber = countryCode+controllerr.text;
+      //      await storage.write("verificationId", verificationId);
+        await storage.write("resendToken", "123456789");
+
+        // Save the verification ID to use later
+        // You can also use the resendToken to send another SMS
+        // with the same verification ID
+        // String smsCode = "";
+        loader = false;
+        update();
+        Get.to(()=> PinPage(code: countryCode,myPhone: controllerr.text),);
+    FirebaseAuth auth = FirebaseAuth.instance;
+    // Force reCAPTCHA flo
+    // await auth.verifyPhoneNumber(
+    //   phoneNumber: phoneNumber,
+    //   verificationCompleted: (PhoneAuthCredential credential) {
+    //     // Auto-retrieve the SMS code and sign in the user
+    //     auth.signInWithCredential(credential);
+    //   },
+    //   verificationFailed: (FirebaseAuthException e) {
+    //     loader = false;
+    //     update();
+    //     switch (e.code) {
+    //       case "invalid-verification-id":
+    //         Get.snackbar('خطاء في id', e.code.toString(),
+    //             borderRadius: 0,
+    //             snackPosition: SnackPosition.BOTTOM);
+    //         loader = false;
+    //         update();
+    //         break;
+
+    //       case "invalid-verification-code":
+    //         Get.snackbar('فشل التحقق من الكود', e.code.toString(),
+    //             borderRadius: 0,
+    //             snackPosition: SnackPosition.BOTTOM);
+    //         loader = false;
+    //         update();
+    //         break;
+
+    //       case "invalid-phone-number":
+    //         Get.snackbar('رقم الهاتف الذي أدخلته غير صحيح', e.code.toString(),
+    //             backgroundColor: Colors.red,
+    //             borderRadius: 0,
+    //             snackPosition: SnackPosition.BOTTOM);
+    //         break;
+
+    //       case "session-expired":
+    //         Get.snackbar('من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد', e.code.toString(),
+    //           borderRadius: 0,
+    //           snackPosition: SnackPosition.BOTTOM,
+
+    //         );
+
+    //         loader = false;
+    //         update();
+    //         break;
+    //     }
+    //     // Handle verification failed
+    //   },
+    //   codeSent: (String verificationId, int? resendToken)async {
+    //     await storage.write("verificationId", verificationId);
+    //     await storage.write("resendToken", resendToken);
+
+    //     // Save the verification ID to use later
+    //     // You can also use the resendToken to send another SMS
+    //     // with the same verification ID
+    //     // String smsCode = "";
+    //     loader = false;
+    //     update();
+    //     Get.to(()=> PinPage(code: countryCode,myPhone: controllerr.text),);
+    //   },
+    //   codeAutoRetrievalTimeout: (String verificationId) {
+    //     // Handle timeout
+    //   },
+    // );
+  }
+
+   Future<void> sendOTP() async {
     GetStorage storage = GetStorage();
     loader = true;
     update();

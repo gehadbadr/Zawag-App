@@ -16,6 +16,7 @@ import 'package:effa/ui/screens/reported_accounts/reported_account.dart';
 import 'package:effa/ui/screens/settings/settings.dart';
 import 'package:effa/ui/screens/show_notify/show_notify.dart';
 import 'package:effa/ui/screens/terms/trems.dart';
+import 'package:effa/ui/widgets/custom_main_info_pages/main_page_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,10 +26,11 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dio/dio.dart' as Dio;
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  //await GetStorage.init();
+//  await GetStorage.init();
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp(
 //     options: const FirebaseOptions(
@@ -81,7 +83,8 @@ class _MyAppState extends State<MyApp> {
         //   showEdit: false,
         // );
 
-       // page = ExhaustedAttemps(onPressed: (){},mainBalance: "150",showCost: "100",);
+     //  page = CustomRegisterView();
+        // page = ExhaustedAttemps(onPressed: (){},mainBalance: "150",showCost: "100",);
       });
       FlutterNativeSplash.remove();
     } else {
@@ -126,13 +129,15 @@ class _MyAppState extends State<MyApp> {
       }
       print(user?.user?.id);
       print(userState?.state);
-      print("dsfdssdg");
+      print("dsfdshhhhhhhhhhhhsdg");
     } catch (err) {
       if (user?.user?.id == null) {
         setState(() {
-//                    page =  DetailedInfo(showEdit: false,);
+          page = DetailedInfo(
+            showEdit: false,
+          );
 
-          page = LoginPage();
+          //    page = LoginPage();
         });
         FlutterNativeSplash.remove();
       }

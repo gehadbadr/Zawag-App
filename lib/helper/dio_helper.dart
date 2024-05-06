@@ -3,12 +3,13 @@ import 'package:get_storage/get_storage.dart';
 GetStorage storage = GetStorage();
 Dio dio() {
   Dio dio = Dio();
-  dio.options.baseUrl = "https://analyzes.online/effah/effah/public/api/";
+  dio.options.baseUrl = "https://analyzes.online/effah/effah/public/api";
   dio.options.headers = {
    'content-type': 'application/json',
     "Accept-Encoding": "gzip",
     "Accept": "application/x-www-form-urlencoded",
-    'authorization': 'Bearer ${storage.read("token")}',
+//'authorization': 'Bearer ${storage.read("resendToken")}',
+   'authorization': 'Bearer ${storage.read("token")}',
      };
   dio.options.receiveDataWhenStatusError = true;
   dio.options.followRedirects = true;
