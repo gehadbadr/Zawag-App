@@ -30,7 +30,7 @@ import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-//  await GetStorage.init();
+   await GetStorage.init();
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp(
 //     options: const FirebaseOptions(

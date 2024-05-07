@@ -176,7 +176,7 @@ class LoginPage extends StatelessWidget {
                                 if (controller.controllerr.text.isEmpty) {
                                   controller.setNum();
                                 } else {
-                                  await controller.withoutsendOTP();
+                                  await controller.sendOTP();
                                 }
                               },
                               color: basicPink,

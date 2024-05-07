@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "809512268949",
-    "project_id": "zawag3-e6346",
-    "storage_bucket": "zawag3-e6346.appspot.com"
+    "project_number": "749486113321",
+    "project_id": "zawagapp-a8cdc",
+    "storage_bucket": "zawagapp-a8cdc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:809512268949:android:3801f866a0dc8e79e6579c",
+        "mobilesdk_app_id": "1:749486113321:android:a030fc060ef2d07dd3d238",
         "android_client_info": {
           "package_name": "com.example.effa"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDUkw6IKwx7htUl1W2MSaoI4C2Y33gEC4Y"
+          "current_key": "AIzaSyDrB1fWfuI3ow9mp0NopbanFxT50P99oAw"
         }
       ],
       "services": {

@@ -206,7 +206,7 @@ class PinPage extends StatelessWidget {
                                       fontWeight: FontWeight.w500)),
                               raduis: 10,
                               myfun: () async {
-                                controller.withoutsendOTPCode(
+                                controller.sendOTPCode(
                                     context, myPhone, code);
                                 print("object0");
                               },

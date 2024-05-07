@@ -63,78 +63,6 @@ class PinCodeController extends GetxController {
     super.onClose();
   }
 
-  Future<void> withoutsendOTPCode(
-      BuildContext ctx, String? myPhone, String? code) async {
-    GetStorage storage = GetStorage();
-    //  FirebaseAuth auth = FirebaseAuth.instance;
-    // var codetest = storage.read("verificationId");
-    //  print("===========${codetest}");
-    loader = true;
-    update();
-    // PhoneAuthCredential credential = PhoneAuthProvider.credential(
-    //     verificationId: storage.read("verificationId"),
-    //     smsCode: codeController1.text +
-    //         codeController2.text +
-    //         codeController3.text +
-    //         codeController4.text +
-    //         codeController5.text +
-    //         codeController6.text);
-    try {
-      //  await auth.signInWithCredential(credential);
-      //  print("========verificationId===${codetest}");
-
-      //   String tokenResult = FirebaseAuth.instance.currentUser!.uid;
-      //   print("========tokenResult===${tokenResult}");
-
-      //   await authController.testregister('222222',/* code!,*/ "123456789123");
-      await authController.testregister();
-      print("object1");
-      loader = false;
-      update();
-      /* } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case "invalid-verification-id":
-          Get.snackbar('خطاء في id', e.code.toString(),
-              borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
-          loader = false;
-          update();
-          break;
-
-        case "invalid-verification-code":
-          Get.snackbar('فشل التحقق من الكود', e.code.toString(),
-              borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
-          loader = false;
-          update();
-          break;
-
-        case "invalid-phone-number":
-          Get.snackbar('رقم الهاتف الذي أدخلته غير صحيح', e.code.toString(),
-              borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
-          break;
-
-        case "session-expired":
-          Get.snackbar(
-            'من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد',
-            e.code.toString(),
-            borderRadius: 0,
-            snackPosition: SnackPosition.BOTTOM,
-          );
-
-          loader = false;
-          update();
-          break;
-      }*/
-    } catch (e) {
-      Get.snackbar(e.toString(), "nbvmbvmbnvmnbخطاء",
-          borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
-      print("object2== ${e.toString()}");
-      loader = false;
-      //  print(codetest);
-
-      update();
-    }
-  }
-
   Future<void> sendOTPCode(
       BuildContext ctx, String? myPhone, String? code) async {
     GetStorage storage = GetStorage();
@@ -158,7 +86,7 @@ class PinCodeController extends GetxController {
       String tokenResult = FirebaseAuth.instance.currentUser!.uid;
       print("========tokenResult===${tokenResult}");
 
-      await authController.register(myPhone!, /* code!,*/ tokenResult);
+      await authController.register(myPhone!, code!,tokenResult);
       loader = false;
       update();
     } on FirebaseAuthException catch (e) {

@@ -98,23 +98,39 @@ class BirthDate extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: SizedBox(
-            width: 264.w,
-            // height: 44.h,
-            child: RoundedButton(
-                mywidget: Text('التالي',
-                    style: GoogleFonts.cairo(
-                      color: white,
-                      fontSize: MediaQuery.of(context).size.height <= 500
-                          ? 10.sp
-                          : 16.0.sp,
-                    )),
-                raduis: 10,
-                myfun: () {
-                  controller.onTap();
-                },
-                color: basicPink),
+          child: Container(
+          width: 264.w,
+          // padding: EdgeInsets.all(5.0),
+          // height: 44.h,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: basicPink,
+              padding: const EdgeInsets.all(2),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text('التالي',
+                style: GoogleFonts.cairo(
+                  color: white,
+                  fontSize: MediaQuery.of(context).size.height <= 500
+                      ? 10.sp
+                      : 16.0.sp,
+                )),
+            // raduis: 10,
+            // myfun: () {
+
+            // },
+            // color: basicPink,
+            onPressed: () {
+             
+              controller.onTap();
+            },
           ),
+        ),
+       
+          
+         
         ),
         // const Expanded(
         //   flex: 1,
