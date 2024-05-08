@@ -30,7 +30,7 @@ import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-   await GetStorage.init();
+  await GetStorage.init();
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp(
 //     options: const FirebaseOptions(
@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
         //   showEdit: false,
         // );
 
-     //  page = CustomRegisterView();
+        //  page = CustomRegisterView();
         // page = ExhaustedAttemps(onPressed: (){},mainBalance: "150",showCost: "100",);
       });
       FlutterNativeSplash.remove();
@@ -93,12 +93,13 @@ class _MyAppState extends State<MyApp> {
           page = Terms();
         });
         FlutterNativeSplash.remove();
+        // } else if (userState?.state == 2) {
+        //   setState(() {
+        //     page = MainData();
+        //   });
+        //   FlutterNativeSplash.remove();
+        // } else if (userState?.state == 3) {
       } else if (userState?.state == 2) {
-        setState(() {
-          page = MainData();
-        });
-        FlutterNativeSplash.remove();
-      } else if (userState?.state == 3) {
         setState(() {
           page = DetailedInfo(
             showEdit: false,

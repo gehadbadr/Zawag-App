@@ -40,32 +40,29 @@ class RegisterButton extends StatelessWidget {
       children: [
         gradient != null
             ?
-    Expanded(
-      child: Container(
-    //  padding: EdgeInsets.all(15.0),
-      child: new LinearPercentIndicator(
-          alignment:MainAxisAlignment.end,
-          padding:EdgeInsets.symmetric(horizontal: 0),
-       //   fillColor: Colors.blue,
-        barRadius:Radius.circular(10),
-        isRTL: true,
-        width: MediaQuery.of(context).size.width /1.4,
-      animation: true,
-      lineHeight:  MediaQuery.of(context).size.height <= 500
-          ? 100.h
-          : 55.h,
-      animationDuration: 2000,
-      percent: 0.5,
-      center: TextButton(
-        onPressed: nav,
-        child: title,
-      ),
-      linearStrokeCap: LinearStrokeCap.roundAll,
-      progressColor: color,
-          backgroundColor:midGrey
-      ),
-      ),
-    )
+  Expanded(
+    child: LinearPercentIndicator(
+        alignment:MainAxisAlignment.end,
+        padding:const EdgeInsets.symmetric(horizontal: 0),
+     //   fillColor: Colors.blue,
+      barRadius:const Radius.circular(10),
+      isRTL: true,
+      width: MediaQuery.of(context).size.width /1.4,
+    animation: true,
+    lineHeight:  MediaQuery.of(context).size.height <= 500
+        ? 100.h
+        : 55.h,
+    animationDuration: 2000,
+    percent: 0.5,
+    center: TextButton(
+      onPressed: nav,
+      child: title,
+    ),
+    linearStrokeCap: LinearStrokeCap.roundAll,
+    progressColor: color,
+        backgroundColor:midGrey
+    ),
+  )
 
             : Expanded(
                 child: Container(

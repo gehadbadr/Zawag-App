@@ -1,10 +1,12 @@
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/questions/questions.dart';
+import 'package:effa/models/user/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as Dio;
-class QuestionsController extends GetxController{
+
+class QuestionsController extends GetxController {
   bool loader = false;
   bool loaderAnswer = false;
 
@@ -21,7 +23,7 @@ class QuestionsController extends GetxController{
   TextEditingController txtController = TextEditingController();
 
   TextEditingController txtAnswerController = TextEditingController();
-
+  UserInfooo? user;
   bool press = false;
   bool listBool = false;
 
@@ -31,25 +33,39 @@ class QuestionsController extends GetxController{
   int? categoryId;
   int level = 1;
   int lastId = 0;
+  int completeCheched = 0;
   List<bool> checklist = [];
 
   List<int> idList = [];
-  void fillList(List<Answer>? answers) {
-      checklist = List<bool>.filled(answers!.length, listBool);
+
+  @override
+  void onInit() async {
+    final Dio.Response response = await dio().get(
+      'myData',
+    );
+    user = UserInfooo.fromJson(response.data);
+    super.onInit();
   }
-  void addId(int id){
+
+  void fillList(List<Answer>? answers) {
+    checklist = List<bool>.filled(answers!.length, listBool);
+  }
+
+  void addId(int id) {
     idList.add(id);
     print(idList);
   }
-  void removeId(int i){
+
+  void removeId(int i) {
     print(i);
-    if(idList.isEmpty){
+    if (idList.isEmpty) {
       changeIndexnN();
     }
     idList.remove(i);
     print(idList);
   }
-  void resetValues(){
+
+  void resetValues() {
     Get.forceAppUpdate();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Wait for the PageView to be built before accessing the page property
@@ -62,33 +78,33 @@ class QuestionsController extends GetxController{
     });
   }
 
-
-  void onPageChange(int i){
+  void onPageChange(int i) {
     tapIndex = 0;
-    selectedChoice  = null;
+    selectedChoice = null;
     press = false;
     // pos = tapIndex-1;
     update();
   }
 
-  void back(){
-    pageIndex --;
-    pageController.previousPage(duration:const Duration(milliseconds: 250), curve: Curves.easeIn);
-    if(position!=1.0-(1/len)){
-      position -= 1/len;
+  void back() {
+    pageIndex--;
+    pageController.previousPage(
+        duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+    if (position != 1.0 - (1 / len)) {
+      position -= 1 / len;
     }
     update();
   }
 
   void onTapP() {
-    if(pageIndex+1 != len){
-      pageIndex ++;
+    if (pageIndex + 1 != len) {
+      pageIndex++;
       pageController.nextPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.bounceInOut);
-      position += 1/len;
-    }else{
-
-      level ++;
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.bounceInOut);
+      position += 1 / len;
+    } else {
+      level++;
       print('categories/get_questions/$categoryId/$level/$lastId');
       getQuestions();
       resetValues();
@@ -96,28 +112,26 @@ class QuestionsController extends GetxController{
     update();
   }
 
-  void changeIndex(int i){
-    selectedChoice  = i;
+  void changeIndex(int i) {
+    selectedChoice = i;
     press = true;
     tapIndex = i;
 
-   update();
+    update();
   }
 
-  void updateList(int i,bool bool){
+  void updateList(int i, bool bool) {
     checklist[i] = bool;
     update();
   }
 
-
-  void changeIndexnN(){
-    selectedChoice  = null;
+  void changeIndexnN() {
+    selectedChoice = null;
     update();
   }
 
-
   //get questions
-  Future <QuestionsAndAnswers?> getQuestions() async {
+  Future<QuestionsAndAnswers?> getQuestions() async {
     var map;
     try {
       loader = true;
@@ -127,18 +141,22 @@ class QuestionsController extends GetxController{
       );
 
       print(response.data);
+      print('categories/get_questions/$categoryId/$level/$lastId');
 
       questions = QuestionsAndAnswers.fromJson(response.data);
       map = questions?.questions;
       len = map.toList().length;
+            print('len --------------------/$len');
+
       print(len);
       loader = false;
       update();
-      if(len==0){
+      if (len == 0) {
         Get.back();
-        Get.snackbar("تم ارسال البيانات","في انتظار المراجعه",
+        Get.snackbar("تم ارسال البيانات", "في انتظار المراجعه",
             borderRadius: 0,
-            showProgressIndicator: false, duration: const Duration(seconds: 4));
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
       }
     } catch (err) {
       loader = false;
@@ -151,26 +169,27 @@ class QuestionsController extends GetxController{
 
   //post answers
   Future<void> singleAnswer(
-      int qId,
-      int answerId,
-      ) async {
+    int qId,
+    int answerId,
+  ) async {
     try {
       lastId = qId;
       loaderAnswer = true;
       update();
+      print("user_id------------------${user?.user?.id }");
       Dio.Response response = await dio().post(
         'questions/answer',
         data: Dio.FormData.fromMap({
-          'que_id':qId,
-          'one_choice':answerId,
+          'user_id': user?.user?.id,
+          'que_id': qId,
+          'one_choice': answerId,
         }),
       );
       if (response.statusCode != 200) {
         loaderAnswer = false;
         update();
-        throw HttpExeption(response.data['errors']=="server error"?
-        "حاول مره اخري"
-            :"");
+        throw HttpExeption(
+            response.data['errors'] == "server error" ? "حاول مره اخري" : "");
       }
       if (response.statusCode == 200) {
         changeIndexnN();
@@ -179,25 +198,26 @@ class QuestionsController extends GetxController{
         update();
       }
     } on HttpExeption catch (e) {
-      Get.snackbar(e.message,"حاول مره اخري !",
+      Get.snackbar(e.message, "حاول مره اخري !",
           borderRadius: 0,
-          showProgressIndicator: false, duration: const Duration(seconds: 4));
-    }
-    catch (error) {
+          showProgressIndicator: false,
+          duration: const Duration(seconds: 4));
+    } catch (error) {
       loaderAnswer = false;
       update();
       print(error);
-      throw (error);
+      //   throw (error);
     }
   }
 
   Future<void> multipleAnswer(
-      int qId, ) async {
+    int qId,
+  ) async {
     try {
-      Map<String, dynamic> api ={
+      Map<String, dynamic> api = {
         'que_id': qId,
       };
-      for(int i = 0;i<idList.length; i++){
+      for (int i = 0; i < idList.length; i++) {
         api['multiple_choice[$i]'] = idList[i];
       }
       Dio.Response response = await dio().post(
@@ -208,9 +228,8 @@ class QuestionsController extends GetxController{
       if (response.statusCode != 200) {
         loaderAnswer = false;
         update();
-        throw HttpExeption(response.data['errors']=="server error"?
-        "حاول مره اخري"
-            :"");
+        throw HttpExeption(
+            response.data['errors'] == "server error" ? "حاول مره اخري" : "");
       }
       if (response.statusCode == 200) {
         changeIndexnN();
@@ -219,11 +238,11 @@ class QuestionsController extends GetxController{
         update();
       }
     } on HttpExeption catch (e) {
-      Get.snackbar(e.message,"حاول مره اخري !",
+      Get.snackbar(e.message, "حاول مره اخري !",
           borderRadius: 0,
-          showProgressIndicator: false, duration: const Duration(seconds: 4));
-    }
-    catch (error) {
+          showProgressIndicator: false,
+          duration: const Duration(seconds: 4));
+    } catch (error) {
       loaderAnswer = false;
       update();
       print(error);
@@ -232,8 +251,8 @@ class QuestionsController extends GetxController{
   }
 
   Future<void> textAnswer(
-      int qId,
-      ) async {
+    int qId,
+  ) async {
     try {
       lastId = qId;
       loaderAnswer = true;
@@ -241,16 +260,15 @@ class QuestionsController extends GetxController{
       Dio.Response response = await dio().post(
         'questions/answer',
         data: Dio.FormData.fromMap({
-          'que_id':qId,
-          'text':txtAnswerController.text,
+          'que_id': qId,
+          'text': txtAnswerController.text,
         }),
       );
       if (response.statusCode != 200) {
         loaderAnswer = false;
         update();
-        throw HttpExeption(response.data['errors']=="server error"?
-        "حاول مره اخري"
-            :"");
+        throw HttpExeption(
+            response.data['errors'] == "server error" ? "حاول مره اخري" : "");
       }
       if (response.statusCode == 200) {
         changeIndexnN();
@@ -259,16 +277,15 @@ class QuestionsController extends GetxController{
         update();
       }
     } on HttpExeption catch (e) {
-      Get.snackbar(e.message,"حاول مره اخري !",
+      Get.snackbar(e.message, "حاول مره اخري !",
           borderRadius: 0,
-          showProgressIndicator: false, duration: const Duration(seconds: 4));
-    }
-    catch (error) {
+          showProgressIndicator: false,
+          duration: const Duration(seconds: 4));
+    } catch (error) {
       loaderAnswer = false;
       update();
       print(error);
       throw (error);
     }
   }
-
 }

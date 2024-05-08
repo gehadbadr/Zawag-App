@@ -29,7 +29,7 @@ class SingleChoice extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "${question}",
+                    question,
                     style: GoogleFonts.cairo(fontSize: 20.sp),
                     textAlign: TextAlign.center,
                   ),
