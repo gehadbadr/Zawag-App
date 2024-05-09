@@ -1,10 +1,12 @@
 import 'package:effa/controllers/basic_pages_controller.dart';
+import 'package:effa/controllers/progress_controller.dart';
 import 'package:effa/helper/app_colors.dart';
 import 'package:effa/ui/widgets/custom_main_info_pages/main_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class MainData extends StatelessWidget {
