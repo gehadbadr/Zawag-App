@@ -1,6 +1,7 @@
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/user/user_auth_model.dart';
+import 'package:effa/models/user/user_data.dart';
 import 'package:effa/ui/screens/dashboard/male_dashboard.dart';
 import 'package:effa/ui/screens/main_data/main_data.dart';
 import 'package:effa/ui/screens/terms/trems.dart';
@@ -124,4 +125,6 @@ class AuthController extends GetxController {
       throw (error);
     }
   }
+
+
 }

@@ -11,6 +11,7 @@ class MyProfileController extends GetxController {
   bool isRequest = false;
   UserInfooo? user;
   bool loader = false;
+  double progress = 0.0;
   requestFatherData() {
     isRequest = true;
     print("MyProfileController isRequest == ${isRequest}");
@@ -85,4 +86,5 @@ class MyProfileController extends GetxController {
       // ignore: unnecessary_brace_in_string_interps
     }
   }
+
 }

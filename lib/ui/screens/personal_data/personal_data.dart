@@ -1,3 +1,4 @@
+import 'package:effa/controllers/progress_controller.dart';
 import 'package:effa/controllers/quistions_controller.dart';
 import 'package:effa/helper/app_colors.dart';
 import 'package:effa/ui/widgets/answers/multiple_choices.dart';

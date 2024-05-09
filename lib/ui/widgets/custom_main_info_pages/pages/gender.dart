@@ -1,4 +1,5 @@
 import 'package:effa/controllers/basic_pages_controller.dart';
+import 'package:effa/controllers/progress_controller.dart';
 import 'package:effa/helper/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

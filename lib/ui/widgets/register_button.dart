@@ -1,15 +1,9 @@
-import 'package:effa/controllers/quistions_controller.dart';
 import 'package:effa/helper/app_colors.dart';
-import 'package:effa/ui/screens/dashboard/male_dashboard.dart';
-import 'package:effa/ui/widgets/show_status_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import 'info_bottom_sheet.dart';
 
 class RegisterButton extends StatelessWidget {
   Widget title;
@@ -17,12 +11,15 @@ class RegisterButton extends StatelessWidget {
   VoidCallback nav;
   Color color;
   bool? gradient;
+  double? progressVal;
   RegisterButton(
       {Key? key,
       required this.title,
       required this.function,
       required this.nav,
       required this.color,
+             this.progressVal,
+
       this.gradient})
       : super(key: key);
 
@@ -35,14 +32,14 @@ class RegisterButton extends StatelessWidget {
   //   fill,
   //   fill,
   // ];
-  final controller = Get.lazyPut(() => QuestionsController(), fenix: false);
+  //final controller = Get.lazyPut(() => ProgressController(), fenix: false);
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         gradient != null
             ? Expanded(
-                child: GetBuilder<QuestionsController>(builder: (controller) {
+                child:/* GetBuilder<QuestionsController>(builder: (controller) {
                   int length = controller.len;
                   double lengthprecentage = 0;
                   if (length > 10) {
@@ -51,7 +48,7 @@ class RegisterButton extends StatelessWidget {
                     lengthprecentage = 0.2;
 
                   }
-                  return LinearPercentIndicator(
+                  return*/ LinearPercentIndicator(
                       alignment: MainAxisAlignment.end,
                       padding: const EdgeInsets.symmetric(horizontal: 0),
                       //   fillColor: Colors.blue,
@@ -63,15 +60,15 @@ class RegisterButton extends StatelessWidget {
                           ? 100.h
                           : 55.h,
                       animationDuration: 2000,
-                      percent: lengthprecentage,
+                      percent: progressVal!,
                       center: TextButton(
                         onPressed: nav,
                         child: title,
                       ),
                       linearStrokeCap: LinearStrokeCap.roundAll,
                       progressColor: color,
-                      backgroundColor: midGrey);
-                }),
+                      backgroundColor: midGrey/*);
+                }*/),
               )
             : Expanded(
                 child: Container(
