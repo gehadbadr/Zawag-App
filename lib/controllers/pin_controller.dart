@@ -86,11 +86,11 @@ class PinCodeController extends GetxController {
       String tokenResult = FirebaseAuth.instance.currentUser!.uid;
       print("========tokenResult===${tokenResult}");
 
-      await authController.register(myPhone!, code!,tokenResult);
+      await authController.register(myPhone!, code!, tokenResult);
       loader = false;
       update();
     } on FirebaseAuthException catch (e) {
-      switch (e.code) {
+      switch ("PinCodeController error ==${e.code}") {
         case "invalid-verification-id":
           Get.snackbar('خطاء في id', e.code.toString(),
               borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
@@ -121,12 +121,14 @@ class PinCodeController extends GetxController {
           loader = false;
           update();
           break;
+        default:
+          print(e.code);
       }
     } catch (e) {
       Get.snackbar(e.toString(), "nbvmbvmbnvmnbخطاء",
           borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
       loader = false;
-      print(codetest);
+      print("codetest==  ${codetest}");
 
       update();
     }

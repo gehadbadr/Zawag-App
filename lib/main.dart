@@ -1,51 +1,38 @@
+// ignore_for_file: library_prefixes
+
 import 'package:country_picker/country_picker.dart';
+import 'package:dio/dio.dart' as Dio;
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get_storage/get_storage.dart';
+
 import 'package:effa/controllers/transition.dart';
 import 'package:effa/firebase_options.dart';
 import 'package:effa/helper/app_colors.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/models/user/user_data.dart';
 import 'package:effa/ui/screens/auth/login.dart';
-import 'package:effa/ui/screens/confirm_identfy/confirm_id.dart';
-import 'package:effa/ui/screens/exhausted_attemps/exhausted_attemps.dart';
-import 'package:effa/ui/screens/pin_page/pin_page.dart';
-
 import 'package:effa/ui/screens/dashboard/male_dashboard.dart';
 import 'package:effa/ui/screens/detailed%20_personal_data/detaild_data.dart';
 import 'package:effa/ui/screens/main_data/main_data.dart';
-import 'package:effa/ui/screens/reported_accounts/reported_account.dart';
-import 'package:effa/ui/screens/settings/settings.dart';
-import 'package:effa/ui/screens/show_notify/show_notify.dart';
 import 'package:effa/ui/screens/terms/trems.dart';
-import 'package:effa/ui/widgets/custom_main_info_pages/main_page_view.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:dio/dio.dart' as Dio;
-import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-   await GetStorage.init();
+  await GetStorage.init();
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp(
-//     options: const FirebaseOptions(
-//     apiKey: 'AIzaSyD-k7xVAGsilh3GvRiJeiaIgVI7mPc0nEE',
-//     appId: '1:725052884229:android:71f8f114259730843d236c',
-//     messagingSenderId: '725052884229',
-//     projectId: 'effah-app',
-//     storageBucket: 'effah-app.appspot.com',
-// ),
     options: DefaultFirebaseOptions.currentPlatform,
   );
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     // Status bar color
     statusBarColor: Colors.white,
-
     // Status bar brightness (optional)
     statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
     statusBarBrightness: Brightness.light, // For iOS (dark icons)
@@ -55,21 +42,13 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  // void initState() {
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //
-  //   });
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
   UserInfooo? user;
   Widget? page;
   UserState? userState;
@@ -79,12 +58,6 @@ class _MyAppState extends State<MyApp> {
     if (user?.user?.id == null) {
       setState(() {
         page = LoginPage();
-        // page = DetailedInfo(
-        //   showEdit: false,
-        // );
-
-     //  page = CustomRegisterView();
-        // page = ExhaustedAttemps(onPressed: (){},mainBalance: "150",showCost: "100",);
       });
       FlutterNativeSplash.remove();
     } else {

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:effa/controllers/basic_pages_controller.dart';
 import 'package:effa/helper/app_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -71,6 +73,8 @@ class NationalityInfo extends GetView<BasicPagesController> {
                           shrinkWrap: true,
                           itemCount: controller.found.length,
                           itemBuilder: (context, index) {
+                            print(
+                                "controller.found.length== ${controller.nationalityModel![4]!.fName}");
                             return InkWell(
                               onTap: () {
                                 controller.choseNational(index, true);
@@ -102,7 +106,8 @@ class NationalityInfo extends GetView<BasicPagesController> {
                                           color: controller.tapIndex ==
                                                       controller
                                                           .found[index]!.id &&
-                                                  controller.nationalPress == true
+                                                  controller.nationalPress ==
+                                                      true
                                               ? basicPink
                                               : black),
                                     ),

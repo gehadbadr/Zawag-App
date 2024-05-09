@@ -46,7 +46,7 @@ class DashBoardMale extends StatelessWidget {
                   "assets/icon/notif.svg",
                 ),
                 onPressed: () {
-                  Get.to(() =>  Notifications());
+                  Get.to(() => Notifications());
                   // Navigator.push(context,
                   //     MaterialPageRoute(builder: (context) => Notifications()));
                 },

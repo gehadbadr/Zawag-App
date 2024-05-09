@@ -2,8 +2,9 @@ import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/models/terms/terms.dart';
 import 'package:effa/ui/screens/main_data/main_data.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart'as Dio;
-class TermsController extends GetxController{
+import 'package:dio/dio.dart' as Dio;
+
+class TermsController extends GetxController {
   TermsModel? termsModel;
 
   bool loader = false;
@@ -12,24 +13,26 @@ class TermsController extends GetxController{
 
   bool posted = false;
 
-  changeValue(bool val){
+  changeValue(bool val) {
     agree = val;
     update();
   }
+
   @override
   void onInit() {
     fetchTermData();
     // TODO: implement onInit
     super.onInit();
   }
-  Future <TermsModel?> fetchTermData() async {
+
+  Future<TermsModel?> fetchTermData() async {
     try {
       loader = true;
 
       Dio.Response response = await dio().get(
         'terms',
       );
-      print(response.data);
+      print("fetchTermData == ${response.data}");
       termsModel = TermsModelFromJson(response.toString());
       loader = false;
       update();
@@ -39,30 +42,31 @@ class TermsController extends GetxController{
       loader = false;
       update();
 
-      print(err);
+      print("fetchTermData error ==${err.toString()}");
       // ignore: unnecessary_brace_in_string_interps
     }
     return termsModel;
   }
+
   Future<void> updateTerms() async {
-    Map<String,dynamic> api ={
+    Map<String, dynamic> api = {
       "is_accept_terms": 1,
     };
     try {
-      posted =true;
+      posted = true;
       update();
       Dio.Response response = await dio().post(
         'general/update_profile',
         data: Dio.FormData.fromMap(api),
       );
-      if(response.statusCode == 200){
-        posted =false;
+      if (response.statusCode == 200) {
+        posted = false;
         update();
-        Get.to(() =>MainData());
+        Get.to(() => MainData());
       }
     } catch (error) {
-      posted =false;
-      print(error);
+      posted = false;
+      print("updateTerms error == ${error}");
       throw (error);
     }
   }

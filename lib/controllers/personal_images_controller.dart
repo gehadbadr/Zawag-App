@@ -1,20 +1,16 @@
 import 'dart:io';
 
-
 import 'package:effa/helper/dio_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart'as Dio;
+import 'package:dio/dio.dart' as Dio;
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
-class PersonalImagesController extends GetxController{
-
-  File myFile=File("");
-
-
+class PersonalImagesController extends GetxController {
+  File myFile = File("");
 
   bool? isProfile;
 
@@ -32,8 +28,7 @@ class PersonalImagesController extends GetxController{
   bool loader = false;
   List<int> idList = [0];
 
-
-  removeItemList(int i){
+  removeItemList(int i) {
     imageFileList!.removeAt(i - 1);
     update();
   }
@@ -42,9 +37,9 @@ class PersonalImagesController extends GetxController{
     imageFileList!.clear();
     selectedImages = await imagePicker.pickMultiImage();
     if (selectedImages!.isNotEmpty) {
-      for (int i = 0; i < selectedImages!.length ; i++) {
-          imageFileList!.add(selectedImages![i]);
-          update();
+      for (int i = 0; i < selectedImages!.length; i++) {
+        imageFileList!.add(selectedImages![i]);
+        update();
       }
     }
     print("Image List Length:" + imageFileList!.length.toString());
@@ -53,108 +48,101 @@ class PersonalImagesController extends GetxController{
   Future<void> updateImgs() async {
     loader = true;
     update();
-    Map<String,dynamic> api ={
+    Map<String, dynamic> api = {
       "user_id": storage.read('userId'),
     };
-    for (int i = 0;i<selectedImages!.length; i++){
-      api['images[$i]'] = await Dio.MultipartFile.fromFile(selectedImages![i].path, filename: selectedImages![i].path);
+    for (int i = 0; i < selectedImages!.length; i++) {
+      api['images[$i]'] = await Dio.MultipartFile.fromFile(
+          selectedImages![i].path,
+          filename: selectedImages![i].path);
     }
     Get.snackbar("يتم رفع الصوره", "برجاء الانتظار",
         borderRadius: 0,
-        showProgressIndicator: true, duration: const Duration(seconds: 20));
+        showProgressIndicator: true,
+        duration: const Duration(seconds: 20));
     try {
       Dio.Response response = await dio().post(
         'user_imagesmale',
         options: Options(
             followRedirects: false,
             receiveDataWhenStatusError: true,
-            contentType: 'multipart/form-data'
-        ),
+            contentType: 'multipart/form-data'),
         data: Dio.FormData.fromMap(api),
       );
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         loader = false;
         update();
         Get.closeAllSnackbars();
         Get.snackbar("تم رفع الصور بنجاح", "",
             backgroundColor: Colors.greenAccent,
             borderRadius: 0,
-            showProgressIndicator: false, duration: const Duration(seconds: 4));
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+        Get.back();
+        print("update image");
       }
-
     } catch (error) {
       if (kDebugMode) {
-        print(error);
+        print("PersonalImagesController error == $error");
       }
       rethrow;
     }
   }
-  pickImageGallery(BuildContext context)async{
+
+  pickImageGallery(BuildContext context) async {
     var imageServer;
     try {
-      final pickedImage = await ImagePicker().pickImage(
-          source: ImageSource.gallery);
+      final pickedImage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
       final pickedImageFile = File(pickedImage!.path);
       imageServer = Dio.MultipartFile.fromFileSync(
-          pickedImageFile.path,
-          filename: pickedImageFile.path
-              .split('/')
-              .last,
+        pickedImageFile.path,
+        filename: pickedImageFile.path.split('/').last,
       );
       Get.snackbar("يتم رفع الصوره", "برجاء الانتظار",
           borderRadius: 0,
-          showProgressIndicator: true, duration: const Duration(seconds: 10));
+          showProgressIndicator: true,
+          duration: const Duration(seconds: 10));
       Dio.Response response = await dio().post(
         'update_profile_image',
-        options: Options(
-            contentType: 'multipart/form-data'
-        ),
-        data: Dio.FormData.fromMap({
-          "image": imageServer
-        }
-        ),
+        options: Options(contentType: 'multipart/form-data'),
+        data: Dio.FormData.fromMap({"image": imageServer}),
       );
       if (kDebugMode) {
-        print(response.data);
+        print("PersonalImagesController response ==${response.data}");
       }
       Navigator.pop(context);
       myFile = pickedImageFile;
-       press = true;
+      press = true;
       update();
 
       Get.closeAllSnackbars();
-    }on PlatformException catch (e) {
-      debugPrint("Failed to Pick Image :$e");
+    } on PlatformException catch (e) {
+      debugPrint("Failed to Pick Image :${e.details}== message ==${e.message}");
     }
   }
 
-  pickImageCamera(BuildContext context)async{
+  pickImageCamera(BuildContext context) async {
     var imageServer;
     try {
-      final pickedImagec = await ImagePicker().pickImage(
-          source: ImageSource.gallery);
+      final pickedImagec =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
       final pickedImageFilec = File(pickedImagec!.path);
       imageServer = Dio.MultipartFile.fromFileSync(
         pickedImagec.path,
-        filename: pickedImagec.path
-            .split('/')
-            .last,
+        filename: pickedImagec.path.split('/').last,
       );
       Get.snackbar("يتم رفع الصوره", "برجاء الانتظار",
           borderRadius: 0,
-          showProgressIndicator: true, duration: const Duration(seconds: 10));
+          showProgressIndicator: true,
+          duration: const Duration(seconds: 10));
       Dio.Response response = await dio().post(
         'update_profile_image',
-        options: Options(
-            contentType: 'multipart/form-data'
-        ),
-        data: Dio.FormData.fromMap({
-          "image": imageServer
-        }
-        ),
+        options: Options(contentType: 'multipart/form-data'),
+        data: Dio.FormData.fromMap({"image": imageServer}),
       );
       if (kDebugMode) {
-        print(response.data);
+        print("PersonalImagesController response ==${response.data}");
       }
       Navigator.pop(context);
       myFile = pickedImageFilec;
@@ -162,9 +150,9 @@ class PersonalImagesController extends GetxController{
       update();
 
       Get.closeAllSnackbars();
-    }on PlatformException catch (e) {
-      debugPrint("Failed to Pick Image :$e");
+    } on PlatformException catch (e) {
+      debugPrint(
+          "Failed to Pick Image :${e.details}== message == ${e.message}");
     }
   }
-
 }
