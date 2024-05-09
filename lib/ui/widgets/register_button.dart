@@ -1,3 +1,4 @@
+import 'package:effa/controllers/quistions_controller.dart';
 import 'package:effa/helper/app_colors.dart';
 import 'package:effa/ui/screens/dashboard/male_dashboard.dart';
 import 'package:effa/ui/widgets/show_status_bottom_sheet.dart';
@@ -34,36 +35,44 @@ class RegisterButton extends StatelessWidget {
   //   fill,
   //   fill,
   // ];
+  final controller = Get.lazyPut(() => QuestionsController(), fenix: false);
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         gradient != null
-            ?
-  Expanded(
-    child: LinearPercentIndicator(
-        alignment:MainAxisAlignment.end,
-        padding:const EdgeInsets.symmetric(horizontal: 0),
-     //   fillColor: Colors.blue,
-      barRadius:const Radius.circular(10),
-      isRTL: true,
-      width: MediaQuery.of(context).size.width /1.4,
-    animation: true,
-    lineHeight:  MediaQuery.of(context).size.height <= 500
-        ? 100.h
-        : 55.h,
-    animationDuration: 2000,
-    percent: 0.5,
-    center: TextButton(
-      onPressed: nav,
-      child: title,
-    ),
-    linearStrokeCap: LinearStrokeCap.roundAll,
-    progressColor: color,
-        backgroundColor:midGrey
-    ),
-  )
+            ? Expanded(
+                child: GetBuilder<QuestionsController>(builder: (controller) {
+                  int length = controller.len;
+                  double lengthprecentage = 0;
+                  if (length > 10) {
+                    lengthprecentage = 0.5;
+                  } else {
+                    lengthprecentage = 0.2;
 
+                  }
+                  return LinearPercentIndicator(
+                      alignment: MainAxisAlignment.end,
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                      //   fillColor: Colors.blue,
+                      barRadius: const Radius.circular(10),
+                      isRTL: true,
+                      width: MediaQuery.of(context).size.width / 1.4,
+                      animation: true,
+                      lineHeight: MediaQuery.of(context).size.height <= 500
+                          ? 100.h
+                          : 55.h,
+                      animationDuration: 2000,
+                      percent: lengthprecentage,
+                      center: TextButton(
+                        onPressed: nav,
+                        child: title,
+                      ),
+                      linearStrokeCap: LinearStrokeCap.roundAll,
+                      progressColor: color,
+                      backgroundColor: midGrey);
+                }),
+              )
             : Expanded(
                 child: Container(
                   decoration: BoxDecoration(
