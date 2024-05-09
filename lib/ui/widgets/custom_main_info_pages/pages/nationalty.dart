@@ -2,7 +2,6 @@
 
 import 'package:effa/controllers/basic_pages_controller.dart';
 import 'package:effa/helper/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

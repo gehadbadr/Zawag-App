@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/questions/questions.dart';
+import 'package:effa/models/user/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as Dio;
@@ -23,7 +24,7 @@ class QuestionsController extends GetxController {
   TextEditingController txtController = TextEditingController();
 
   TextEditingController txtAnswerController = TextEditingController();
-
+  UserInfooo? user;
   bool press = false;
   bool listBool = false;
 
@@ -33,9 +34,20 @@ class QuestionsController extends GetxController {
   int? categoryId;
   int level = 1;
   int lastId = 0;
+  int completeCheched = 0;
   List<bool> checklist = [];
 
   List<int> idList = [];
+
+  @override
+  void onInit() async {
+    final Dio.Response response = await dio().get(
+      'myData',
+    );
+    user = UserInfooo.fromJson(response.data);
+    super.onInit();
+  }
+
   void fillList(List<Answer>? answers) {
     checklist = List<bool>.filled(answers!.length, listBool);
   }
@@ -129,12 +141,12 @@ class QuestionsController extends GetxController {
         'categories/get_questions/$categoryId/$level/$lastId',
       );
 
-      print("getQuestions == ${response.data}");
+      print(response.data);
 
       questions = QuestionsAndAnswers.fromJson(response.data);
       map = questions?.questions;
       len = map.toList().length;
-      print("getQuestions== ${len}");
+      print(len);
       loader = false;
       update();
       if (len == 0) {
@@ -162,6 +174,7 @@ class QuestionsController extends GetxController {
       lastId = qId;
       loaderAnswer = true;
       update();
+      print("user_id------------------${user?.user?.id}");
       Dio.Response response = await dio().post(
         'questions/answer',
         // options: Options(
@@ -177,8 +190,6 @@ class QuestionsController extends GetxController {
       if (response.statusCode != 200) {
         loaderAnswer = false;
         update();
-        print(" response.statusMessage ${response.statusMessage}");
-        print(" response.data ${response.data}");
         throw HttpExeption(
             response.data['errors'] == "server error" ? "حاول مره اخري" : "");
       }
@@ -193,12 +204,11 @@ class QuestionsController extends GetxController {
           borderRadius: 0,
           showProgressIndicator: false,
           duration: const Duration(seconds: 4));
-      print(e.message);
     } catch (error) {
       loaderAnswer = false;
       update();
-      print("getQuestions error ==${error.toString()}");
-      // throw (error);
+      print(error);
+      throw (error);
     }
   }
 

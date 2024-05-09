@@ -35,6 +35,42 @@ class SingleChoice extends StatelessWidget {
               ),
             ),
           ),
+          // Padding(
+          //   padding:
+          //   EdgeInsets.only(right: 30.w, left: 30.w, bottom: 8.h, top: 8.h),
+          //   child: Directionality(
+          //     textDirection: TextDirection.rtl,
+          //     child: TextField(
+          //       style: GoogleFonts.cairo(
+          //         fontSize: 18.0, // Set the font size
+          //         color: Colors.black, // Set the text color
+          //         fontWeight: FontWeight.bold, // Set the font weight
+          //         decorationColor: basicPink, // Set the underline color
+          //         decorationThickness: 2.0, // Set the underline thickness
+          //       ),
+          //       cursorColor: basicPink,
+          //       onChanged: (value) {
+          //
+          //       },
+          //       controller: editingController,
+          //       decoration: InputDecoration(
+          //         hintText: " بحث ... ",
+          //         hintStyle:  GoogleFonts.cairo(
+          //           fontSize: 12.0, // Set the font size
+          //         ),
+          //         focusedBorder: const UnderlineInputBorder(
+          //           borderSide: BorderSide(color: grey),
+          //         ),
+          //         focusColor: basicPink,
+          //         fillColor: basicPink,
+          //         prefixIcon: Icon(
+          //           Icons.search,
+          //           color: basicPink,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Expanded(
               child: Padding(
             padding: EdgeInsets.symmetric(
