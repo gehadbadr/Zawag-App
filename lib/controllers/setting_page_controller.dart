@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:effa/models/terms/terms.dart';
-import 'package:dio/dio.dart'as Dio;
+import 'package:dio/dio.dart' as Dio;
 import 'package:effa/helper/dio_helper.dart';
-class SettingPageController extends GetxController{
+
+class SettingPageController extends GetxController {
   bool isSwitched = false;
   bool loader = false;
   TermsModel? aboutModel;
@@ -12,16 +13,18 @@ class SettingPageController extends GetxController{
     // TODO: implement onInit
     super.onInit();
   }
+
   void toggleSwitch(bool value) {
     if (isSwitched == false) {
-        isSwitched = true;
-        update();
+      isSwitched = true;
+      update();
     } else {
-        isSwitched = false;
-        update();
+      isSwitched = false;
+      update();
     }
   }
-  Future <TermsModel?> fetchAboutData() async {
+
+  Future<TermsModel?> fetchAboutData() async {
     try {
       loader = true;
 
@@ -31,7 +34,7 @@ class SettingPageController extends GetxController{
       Dio.Response responseLink = await dio().get(
         'share_link',
       );
-      print(response.data);
+      print("fetchAboutData == ${response.data}");
       aboutModel = TermsModelFromJson(response.toString());
       shareLinkModel = shareLinkModelFromJson(responseLink.toString());
 
@@ -43,7 +46,7 @@ class SettingPageController extends GetxController{
       loader = false;
       update();
 
-      print(err);
+      print("fetchAboutData error == ${err}");
       // ignore: unnecessary_brace_in_string_interps
     }
     return aboutModel;

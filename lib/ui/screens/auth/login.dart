@@ -1,8 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:effa/controllers/login_controller.dart';
 import 'package:effa/helper/app_colors.dart';
-import 'package:effa/ui/screens/pin_page/pin_page.dart';
 import 'package:effa/ui/widgets/login_tf.dart';
-import 'package:effa/ui/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,7 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../widgets/dropdown_contry.dart';
-import '../../widgets/rounded_card.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -168,7 +167,7 @@ class LoginPage extends StatelessWidget {
                             width: 148.w,
                             child: MaterialButton(
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular((20!))),
+                                  borderRadius: BorderRadius.circular((20))),
                               padding: const EdgeInsets.all(
                                 5,
                               ),

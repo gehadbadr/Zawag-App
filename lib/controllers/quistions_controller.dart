@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/questions/questions.dart';
@@ -53,7 +54,7 @@ class QuestionsController extends GetxController {
 
   void addId(int id) {
     idList.add(id);
-    print(idList);
+    print("addId== ${idList}");
   }
 
   void removeId(int i) {
@@ -62,7 +63,7 @@ class QuestionsController extends GetxController {
       changeIndexnN();
     }
     idList.remove(i);
-    print(idList);
+    print("removeId== ${idList}");
   }
 
   void resetValues() {
@@ -141,13 +142,10 @@ class QuestionsController extends GetxController {
       );
 
       print(response.data);
-      print('categories/get_questions/$categoryId/$level/$lastId');
 
       questions = QuestionsAndAnswers.fromJson(response.data);
       map = questions?.questions;
       len = map.toList().length;
-            print('len --------------------/$len');
-
       print(len);
       loader = false;
       update();
@@ -161,7 +159,7 @@ class QuestionsController extends GetxController {
     } catch (err) {
       loader = false;
       update();
-      print(err);
+      print("getQuestions error == ${err.toString()}");
       // ignore: unnecessary_brace_in_string_interps
     }
     return questions;
@@ -176,15 +174,19 @@ class QuestionsController extends GetxController {
       lastId = qId;
       loaderAnswer = true;
       update();
-      print("user_id------------------${user?.user?.id }");
+      print("user_id------------------${user?.user?.id}");
       Dio.Response response = await dio().post(
         'questions/answer',
+        // options: Options(
+        //   followRedirects: false,
+        //   validateStatus: (status) => true,
+        // ),
         data: Dio.FormData.fromMap({
-          'user_id': user?.user?.id,
           'que_id': qId,
           'one_choice': answerId,
         }),
       );
+      print("object${response.statusMessage}");
       if (response.statusCode != 200) {
         loaderAnswer = false;
         update();
@@ -206,7 +208,7 @@ class QuestionsController extends GetxController {
       loaderAnswer = false;
       update();
       print(error);
-      //   throw (error);
+      throw (error);
     }
   }
 
@@ -224,7 +226,7 @@ class QuestionsController extends GetxController {
         'questions/answer',
         data: Dio.FormData.fromMap(api),
       );
-      print(response.data);
+      print("multipleAnswer == ${response.data}");
       if (response.statusCode != 200) {
         loaderAnswer = false;
         update();
@@ -245,7 +247,7 @@ class QuestionsController extends GetxController {
     } catch (error) {
       loaderAnswer = false;
       update();
-      print(error);
+      print("multipleAnswer error == ${error}");
       throw (error);
     }
   }
@@ -284,7 +286,7 @@ class QuestionsController extends GetxController {
     } catch (error) {
       loaderAnswer = false;
       update();
-      print(error);
+      print("textAnswer error == ${error}");
       throw (error);
     }
   }

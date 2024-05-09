@@ -2,6 +2,7 @@ import 'package:effa/helper/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class GirlWidget extends StatelessWidget {
   String name;
   String age;
@@ -30,16 +31,13 @@ class GirlWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.0),
-          border: Border.all(
-              color: Colors.white70, width: 1
-          ),
+          border: Border.all(color: Colors.white70, width: 1),
           boxShadow: [
             const BoxShadow(
                 color: gGrey,
                 spreadRadius: 0.2,
-                blurRadius:4,
-                offset: Offset(0,3)
-            ),
+                blurRadius: 4,
+                offset: Offset(0, 3)),
           ],
         ),
         child: Column(
@@ -70,11 +68,11 @@ class GirlWidget extends StatelessWidget {
             Directionality(
               textDirection: TextDirection.rtl,
               child: Padding(
-                padding:  EdgeInsets.only(left: 8.0.w,right: 8.0.w),
+                padding: EdgeInsets.only(left: 8.0.w, right: 8.0.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                     ImageIcon(
+                    ImageIcon(
                       const AssetImage("assets/icon/person.png"),
                       size: 25.h,
                       color: red,
@@ -128,8 +126,7 @@ class GirlWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-              EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
               child: Divider(
                 thickness: 1.w,
                 color: const Color(0xffECECEC),
@@ -143,29 +140,29 @@ class GirlWidget extends StatelessWidget {
                   SizedBox(
                     width: 7.w,
                   ),
-                   Row(
-
-                     children: [
-                       ImageIcon(
+                  Row(
+                    children: [
+                      ImageIcon(
                         const AssetImage("assets/icon/stat.png"),
                         size: 25.h,
                         color: red,
-                                         ),
-                                         SizedBox(
-                                           width: 7.w,
-                                         ),
-                                         Text(
+                      ),
+                      SizedBox(
+                        width: 7.w,
+                      ),
+                      Text(
                         socialSituation,
-                        style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
-                                         ),
-                     ],
-                   ),
-
+                        style:
+                            GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
+                      ),
+                    ],
+                  ),
                   Padding(
                       padding: EdgeInsets.symmetric(horizontal: 25.w),
                       child: SizedBox(
                           height: 25.h,
-                          child: const VerticalDivider(color: Color(0xffECECEC)))),
+                          child:
+                              const VerticalDivider(color: Color(0xffECECEC)))),
                   Row(
                     children: [
                       ImageIcon(
@@ -178,7 +175,8 @@ class GirlWidget extends StatelessWidget {
                       ),
                       Text(
                         nationality,
-                        style: GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
+                        style:
+                            GoogleFonts.cairo(fontSize: 14.sp, color: dmGrey),
                       ),
                     ],
                   ),
@@ -189,8 +187,7 @@ class GirlWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-              EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
               child: Divider(
                 thickness: 1.w,
                 color: const Color(0xffECECEC),

@@ -1,6 +1,5 @@
 import 'package:effa/helper/app_colors.dart';
 import 'package:effa/ui/screens/auth/login.dart';
-import 'package:effa/ui/screens/dashboard/male_dashboard.dart';
 import 'package:effa/ui/screens/my_account/my_account.dart';
 import 'package:effa/ui/screens/reported_accounts/reported_account.dart';
 import 'package:effa/ui/widgets/custom_image.dart';
@@ -10,9 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../controllers/male_dashboard_controller.dart';
-import '../../../helper/dio_helper.dart';
 import '../detailed _personal_data/detaild_data.dart';
-
 
 class AccountSettings extends StatelessWidget {
   AccountSettings({Key? key}) : super(key: key);
@@ -20,11 +17,11 @@ class AccountSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bGround,
-      body: SingleChildScrollView(
-        child: GetBuilder<MaleDashboardController>(builder: (controller) {
-          return Column(
-              children: [
+        backgroundColor: bGround,
+        body: SingleChildScrollView(
+          child: GetBuilder<MaleDashboardController>(
+            builder: (controller) {
+              return Column(children: [
                 Stack(children: [
                   Container(
                     height: 120.h,
@@ -40,41 +37,37 @@ class AccountSettings extends StatelessWidget {
                         padding: EdgeInsets.only(top: 60.h),
                         child: CustomImage(
                           isNetwork: true,
-                       //   "${controller.user?.images?.isEmpty}" == "true"?"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png":"${ApiConstants.baseUrl}${controller.user?.images?.first}",
+                          //   "${controller.user?.images?.isEmpty}" == "true"?"https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png":"${ApiConstants.baseUrl}${controller.user?.images?.first}",
                           "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
                           height: 96.h,
                           width: 96.w,
                           shape: true,
                           isShadow: false,
-                        )
-                    ),
+                        )),
                   ),
                 ]),
                 Center(
                     child: Padding(
-                      padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
-                      child: Text(
-                        " ${controller.user?.user?.frName} ${controller.user?.user?.lsName}",
-                        style: GoogleFonts.cairo(
-                            fontWeight: FontWeight.bold, fontSize: 22.sp),
-                      ),
-                    )),
+                  padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
+                  child: Text(
+                    " ${controller.user?.user?.frName} ${controller.user?.user?.lsName}",
+                    style: GoogleFonts.cairo(
+                        fontWeight: FontWeight.bold, fontSize: 22.sp),
+                  ),
+                )),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                          color: Colors.white70, width: 1
-                      ),
+                      border: Border.all(color: Colors.white70, width: 1),
                       boxShadow: const [
                         BoxShadow(
                             color: gGrey,
                             spreadRadius: 0.2,
-                            blurRadius:4,
-                            offset: Offset(0,3)
-                        ),
+                            blurRadius: 4,
+                            offset: Offset(0, 3)),
                       ],
                     ),
                     child: Padding(
@@ -94,7 +87,7 @@ class AccountSettings extends StatelessWidget {
                                         // height: 119.h,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(12),
+                                                BorderRadius.circular(12),
                                             color: red),
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
@@ -103,7 +96,7 @@ class AccountSettings extends StatelessWidget {
                                           child: Column(children: [
                                             Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Image(
                                                   image: const AssetImage(
@@ -118,7 +111,8 @@ class AccountSettings extends StatelessWidget {
                                                   style: GoogleFonts.cairo(
                                                       color: white,
                                                       fontSize: 30.sp,
-                                                      fontWeight: FontWeight.bold),
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               ],
                                             ),
@@ -127,7 +121,7 @@ class AccountSettings extends StatelessWidget {
                                             ),
                                             Text(
                                               "نقاطي",
-                                              style:  GoogleFonts.cairo(
+                                              style: GoogleFonts.cairo(
                                                   color: white,
                                                   fontSize: 16.sp),
                                             )
@@ -143,7 +137,7 @@ class AccountSettings extends StatelessWidget {
                                         width: 153.w,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(12),
+                                                BorderRadius.circular(12),
                                             color: basicPink),
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
@@ -152,7 +146,7 @@ class AccountSettings extends StatelessWidget {
                                           child: Column(children: [
                                             Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Image(
                                                   image: const AssetImage(
@@ -164,12 +158,13 @@ class AccountSettings extends StatelessWidget {
                                                   width: 20.w,
                                                 ),
                                                 Text(
-                                                  "210",
-                                                  style:  GoogleFonts.cairo(
+                                                  controller.user!.user!.points
+                                                      .toString(),
+                                                  style: GoogleFonts.cairo(
                                                       color: white,
                                                       fontSize: 30.sp,
                                                       fontWeight:
-                                                      FontWeight.bold),
+                                                          FontWeight.bold),
                                                 ),
                                               ],
                                             ),
@@ -178,7 +173,7 @@ class AccountSettings extends StatelessWidget {
                                             ),
                                             Text(
                                               "حسابات شاهدتها",
-                                              style:  GoogleFonts.cairo(
+                                              style: GoogleFonts.cairo(
                                                   color: white,
                                                   fontSize: 16.sp),
                                             )
@@ -192,34 +187,40 @@ class AccountSettings extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   Get.to(
-                                          () => MyProfile(showEdit: true,),
+                                      () => MyProfile(
+                                            showEdit: true,
+                                          ),
                                       //next page class
-                                      duration: const Duration(milliseconds:400),
+                                      duration:
+                                          const Duration(milliseconds: 400),
                                       //duration of transitions, default 1 sec
                                       transition: Transition
                                           .leftToRight //transition effect
-                                  );
+                                      );
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 3.0.h),
+                                  padding:
+                                      EdgeInsets.symmetric(vertical: 3.0.h),
                                   child: _rowOption("././assets/icon/watch.png",
-                                      "مشاهدة حسابي"
-                                  ),
+                                      "مشاهدة حسابي"),
                                 ),
                               ),
-                              GestureDetector
-                                (onTap: () {
-                                Get.to( () =>DetailedInfo(showEdit: true,));
-                              },
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => DetailedInfo(
+                                        showEdit: true,
+                                      ));
+                                },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 3.0.h),
+                                  padding:
+                                      EdgeInsets.symmetric(vertical: 3.0.h),
                                   child: _rowOption(
-                                    "././assets/icon/edit2.png", "تعديل الحساب",
+                                    "././assets/icon/edit2.png",
+                                    "تعديل الحساب",
                                   ),
                                 ),
                               ),
                               GestureDetector(
-
                                 onTap: () {
                                   // Navigator.push(
                                   //     context,
@@ -227,37 +228,45 @@ class AccountSettings extends StatelessWidget {
                                   //         builder: (context) => Report()));
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 3.0.h),
-                                  child: _rowOption("././assets/icon/unwatch.png",
+                                  padding:
+                                      EdgeInsets.symmetric(vertical: 3.0.h),
+                                  child: _rowOption(
+                                      "././assets/icon/unwatch.png",
                                       "تعطيل الحساب"),
                                 ),
                               ),
-                              GestureDetector
-                                (onTap: () {
-                                Get.to(() =>
-                                    Report(), //next page class
-                                    duration: const Duration(milliseconds: 400), //duration of transitions, default 1 sec
-                                    transition: Transition.leftToRight //transition effect
-                                );
-
-                              },
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => Report(), //next page class
+                                      duration: const Duration(
+                                          milliseconds:
+                                              400), //duration of transitions, default 1 sec
+                                      transition: Transition
+                                          .leftToRight //transition effect
+                                      );
+                                },
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 3.0.h),
-                                  child: _rowOption("././assets/icon/report.png",
+                                  padding:
+                                      EdgeInsets.symmetric(vertical: 3.0.h),
+                                  child: _rowOption(
+                                      "././assets/icon/report.png",
                                       "الابلاغ عن الحسابات"),
                                 ),
                               ),
-                              GestureDetector
-                                (onTap: () {
-                                Get.offAll(
-                                    LoginPage(), //next page class
-                                    duration: const Duration(milliseconds: 400), //duration of transitions, default 1 sec
-                                    transition: Transition.leftToRight //transition effect
-                                );
-                              },
+                              GestureDetector(
+                                onTap: () {
+                                  Get.offAll(LoginPage(), //next page class
+                                      duration: const Duration(
+                                          milliseconds:
+                                              400), //duration of transitions, default 1 sec
+                                      transition: Transition
+                                          .leftToRight //transition effect
+                                      );
+                                },
                                 child: Padding(
                                   padding: EdgeInsets.only(top: 3.0.h),
-                                  child: _rowOption("././assets/icon/logout.png",
+                                  child: _rowOption(
+                                      "././assets/icon/logout.png",
                                       "تسجيل الخروج"),
                                 ),
                               )
@@ -267,37 +276,37 @@ class AccountSettings extends StatelessWidget {
                   ),
                 ),
               ]);
-    },
-      ),
-    ));
+            },
+          ),
+        ));
   }
 
   Widget _rowOption(String icon, String txt) => Container(
-    width: double.infinity,
-    decoration: BoxDecoration(
-      color: lbg,
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    child: Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.0.h,horizontal: 10.w),
-      child: Row(
-        children: [
-          ImageIcon(
-            AssetImage(icon),
-            size: 25.h,
-            color: basicPink,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: lbg,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 12.0.h, horizontal: 10.w),
+          child: Row(
+            children: [
+              ImageIcon(
+                AssetImage(icon),
+                size: 25.h,
+                color: basicPink,
+              ),
+              SizedBox(
+                width: 5.w,
+              ),
+              Text(
+                txt,
+                style: GoogleFonts.cairo(
+                  fontSize: 16.sp,
+                ),
+              )
+            ],
           ),
-          SizedBox(
-            width: 5.w,
-          ),
-          Text(
-            txt,
-            style:  GoogleFonts.cairo(
-              fontSize: 16.sp,
-            ),
-          )
-        ],
-      ),
-    ),
-  );
+        ),
+      );
 }

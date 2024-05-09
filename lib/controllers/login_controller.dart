@@ -202,6 +202,8 @@ class LoginController extends GetxController{
             loader = false;
             update();
             break;
+          default:
+            print("error login ==${e.message}");
         }
         // Handle verification failed
       },

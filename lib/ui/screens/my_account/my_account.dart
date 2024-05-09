@@ -12,16 +12,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class MyProfile extends StatelessWidget {
   bool showEdit;
-  MyProfile({Key? key,required this.showEdit}) : super(key: key);
-  MyProfileController controller = Get.put(MyProfileController(), permanent: false);
+  MyProfile({Key? key, required this.showEdit}) : super(key: key);
+  MyProfileController controller =
+      Get.put(MyProfileController(), permanent: false);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: bGround,
-        appBar:  PreferredSize(
+        appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Container(
             decoration: BoxDecoration(boxShadow: [
@@ -51,7 +53,7 @@ class MyProfile extends StatelessWidget {
               actions: [
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
-                  child:  Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset("./././assets/icon/arrow_back.png"),
                   ),
@@ -65,34 +67,47 @@ class MyProfile extends StatelessWidget {
           ),
         ),
         body: GetBuilder<MyProfileController>(
-          builder: (controller){
-            return controller.loader?const Center(child: CircularProgressIndicator(color: basicPink,),):SingleChildScrollView(
-              child: Padding(
-                padding:
-                EdgeInsets.only(right: 10.w, left: 10.w, top: 9.h, bottom: 30.h),
-                child: Column(children: [
-                  controller.gender?ProfileCard(): 
-                  GirlWidget(
-                            name: "نورهان",
-                            age: "22",
-                            job: "لاتوجد وظيفه",
-                            education: "عالي",
-                            socialSituation: "عزباء",
-                            nationality: "مصريه",
-                            address: "القاهره"),
-                  MyInfoCard(),
-                  showEdit?InkWell(
-                      onTap: (){
-                        Get.to(
-                          DetailedInfo(showEdit: true,),);
-                      },
-                      child: EditButton(title: "تعديل الحساب")):const SizedBox()
-                ]),
-              ),
-            );
+          builder: (controller) {
+            return controller.loader
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: basicPink,
+                    ),
+                  )
+                : SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          right: 10.w, left: 10.w, top: 9.h, bottom: 30.h),
+                      child: Column(children: [
+                        controller.gender
+                            ? ProfileCard()
+                            : GirlWidget(
+                                name: controller.user!.user!.fullName!,
+                                age: controller.user!.user!.age.toString(),
+                                job: controller.user!.job.toString(),
+                                education:
+                                    controller.user!.education.toString(),
+                                socialSituation:
+                                    controller.user!.socialSituation.toString(),
+                                nationality:
+                                    controller.user!.nationality.toString(),
+                                address: controller.user!.address.toString()),
+                        MyInfoCard(),
+                        showEdit
+                            ? InkWell(
+                                onTap: () {
+                                  Get.to(
+                                    DetailedInfo(
+                                      showEdit: true,
+                                    ),
+                                  );
+                                },
+                                child: EditButton(title: "تعديل الحساب"))
+                            : const SizedBox()
+                      ]),
+                    ),
+                  );
           },
-        )
-
-    );
+        ));
   }
 }

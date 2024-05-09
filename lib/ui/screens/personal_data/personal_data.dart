@@ -35,7 +35,7 @@ class _PersonalDataState extends State<PersonalData> {
       return Scaffold(
         body: SizedBox(
           child: SingleChildScrollView(
-             physics: const BouncingScrollPhysics(),           
+            physics: const BouncingScrollPhysics(),
             child: Column(children: [
               SizedBox(
                 height: 65.h,
@@ -99,7 +99,8 @@ class _PersonalDataState extends State<PersonalData> {
                             },
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int x) {
-                              if (controller.questions?.questions[x].type == 1) {
+                              if (controller.questions?.questions[x].type ==
+                                  1) {
                                 return Center(
                                   child: TextQuestion(
                                     question: controller
@@ -109,7 +110,8 @@ class _PersonalDataState extends State<PersonalData> {
                               } else if (controller
                                           .questions?.questions[x].type ==
                                       2 ||
-                                  controller.questions?.questions[x].type == 4) {
+                                  controller.questions?.questions[x].type ==
+                                      4) {
                                 return Center(
                                   child: SingleChoice(
                                     editingController: controller.txtController,
@@ -168,8 +170,8 @@ class _PersonalDataState extends State<PersonalData> {
                                           onPressed: () {
                                             if (controller
                                                         .questions
-                                                        ?.questions[
-                                                            controller.pageIndex]
+                                                        ?.questions[controller
+                                                            .pageIndex]
                                                         .isSkipable ==
                                                     1 &&
                                                 controller.selectedChoice ==
@@ -208,13 +210,13 @@ class _PersonalDataState extends State<PersonalData> {
                                                 controller.singleAnswer(
                                                     controller
                                                         .questions!
-                                                        .questions[
-                                                            controller.pageIndex]
+                                                        .questions[controller
+                                                            .pageIndex]
                                                         .id,
                                                     controller
                                                         .questions!
-                                                        .questions[
-                                                            controller.pageIndex]
+                                                        .questions[controller
+                                                            .pageIndex]
                                                         .answers[controller
                                                             .selectedChoice!]
                                                         .id);
@@ -222,8 +224,8 @@ class _PersonalDataState extends State<PersonalData> {
                                                 controller.multipleAnswer(
                                                     controller
                                                         .questions!
-                                                        .questions[
-                                                            controller.pageIndex]
+                                                        .questions[controller
+                                                            .pageIndex]
                                                         .id);
                                               }
                                             } else {
@@ -234,8 +236,8 @@ class _PersonalDataState extends State<PersonalData> {
                                                   "", "برجاء اختيار اجراء",
                                                   borderRadius: 0,
                                                   showProgressIndicator: false,
-                                                  duration:
-                                                      const Duration(seconds: 2));
+                                                  duration: const Duration(
+                                                      seconds: 2));
                                             }
                                           },
                                           child: Text(
@@ -278,13 +280,14 @@ class _PersonalDataState extends State<PersonalData> {
                                               onPressed: () async {
                                                 if (controller
                                                             .questions
-                                                            ?.questions[controller
-                                                                .pageIndex]
+                                                            ?.questions[
+                                                                controller
+                                                                    .pageIndex]
                                                             .isSkipable ==
                                                         1 &&
                                                     controller.selectedChoice ==
                                                         null) {
-                                                  print(11);
+                                                  print("11");
                                                   controller.changeIndexnN();
                                                   controller.onTapP();
                                                   controller.level++;
@@ -306,8 +309,9 @@ class _PersonalDataState extends State<PersonalData> {
                                                     controller.textAnswer(
                                                         controller
                                                             .questions!
-                                                            .questions[controller
-                                                                .pageIndex]
+                                                            .questions[
+                                                                controller
+                                                                    .pageIndex]
                                                             .id);
                                                   } else if (controller
                                                               .questions
@@ -326,13 +330,15 @@ class _PersonalDataState extends State<PersonalData> {
                                                     controller.singleAnswer(
                                                         controller
                                                             .questions!
-                                                            .questions[controller
-                                                                .pageIndex]
+                                                            .questions[
+                                                                controller
+                                                                    .pageIndex]
                                                             .id,
                                                         controller
                                                             .questions!
-                                                            .questions[controller
-                                                                .pageIndex]
+                                                            .questions[
+                                                                controller
+                                                                    .pageIndex]
                                                             .answers[controller
                                                                 .selectedChoice!]
                                                             .id);
@@ -340,8 +346,9 @@ class _PersonalDataState extends State<PersonalData> {
                                                     controller.multipleAnswer(
                                                         controller
                                                             .questions!
-                                                            .questions[controller
-                                                                .pageIndex]
+                                                            .questions[
+                                                                controller
+                                                                    .pageIndex]
                                                             .id);
                                                   }
                                                 } else {
@@ -351,7 +358,8 @@ class _PersonalDataState extends State<PersonalData> {
                                                     "برجاء اختيار اجراء",
                                                     colorText: Colors.white,
                                                     backgroundColor: orginalRed,
-                                                    icon: const Icon(Icons.error),
+                                                    icon:
+                                                        const Icon(Icons.error),
                                                   );
                                                 }
                                               },
@@ -386,8 +394,9 @@ class _PersonalDataState extends State<PersonalData> {
                                                       const RoundedRectangleBorder(
                                                           borderRadius:
                                                               BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10))),
+                                                                  Radius
+                                                                      .circular(
+                                                                          10))),
                                                 ),
                                                 onPressed: () {
                                                   if (controller
@@ -397,7 +406,8 @@ class _PersonalDataState extends State<PersonalData> {
                                                                       .pageIndex]
                                                               .isSkipable ==
                                                           1 &&
-                                                      controller.selectedChoice ==
+                                                      controller
+                                                              .selectedChoice ==
                                                           null) {
                                                     controller.changeIndexnN();
                                                     controller.onTapP();
@@ -406,8 +416,9 @@ class _PersonalDataState extends State<PersonalData> {
                                                       null) {
                                                     if (controller
                                                             .questions
-                                                            ?.questions[controller
-                                                                .pageIndex]
+                                                            ?.questions[
+                                                                controller
+                                                                    .pageIndex]
                                                             .type ==
                                                         1) {
                                                       controller.textAnswer(
@@ -461,9 +472,10 @@ class _PersonalDataState extends State<PersonalData> {
                                                       "خطأ",
                                                       "برجاء اختيار اجراء",
                                                       colorText: Colors.white,
-                                                      backgroundColor: orginalRed,
-                                                      icon:
-                                                          const Icon(Icons.error),
+                                                      backgroundColor:
+                                                          orginalRed,
+                                                      icon: const Icon(
+                                                          Icons.error),
                                                     );
                                                   }
                                                 },
@@ -502,13 +514,11 @@ class _PersonalDataState extends State<PersonalData> {
                                                 ),
                                                 child: TextButton(
                                                   style: TextButton.styleFrom(
-                                                    shape:
-                                                        const RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius
-                                                                        .circular(
-                                                                            10))),
+                                                    shape: const RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10))),
                                                   ),
                                                   onPressed: () {
                                                     controller.back();

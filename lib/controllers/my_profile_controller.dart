@@ -3,55 +3,59 @@ import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/models/user/user_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart'as Dio;
+import 'package:dio/dio.dart' as Dio;
 
-class MyProfileController extends GetxController{
+class MyProfileController extends GetxController {
   bool gender = false;
-   bool parentDataShow = false;
-   bool isRequest = false;
+  bool parentDataShow = false;
+  bool isRequest = false;
   UserInfooo? user;
-  bool loader =false;
-   requestFatherData(){
-     isRequest = true;
-     print(isRequest);
-     update();
-   }
-   cancelFather(){
-     isRequest = false;
-     update();
-   }
-   showParent(){
-     parentDataShow = true;
-     update();
-   }
-  List<ImagesUser> userImages =[];
+  bool loader = false;
+  requestFatherData() {
+    isRequest = true;
+    print("MyProfileController isRequest == ${isRequest}");
+    update();
+  }
 
-  List<String> interests =[];
+  cancelFather() {
+    isRequest = false;
+    update();
+  }
 
-  List<Question> family =[];
+  showParent() {
+    parentDataShow = true;
+    update();
+  }
 
-  List<Question> study =[];
+  List<ImagesUser> userImages = [];
 
-  List<Question> relegion =[];
+  List<String> interests = [];
 
-  List<Question> personal =[];
+  List<Question> family = [];
+
+  List<Question> study = [];
+
+  List<Question> relegion = [];
+
+  List<Question> personal = [];
 
   int? totalDots;
 
   double currentIndex = 0.0;
 
-  updateIndex(double i){
+  updateIndex(double i) {
     currentIndex = i;
     update();
   }
+
   @override
   void onInit() {
-
     fetchUserData();
     // TODO: implement onInit
     super.onInit();
   }
-  Future <void> fetchUserData() async {
+
+  Future<void> fetchUserData() async {
     try {
       loader = true;
       final Dio.Response response = await dio().get(
@@ -65,9 +69,9 @@ class MyProfileController extends GetxController{
       family = user!.categories![3].questions!;
       interests = user!.interests!;
 
-      if(user!.images!.isEmpty){
+      if (user!.images!.isEmpty) {
         totalDots = 1;
-      }else{
+      } else {
         totalDots = userImages.length;
       }
       loader = false;
@@ -76,9 +80,8 @@ class MyProfileController extends GetxController{
       loader = false;
       update();
       Get.snackbar('خطأ في الاتصال', "NETWORK_ERR",
-          borderRadius: 0,
-          snackPosition: SnackPosition.BOTTOM);
-      print(err);
+          borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+      print("MyProfileController error == ${err.toString()}");
       // ignore: unnecessary_brace_in_string_interps
     }
   }
