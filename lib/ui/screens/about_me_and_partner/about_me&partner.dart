@@ -19,6 +19,7 @@ class AboutMe extends StatelessWidget {
   TextEditingController aboutmeController = TextEditingController();
   MultiSelectController interests = MultiSelectController();
   TextEditingController partenerController = TextEditingController();
+  List<String> interestsChoich = [];
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -196,18 +197,22 @@ class AboutMe extends StatelessWidget {
                                   });
                             },
                             nav: () {
+                              interestsMethod();
                               if (controller.loader == true) {
                               } else {
                                 if (aboutmeController.text == "" ||
-                                    partenerController.text == "") {
+                                    partenerController.text == "" ||
+                                    interests.selectedOptions.isEmpty) {
                                   Get.snackbar(
                                       " من فضلك تأكد من تكملة البيانات", "",
                                       borderRadius: 0,
                                       showProgressIndicator: false,
                                       duration: const Duration(seconds: 4));
                                 } else {
-                                  controller.updateUser(aboutmeController.text,
-                                      partenerController.text);
+                                  controller.updateUser(
+                                    aboutmeController.text,
+                                    partenerController.text,
+                                  );
                                   return;
                                 }
                               }
@@ -222,5 +227,27 @@ class AboutMe extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  void interestsMethod() {
+    interests.selectedOptions.map((e) {
+      bool x = false;
+      int z;
+      int n = 0;
+      for (int i = 0; i < interestsChoich.length; i++) {
+        for (z = 0; z < interests.selectedOptions.length; z++) {
+          if ((z == interests.selectedOptions.length) && (n != 0)) {
+            interestsChoich.remove(interests.selectedOptions[n]);
+          }
+        }
+        if (e.value == interestsChoich[i]) {
+          x = true;
+        }
+      }
+      if (x == false) {
+        interestsChoich.add(e.value!);
+      }
+    }).toList();
+    print("interestsChoich == ${interestsChoich}");
   }
 }
