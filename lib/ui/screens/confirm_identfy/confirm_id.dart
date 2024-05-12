@@ -519,8 +519,8 @@ class ConfirmInfo extends StatelessWidget {
                                 horizontal: 15.w),
                             width: double.infinity,
                             height: 150,
-                            child: Expanded(
-                              child: UploadID(
+                            child:/* Expanded(
+                              child:*/ UploadID(
                                 context: context,
                                 myFile: controller.image1,
                                 press: controller.pressed1,
@@ -570,7 +570,7 @@ class ConfirmInfo extends StatelessWidget {
                                         : SvgPicture.asset(
                                             "assets/icon/img.svg"),
                               ),
-                            ),
+                           // ),
                           ),
                           SizedBox(
                             height: 5.w,
@@ -580,8 +580,8 @@ class ConfirmInfo extends StatelessWidget {
                                 horizontal: 15.w),
                             width: double.infinity,
                             height: 150,
-                            child: Expanded(
-                              child: UploadID(
+                            child: /*Expanded(
+                              child:*/ UploadID(
                                 context: context,
                                 myFile: controller.image1,
                                 press: controller.pressed1,
@@ -631,7 +631,7 @@ class ConfirmInfo extends StatelessWidget {
                                         : SvgPicture.asset(
                                             "assets/icon/img.svg"),
                               ),
-                            ),
+                          //  ),
                           ),
                           controller.hide1
                               ? const SizedBox()
@@ -642,8 +642,8 @@ class ConfirmInfo extends StatelessWidget {
                               ? const SizedBox()
                               : Row(
                                   children: [
-                                    Expanded(
-                                      child: Padding(
+                                   /* Expanded(
+                                      child: */Padding(
                                         padding: EdgeInsets.only(
                                             right: 30.w, left: 10.w),
                                         child: Divider(
@@ -651,15 +651,15 @@ class ConfirmInfo extends StatelessWidget {
                                           color: black,
                                         ),
                                       ),
-                                    ),
+                                //    ),
                                     Text(
                                       "او",
                                       style: GoogleFonts.cairo(
                                           fontSize: 18.sp,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Expanded(
-                                      child: Padding(
+                                   /* Expanded(
+                                      child:*/ Padding(
                                         padding: EdgeInsets.only(
                                             right: 10.w, left: 30.w),
                                         child: Divider(
@@ -667,7 +667,7 @@ class ConfirmInfo extends StatelessWidget {
                                           color: black,
                                         ),
                                       ),
-                                    ),
+                                   // ),
                                   ],
                                 ),
                           controller.hide2
@@ -699,8 +699,8 @@ class ConfirmInfo extends StatelessWidget {
                                 ),
                           controller.hide2
                               ? const SizedBox()
-                              : Expanded(
-                                  child: UploadID(
+                              : /*Expanded(
+                                  child: */UploadID(
                                     context: context,
                                     myFile: controller.image3,
                                     press: controller.pressed3,
@@ -760,7 +760,7 @@ class ConfirmInfo extends StatelessWidget {
                                                       "assets/icon/img.svg"),
                                     ),
                                   ),
-                                ),
+                               // ),
                         ],
                       ),
               ],

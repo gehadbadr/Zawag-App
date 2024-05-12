@@ -20,28 +20,26 @@ class DetailedWidget extends StatelessWidget {
       child: Padding(
         padding:
             EdgeInsets.only(top: 20.h, left: 18.w, right: 18.w, bottom: 20.h),
-        child: Expanded(
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Row(
-              children: [
-                SvgPicture.asset(icon),
-                SizedBox(
-                  width: 7.w,
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Row(
+            children: [
+              SvgPicture.asset(icon),
+              SizedBox(
+                width: 7.w,
+              ),
+              Text(
+                subject,
+                style: GoogleFonts.cairo(
+                  fontSize: 16.sp,
+                  color: black,
                 ),
-                Text(
-                  subject,
-                  style: GoogleFonts.cairo(
-                    fontSize: 16.sp,
-                    color: black,
-                  ),
-                ),
-                const Spacer(),
-                done
-                    ? const Icon(Icons.check, size: 30, color: basicPink)
-                    : const SizedBox(),
-              ],
-            ),
+              ),
+              const Spacer(),
+              done
+                  ? const Icon(Icons.check, size: 30, color: basicPink)
+                  : const SizedBox(),
+            ],
           ),
         ),
       ),

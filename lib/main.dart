@@ -57,10 +57,10 @@ class _MyAppState extends State<MyApp> {
 
     if (user?.user?.id == null) {
       setState(() {
-        page = LoginPage();
-        // page = DetailedInfo(
-        //   showEdit: false,
-        // );
+      //  page = LoginPage();
+        page = DetailedInfo(
+          showEdit: false,
+        );
 
         //  page = CustomRegisterView();
         // page = ExhaustedAttemps(onPressed: (){},mainBalance: "150",showCost: "100",);
@@ -72,13 +72,13 @@ class _MyAppState extends State<MyApp> {
           page = Terms();
         });
         FlutterNativeSplash.remove();
-        } else if (userState?.state == 2) {
-          setState(() {
-            page = MainData();
-          });
-          FlutterNativeSplash.remove();
-        } else if (userState?.state == 3) {
-  //    } else if (userState?.state == 2) {
+        // } else if (userState?.state == 2) {
+        //   setState(() {
+        //     page = MainData();
+        //   });
+        //   FlutterNativeSplash.remove();
+        // } else if (userState?.state == 3) {
+      } else if (userState?.state == 2) {
         setState(() {
           page = DetailedInfo(
             showEdit: false,
