@@ -45,12 +45,9 @@ class QuestionsController extends GetxController {
       'myData',
     );
     user = UserInfooo.fromJson(response.data);
-    
+
     super.onInit();
   }
-
-
-  
 
   void fillList(List<Answer>? answers) {
     checklist = List<bool>.filled(answers!.length, listBool);
@@ -162,7 +159,7 @@ class QuestionsController extends GetxController {
       }
     } catch (err) {
       loader = false;
-     // update();
+      // update();
       print("getQuestions error == ${err.toString()}");
       // ignore: unnecessary_brace_in_string_interps
     }
@@ -222,8 +219,7 @@ class QuestionsController extends GetxController {
   ) async {
     try {
       Map<String, dynamic> api = {
-                  'user_id': user?.user?.id,
-
+        'user_id': user?.user?.id,
         'que_id': qId,
       };
       for (int i = 0; i < idList.length; i++) {
@@ -269,8 +265,7 @@ class QuestionsController extends GetxController {
       Dio.Response response = await dio().post(
         'questions/answer',
         data: Dio.FormData.fromMap({
-                    'user_id': user?.user?.id,
-
+          'user_id': user?.user?.id,
           'que_id': qId,
           'text': txtAnswerController.text,
         }),
