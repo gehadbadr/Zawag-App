@@ -8,14 +8,17 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart' as ShareApp;
 import 'package:share_plus/share_plus.dart';
 
+import '../../../controllers/contact_us.dart';
+
 class Share extends StatelessWidget {
+  ContactUs_And_ShareLink controller = ContactUs_And_ShareLink();
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: bGround,
       resizeToAvoidBottomInset: false,
-      appBar:  PreferredSize(
+      appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Container(
           decoration: const BoxDecoration(boxShadow: [
@@ -45,7 +48,7 @@ class Share extends StatelessWidget {
             actions: [
               GestureDetector(
                 onTap: () => Navigator.pop(context),
-                child:  Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset("./././assets/icon/arrow_back.png"),
                 ),
@@ -64,8 +67,8 @@ class Share extends StatelessWidget {
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Directionality(
                     textDirection: TextDirection.rtl,
@@ -75,7 +78,9 @@ class Share extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: 20.h,),
+                  SizedBox(
+                    height: 20.h,
+                  ),
                   Container(
                     // height: 300,
                     decoration: const BoxDecoration(
@@ -103,10 +108,12 @@ class Share extends StatelessWidget {
                                   ),
                                   Column(
                                     children: [
-                                      Text("حسام وليد",
+                                      Text(
+                                        "حسام وليد",
                                         style: GoogleFonts.cairo(
                                           color: black,
-                                        ),),
+                                        ),
+                                      ),
                                       const SizedBox(
                                         height: 5,
                                       ),
@@ -130,9 +137,9 @@ class Share extends StatelessWidget {
                                   BoxConstraints constraints) {
                                 final boxWidth = constraints.constrainWidth();
                                 const dashWidth = 4.0;
-                                const dashHeight =4.0;
+                                const dashHeight = 4.0;
                                 final dashCount =
-                                    (boxWidth / (2* dashWidth)).floor();
+                                    (boxWidth / (2 * dashWidth)).floor();
                                 return Flex(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -158,7 +165,7 @@ class Share extends StatelessWidget {
                           const SizedBox(
                             height: 25,
                           ),
-                           Center(
+                          Center(
                               child: Text(
                             "امسح الكود",
                             style: GoogleFonts.cairo(
@@ -168,7 +175,7 @@ class Share extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 20),
                               child: QrImageView(
-                                data: "https://github.com/AhmedElmagdob",
+                                data: "controller.shareLinkModel!.title",
                                 version: QrVersions.auto,
                                 size: 200.0,
                                 backgroundColor: Colors.white,
@@ -178,38 +185,36 @@ class Share extends StatelessWidget {
                         ],
                       ),
                       Positioned(
-                        // left: -30,
-                        right: -10,
-                        top: -180.h,
-                        bottom: 0,
-                        child:  Container(
-                          width: 25,
-                          height: 25,
-                          decoration: const BoxDecoration(
-                            color: Color(0xffF0F0F0),
-                            shape: BoxShape.circle,
-                          ),
-                        )
-                      ),
+                          // left: -30,
+                          right: -10,
+                          top: -180.h,
+                          bottom: 0,
+                          child: Container(
+                            width: 25,
+                            height: 25,
+                            decoration: const BoxDecoration(
+                              color: Color(0xffF0F0F0),
+                              shape: BoxShape.circle,
+                            ),
+                          )),
                       Positioned(
-                        left: -10,
-                        // right: -50,
-                        top: -180.h,
-                        bottom: 0,
-                        child:
-                        Container(
-                          width: 25,
-                          height: 25,
-                          decoration: const BoxDecoration(
-                            color: bGround,
-                            shape: BoxShape.circle,
-                          ),
-                        )
-
-                      ),
+                          left: -10,
+                          // right: -50,
+                          top: -180.h,
+                          bottom: 0,
+                          child: Container(
+                            width: 25,
+                            height: 25,
+                            decoration: const BoxDecoration(
+                              color: bGround,
+                              shape: BoxShape.circle,
+                            ),
+                          )),
                     ]),
                   ),
-                  SizedBox(height: 20.h,),
+                  SizedBox(
+                    height: 20.h,
+                  ),
                   Row(
                     children: [
                       const Expanded(
@@ -217,22 +222,22 @@ class Share extends StatelessWidget {
                           padding: EdgeInsets.only(right: 20, left: 10),
                           child: Divider(
                             thickness: 2,
-                            color: lliGrey ,
-
+                            color: lliGrey,
                           ),
                         ),
                       ),
                       Text(
                         "أو",
                         style: GoogleFonts.cairo(
-                            fontSize: 20,),
+                          fontSize: 20,
+                        ),
                       ),
                       const Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(right: 10, left: 20),
                           child: Divider(
                             thickness: 2,
-                            color:lliGrey,
+                            color: lliGrey,
                           ),
                         ),
                       ),
@@ -243,7 +248,8 @@ class Share extends StatelessWidget {
                   ),
                   Center(
                     child: Padding(
-                      padding: EdgeInsets.only(left:60.w,right: 60.w,top: 5,bottom: 5),
+                      padding: EdgeInsets.only(
+                          left: 60.w, right: 60.w, top: 5, bottom: 5),
                       child: Container(
                         // width: 208.h,
 //height: 50.h,
@@ -254,33 +260,35 @@ class Share extends StatelessWidget {
                               width: 2,
                             )),
                         child: TextButton(
-                            onPressed: () async{
+                            onPressed: () async {
                               ShareResult shareResult;
-                               shareResult =
-                               await  ShareApp.Share.shareWithResult('check out my website https://github.com/AhmedElmagdob', subject: 'Look what I made!');
-                              if(shareResult.status == ShareResultStatus.success){
+                              shareResult =
+                                  await ShareApp.Share.shareWithResult(
+                                      'controller.shareLinkModel!.title',
+                                      subject: 'Look what I made!');
+                              if (shareResult.status ==
+                                  ShareResultStatus.success) {
                                 Get.snackbar(
                                   "تمت المشاركه",
-                                  "Thank You!",backgroundColor: const Color(
-                                    0xffffd5e0),
+                                  "Thank You!",
+                                  backgroundColor: const Color(0xffffd5e0),
                                   borderRadius: 10,
-
                                 );
                               }
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children:  [
+                              children: [
                                 Text(
                                   "اضغط للمشاركة  ",
                                   style: GoogleFonts.cairo(
-                                      color: basicPink,
-                                      fontSize: 18),
+                                      color: basicPink, fontSize: 18),
                                 ),
-                              Image(
+                                Image(
                                   height: 20.h,
                                   image: const AssetImage(
-                                      "././assets/icon/Mask Group 297.png",),
+                                    "././assets/icon/Mask Group 297.png",
+                                  ),
                                   color: basicPink,
                                 ),
                               ],
@@ -295,5 +303,3 @@ class Share extends StatelessWidget {
     );
   }
 }
-
-
