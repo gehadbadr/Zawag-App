@@ -15,7 +15,6 @@ class MaleDashboardController extends GetxController {
   @override
   void onInit() {
     fetchUserData();
-    // TODO: implement onInit
     super.onInit();
   }
 
