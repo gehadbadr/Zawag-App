@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/questions/questions.dart';
@@ -41,16 +42,21 @@ class QuestionsController extends GetxController {
 
   @override
   void onInit() async {
-    final Dio.Response response = await dio().get(
-      'myData',
-    );
-    user = UserInfooo.fromJson(response.data);
-    
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      final Dio.Response response = await dio().get(
+        'myData',
+      );
+      user = UserInfooo.fromJson(response.data);
+    } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
+    }
     super.onInit();
   }
-
-
-  
 
   void fillList(List<Answer>? answers) {
     checklist = List<bool>.filled(answers!.length, listBool);
@@ -138,35 +144,44 @@ class QuestionsController extends GetxController {
   //get questions
   Future<QuestionsAndAnswers?> getQuestions() async {
     var map;
-    try {
-      loader = true;
-      update();
-      final Dio.Response response = await dio().get(
-        'categories/get_questions/$categoryId/$level/$lastId',
-      );
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      try {
+        loader = true;
+        update();
+        final Dio.Response response = await dio().get(
+          'categories/get_questions/$categoryId/$level/$lastId',
+        );
 
-      print(response.data);
+        print(response.data);
 
-      questions = QuestionsAndAnswers.fromJson(response.data);
-      map = questions?.questions;
-      len = map.toList().length;
-      print(len);
-      loader = false;
-      update();
-      if (len == 0) {
-        Get.back();
-        Get.snackbar("تم ارسال البيانات", "في انتظار المراجعه",
-            borderRadius: 0,
-            showProgressIndicator: false,
-            duration: const Duration(seconds: 4));
+        questions = QuestionsAndAnswers.fromJson(response.data);
+        map = questions?.questions;
+        len = map.toList().length;
+        print(len);
+        loader = false;
+        update();
+        if (len == 0) {
+          Get.back();
+          Get.snackbar("تم ارسال البيانات", "في انتظار المراجعه",
+              borderRadius: 0,
+              showProgressIndicator: false,
+              duration: const Duration(seconds: 4));
+        }
+      } catch (err) {
+        loader = false;
+        // update();
+        print("getQuestions error == ${err.toString()}");
+        // ignore: unnecessary_brace_in_string_interps
       }
-    } catch (err) {
-      loader = false;
-     // update();
-      print("getQuestions error == ${err.toString()}");
-      // ignore: unnecessary_brace_in_string_interps
+      return questions;
+    } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
     }
-    return questions;
   }
 
   //post answers
@@ -174,129 +189,154 @@ class QuestionsController extends GetxController {
     int qId,
     int answerId,
   ) async {
-    try {
-      lastId = qId;
-      loaderAnswer = true;
-      update();
-      print("user_id------------------${user?.user?.id}");
-      Dio.Response response = await dio().post(
-        'questions/answer',
-        // options: Options(
-        //   followRedirects: false,
-        //   validateStatus: (status) => true,
-        // ),
-        data: Dio.FormData.fromMap({
-          'user_id': user?.user?.id,
-          'que_id': qId,
-          'one_choice': answerId,
-        }),
-      );
-      print("object${response.statusMessage}");
-      if (response.statusCode != 200) {
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      try {
+        lastId = qId;
+        loaderAnswer = true;
+        update();
+        print("user_id------------------${user?.user?.id}");
+        Dio.Response response = await dio().post(
+          'questions/answer',
+          // options: Options(
+          //   followRedirects: false,
+          //   validateStatus: (status) => true,
+          // ),
+          data: Dio.FormData.fromMap({
+            'user_id': user?.user?.id,
+            'que_id': qId,
+            'one_choice': answerId,
+          }),
+        );
+        print("object${response.statusMessage}");
+        if (response.statusCode != 200) {
+          loaderAnswer = false;
+          update();
+          throw HttpExeption(
+              response.data['errors'] == "server error" ? "حاول مره اخري" : "");
+        }
+        if (response.statusCode == 200) {
+          changeIndexnN();
+          onTapP();
+          loaderAnswer = false;
+          update();
+        }
+      } on HttpExeption catch (e) {
+        Get.snackbar(e.message, "حاول مره اخري !",
+            borderRadius: 0,
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+      } catch (error) {
         loaderAnswer = false;
         update();
-        throw HttpExeption(
-            response.data['errors'] == "server error" ? "حاول مره اخري" : "");
+        print(error);
+        throw (error);
       }
-      if (response.statusCode == 200) {
-        changeIndexnN();
-        onTapP();
-        loaderAnswer = false;
-        update();
-      }
-    } on HttpExeption catch (e) {
-      Get.snackbar(e.message, "حاول مره اخري !",
+    } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
           borderRadius: 0,
-          showProgressIndicator: false,
-          duration: const Duration(seconds: 4));
-    } catch (error) {
-      loaderAnswer = false;
-      update();
-      print(error);
-      throw (error);
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 
   Future<void> multipleAnswer(
     int qId,
   ) async {
-    try {
-      Map<String, dynamic> api = {
-                  'user_id': user?.user?.id,
-
-        'que_id': qId,
-      };
-      for (int i = 0; i < idList.length; i++) {
-        api['multiple_choice[$i]'] = idList[i];
-      }
-      Dio.Response response = await dio().post(
-        'questions/answer',
-        data: Dio.FormData.fromMap(api),
-      );
-      print("multipleAnswer == ${response.data}");
-      if (response.statusCode != 200) {
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      try {
+        Map<String, dynamic> api = {
+          'user_id': user?.user?.id,
+          'que_id': qId,
+        };
+        for (int i = 0; i < idList.length; i++) {
+          api['multiple_choice[$i]'] = idList[i];
+        }
+        Dio.Response response = await dio().post(
+          'questions/answer',
+          data: Dio.FormData.fromMap(api),
+        );
+        print("multipleAnswer == ${response.data}");
+        if (response.statusCode != 200) {
+          loaderAnswer = false;
+          update();
+          throw HttpExeption(
+              response.data['errors'] == "server error" ? "حاول مره اخري" : "");
+        }
+        if (response.statusCode == 200) {
+          changeIndexnN();
+          onTapP();
+          loaderAnswer = false;
+          update();
+        }
+      } on HttpExeption catch (e) {
+        Get.snackbar(e.message, "حاول مره اخري !",
+            borderRadius: 0,
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+      } catch (error) {
         loaderAnswer = false;
         update();
-        throw HttpExeption(
-            response.data['errors'] == "server error" ? "حاول مره اخري" : "");
+        print("multipleAnswer error == ${error}");
+        throw (error);
       }
-      if (response.statusCode == 200) {
-        changeIndexnN();
-        onTapP();
-        loaderAnswer = false;
-        update();
-      }
-    } on HttpExeption catch (e) {
-      Get.snackbar(e.message, "حاول مره اخري !",
+    } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
           borderRadius: 0,
-          showProgressIndicator: false,
-          duration: const Duration(seconds: 4));
-    } catch (error) {
-      loaderAnswer = false;
-      update();
-      print("multipleAnswer error == ${error}");
-      throw (error);
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 
   Future<void> textAnswer(
     int qId,
   ) async {
-    try {
-      lastId = qId;
-      loaderAnswer = true;
-      update();
-      Dio.Response response = await dio().post(
-        'questions/answer',
-        data: Dio.FormData.fromMap({
-                    'user_id': user?.user?.id,
-
-          'que_id': qId,
-          'text': txtAnswerController.text,
-        }),
-      );
-      if (response.statusCode != 200) {
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      try {
+        lastId = qId;
+        loaderAnswer = true;
+        update();
+        Dio.Response response = await dio().post(
+          'questions/answer',
+          data: Dio.FormData.fromMap({
+            'user_id': user?.user?.id,
+            'que_id': qId,
+            'text': txtAnswerController.text,
+          }),
+        );
+        if (response.statusCode != 200) {
+          loaderAnswer = false;
+          update();
+          throw HttpExeption(
+              response.data['errors'] == "server error" ? "حاول مره اخري" : "");
+        }
+        if (response.statusCode == 200) {
+          changeIndexnN();
+          onTapP();
+          loaderAnswer = false;
+          update();
+        }
+      } on HttpExeption catch (e) {
+        Get.snackbar(e.message, "حاول مره اخري !",
+            borderRadius: 0,
+            showProgressIndicator: false,
+            duration: const Duration(seconds: 4));
+      } catch (error) {
         loaderAnswer = false;
         update();
-        throw HttpExeption(
-            response.data['errors'] == "server error" ? "حاول مره اخري" : "");
+        print("textAnswer error == ${error}");
+        throw (error);
       }
-      if (response.statusCode == 200) {
-        changeIndexnN();
-        onTapP();
-        loaderAnswer = false;
-        update();
-      }
-    } on HttpExeption catch (e) {
-      Get.snackbar(e.message, "حاول مره اخري !",
+    } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
           borderRadius: 0,
-          showProgressIndicator: false,
-          duration: const Duration(seconds: 4));
-    } catch (error) {
-      loaderAnswer = false;
-      update();
-      print("textAnswer error == ${error}");
-      throw (error);
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 }

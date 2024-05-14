@@ -1,6 +1,5 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:country_picker/country_picker.dart';
+import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/app_colors.dart';
 import 'package:effa/ui/screens/pin_page/pin_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -94,6 +93,7 @@ class LoginController extends GetxController {
   @override
   void onClose() {
     controllerr.dispose();
+    // TODO: implement onClose
     super.onClose();
   }
 
@@ -186,38 +186,39 @@ class LoginController extends GetxController {
   Future<void> sendOTP() async {
     GetStorage storage = GetStorage();
     loader = true;
-    update();
-    if(controllerr.text.startsWith("0")&&countryCode ==("+20")){
-      controllerr.text = controllerr.text.replaceFirst(RegExp('^0'), '');
-    }
-    String phoneNumber = countryCode+controllerr.text;
-    FirebaseAuth auth = FirebaseAuth.instance;
-    // Force reCAPTCHA flo
-    await auth.verifyPhoneNumber(
-      phoneNumber: phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) {
-        // Auto-retrieve the SMS code and sign in the user
-        auth.signInWithCredential(credential);
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        loader = false;
-        update();
-        switch (e.code) {
-          case "invalid-verification-id":
-            Get.snackbar('خطاء في id', e.code.toString(),
-                borderRadius: 0,
-                snackPosition: SnackPosition.BOTTOM);
-            loader = false;
-            update();
-            break;
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      update();
+      if (controllerr.text.startsWith("0") && countryCode == ("+20")) {
+        controllerr.text = controllerr.text.replaceFirst(RegExp('^0'), '');
+      }
+      String phoneNumber = countryCode + controllerr.text;
+      FirebaseAuth auth = FirebaseAuth.instance;
+      // Force reCAPTCHA flo
+      await auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) {
+          // Auto-retrieve the SMS code and sign in the user
+          auth.signInWithCredential(credential);
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          loader = false;
+          update();
+          switch (e.code) {
+            case "invalid-verification-id":
+              Get.snackbar('خطاء في id', e.code.toString(),
+                  borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+              loader = false;
+              update();
+              break;
 
-          case "invalid-verification-code":
-            Get.snackbar('فشل التحقق من الكود', e.code.toString(),
-                borderRadius: 0,
-                snackPosition: SnackPosition.BOTTOM);
-            loader = false;
-            update();
-            break;
+            case "invalid-verification-code":
+              Get.snackbar('فشل التحقق من الكود', e.code.toString(),
+                  borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+              loader = false;
+              update();
+              break;
 
             case "invalid-phone-number":
               Get.snackbar('رقم الهاتف الذي أدخلته غير صحيح', e.code.toString(),
@@ -226,36 +227,47 @@ class LoginController extends GetxController {
                   snackPosition: SnackPosition.BOTTOM);
               break;
 
-          case "session-expired":
-            Get.snackbar('من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد', e.code.toString(),
-              borderRadius: 0,
-              snackPosition: SnackPosition.BOTTOM,
+            case "session-expired":
+              Get.snackbar(
+                'من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد',
+                e.code.toString(),
+                borderRadius: 0,
+                snackPosition: SnackPosition.BOTTOM,
+              );
 
-            );
+              loader = false;
+              update();
+              break;
+            default:
+              print("error login ==${e.message}");
+          }
+          // Handle verification failed
+        },
+        codeSent: (String verificationId, int? resendToken) async {
+          await storage.write("verificationId", verificationId);
+          await storage.write("resendToken", resendToken);
 
-            loader = false;
-            update();
-            break;
-          default:
-            print("error login ==${e.message}");
-        }
-        // Handle verification failed
-      },
-      codeSent: (String verificationId, int? resendToken)async {
-        await storage.write("verificationId", verificationId);
-        await storage.write("resendToken", resendToken);
+          // Save the verification ID to use later
+          // You can also use the resendToken to send another SMS
+          // with the same verification ID
+          // String smsCode = "";
+          loader = false;
+          update();
+          Get.to(
+            () => PinPage(code: countryCode, myPhone: controllerr.text),
+          );
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // Handle timeout
+        },
+      );
+    } else {
+       Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
+              loader = false;
 
-        // Save the verification ID to use later
-        // You can also use the resendToken to send another SMS
-        // with the same verification ID
-        // String smsCode = "";
-        loader = false;
-        update();
-        Get.to(()=> PinPage(code: countryCode,myPhone: controllerr.text),);
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        // Handle timeout
-      },
-    );
+    }
   }
 }
