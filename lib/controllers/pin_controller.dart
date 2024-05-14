@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/app_colors.dart';
 import 'package:effa/models/posts/auth.dart';
 import 'package:effa/ui/screens/terms/trems.dart';
@@ -66,71 +67,80 @@ class PinCodeController extends GetxController {
   Future<void> sendOTPCode(
       BuildContext ctx, String? myPhone, String? code) async {
     GetStorage storage = GetStorage();
-    FirebaseAuth auth = FirebaseAuth.instance;
-    var codetest = storage.read("verificationId");
-    print("===========${codetest}");
-    loader = true;
-    update();
-    PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: storage.read("verificationId"),
-        smsCode: codeController1.text +
-            codeController2.text +
-            codeController3.text +
-            codeController4.text +
-            codeController5.text +
-            codeController6.text);
-    try {
-      await auth.signInWithCredential(credential);
-      print("========verificationId===${codetest}");
-
-      String tokenResult = FirebaseAuth.instance.currentUser!.uid;
-      print("========tokenResult===${tokenResult}");
-
-      await authController.register(myPhone!, code!, tokenResult);
-      loader = false;
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      var codetest = storage.read("verificationId");
+      print("===========${codetest}");
+      loader = true;
       update();
-    } on FirebaseAuthException catch (e) {
-      switch ("PinCodeController error ==${e.code}") {
-        case "invalid-verification-id":
-          Get.snackbar('خطاء في id', e.code.toString(),
-              borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
-          loader = false;
-          update();
-          break;
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: storage.read("verificationId"),
+          smsCode: codeController1.text +
+              codeController2.text +
+              codeController3.text +
+              codeController4.text +
+              codeController5.text +
+              codeController6.text);
+      try {
+        await auth.signInWithCredential(credential);
+        print("========verificationId===${codetest}");
 
-        case "invalid-verification-code":
-          Get.snackbar('فشل التحقق من الكود', e.code.toString(),
-              borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
-          loader = false;
-          update();
-          break;
+        String tokenResult = FirebaseAuth.instance.currentUser!.uid;
+        print("========tokenResult===${tokenResult}");
 
-        case "invalid-phone-number":
-          Get.snackbar('رقم الهاتف الذي أدخلته غير صحيح', e.code.toString(),
-              borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
-          break;
+        await authController.register(myPhone!, code!, tokenResult);
+        loader = false;
+        update();
+      } on FirebaseAuthException catch (e) {
+        switch ("PinCodeController error ==${e.code}") {
+          case "invalid-verification-id":
+            Get.snackbar('خطاء في id', e.code.toString(),
+                borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+            loader = false;
+            update();
+            break;
 
-        case "session-expired":
-          Get.snackbar(
-            'من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد',
-            e.code.toString(),
-            borderRadius: 0,
-            snackPosition: SnackPosition.BOTTOM,
-          );
+          case "invalid-verification-code":
+            Get.snackbar('فشل التحقق من الكود', e.code.toString(),
+                borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+            loader = false;
+            update();
+            break;
 
-          loader = false;
-          update();
-          break;
-        default:
-          print(e.code);
+          case "invalid-phone-number":
+            Get.snackbar('رقم الهاتف الذي أدخلته غير صحيح', e.code.toString(),
+                borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+            break;
+
+          case "session-expired":
+            Get.snackbar(
+              'من فضلك اضغط اعادة ارسال الكود وأدخل الكود الجديد',
+              e.code.toString(),
+              borderRadius: 0,
+              snackPosition: SnackPosition.BOTTOM,
+            );
+
+            loader = false;
+            update();
+            break;
+          default:
+            print(e.code);
+        }
+      } catch (e) {
+        Get.snackbar(e.toString(), "خطاء",
+            borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
+        loader = false;
+        print("codetest==  ${codetest}");
+
+        update();
       }
-    } catch (e) {
-      Get.snackbar(e.toString(), "nbvmbvmbnvmnbخطاء",
-          borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
-      loader = false;
-      print("codetest==  ${codetest}");
-
-      update();
+    } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 }

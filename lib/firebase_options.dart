@@ -47,28 +47,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAPT0BqLKK0-sMPdM11SQ-2xYXW5aHHKvY',
-    appId: '1:749486113321:web:e4b4bb49a22a08e0d3d238',
-    messagingSenderId: '749486113321',
-    projectId: 'zawagapp-a8cdc',
-    authDomain: 'zawagapp-a8cdc.firebaseapp.com',
-    storageBucket: 'zawagapp-a8cdc.appspot.com',
+    apiKey: 'AIzaSyAV4pOAettiIDr9wnjP_LawkaDJ9_vWHbk',
+    appId: '1:378429873654:web:1f1908ab194db5e9e67bd7',
+    messagingSenderId: '378429873654',
+    projectId: 'effa-6c6d7',
+    authDomain: 'effa-6c6d7.firebaseapp.com',
+    storageBucket: 'effa-6c6d7.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDrB1fWfuI3ow9mp0NopbanFxT50P99oAw',
-    appId: '1:749486113321:android:a030fc060ef2d07dd3d238',
-    messagingSenderId: '749486113321',
-    projectId: 'zawagapp-a8cdc',
-    storageBucket: 'zawagapp-a8cdc.appspot.com',
+    apiKey: 'AIzaSyBVWckozKH6gJs35SWCQ2tun1TdWvFQvF4',
+    appId: '1:378429873654:android:c720900d98e8d3d3e67bd7',
+    messagingSenderId: '378429873654',
+    projectId: 'effa-6c6d7',
+    storageBucket: 'effa-6c6d7.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA0s1J0tFWtgIyLQ3EtWila2GY79dzGaQc',
-    appId: '1:749486113321:ios:38c9b1be6d978c89d3d238',
-    messagingSenderId: '749486113321',
-    projectId: 'zawagapp-a8cdc',
-    storageBucket: 'zawagapp-a8cdc.appspot.com',
+    apiKey: 'AIzaSyC_0xhsZduvMlhg1YTk_Ya6hO8hoVAHvxo',
+    appId: '1:378429873654:ios:147e21b95aab1b88e67bd7',
+    messagingSenderId: '378429873654',
+    projectId: 'effa-6c6d7',
+    storageBucket: 'effa-6c6d7.appspot.com',
     iosBundleId: 'com.example.effa',
   );
 

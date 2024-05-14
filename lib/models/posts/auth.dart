@@ -1,11 +1,13 @@
+import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/user/user_auth_model.dart';
-import 'package:effa/models/user/user_data.dart';
 import 'package:effa/ui/screens/dashboard/male_dashboard.dart';
 import 'package:effa/ui/screens/main_data/main_data.dart';
 import 'package:effa/ui/screens/terms/trems.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:get_storage/get_storage.dart';
 import 'package:dio/dio.dart' as Dio;
 
@@ -22,6 +24,9 @@ class AuthController extends GetxController {
     String userCode,
   ) async {
     GetStorage storage = GetStorage();
+     var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
     try {
       Dio.Response response = await dio().post(
         'register',
@@ -78,6 +83,15 @@ class AuthController extends GetxController {
       print("register error == ${error.toString()}");
       //  throw (error);
     }
+     } else {
+       Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
+              loader = false;
+
+    }
+
   }
 
   //updateUser data
@@ -85,6 +99,9 @@ class AuthController extends GetxController {
     String? about_you,
     String? about_partner,
   ) async {
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) { 
     try {
       loader = true;
       update();
@@ -124,6 +141,16 @@ class AuthController extends GetxController {
       print("updateUser == ${error.toString()}");
       throw (error);
     }
+
+      } else {
+       Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
+              loader = false;
+
+    }
+
   }
 
 

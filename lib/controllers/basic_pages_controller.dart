@@ -1,3 +1,4 @@
+import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/nationality/nationality_model.dart';
@@ -97,6 +98,9 @@ class BasicPagesController extends GetxController {
 
   //updateUser data
   Future<void> updateUser() async {
+    var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
     try {
       loader = true;
       update();
@@ -146,11 +150,21 @@ class BasicPagesController extends GetxController {
           duration: const Duration(seconds: 4));
       throw (error);
     }
+   } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
+    }
   }
 
   //fetchNationality
-  Future<List<NationalityModel?>?> fetchNationalityData() async {
-    try {
+  Future<List<NationalityModel?>?> fetchNationalityData() async 
+  {
+  var res;
+    res = await CheckInternet.checkInternet();
+    if (res) {
+        try {
       loaderN = true;
       final Dio.Response response = await dio().get(
         'general/nationality',
@@ -169,6 +183,12 @@ class BasicPagesController extends GetxController {
       // ignore: unnecessary_brace_in_string_interps
     }
     return nationalityModel;
+         } else {
+      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
+          backgroundColor: Colors.red,
+          borderRadius: 0,
+          snackPosition: SnackPosition.BOTTOM);
+    }
   }
 
   //searchMethod

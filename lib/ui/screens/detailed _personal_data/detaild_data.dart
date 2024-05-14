@@ -29,9 +29,9 @@ class DetailedInfo extends StatelessWidget {
   bool showEdit;
   DetailedInfo({Key? key, required this.showEdit}) : super(key: key);
   final gender = GetStorage();
- // final controller1 = Get.lazyPut(() => ProgressController(), fenix: false);
-  final ProgressController controller =
-      Get.put(ProgressController(), permanent: false);
+ final controller1 = Get.lazyPut(() => ProgressController(), fenix: false);
+  // final ProgressController controller =
+  //     Get.put(ProgressController(), permanent: false);
   @override
   Widget build(BuildContext context) {
     return  GetBuilder<ProgressController>(builder: (controller) {

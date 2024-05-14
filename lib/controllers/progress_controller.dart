@@ -72,7 +72,7 @@ class ProgressController extends GetxController {
     } catch (err) {
       loader = false;
       update();
-      Get.snackbar('خطأ في الاتصال', "NETWORK_ERR",
+      Get.snackbar('jhcjNKCHkdjzhcvvvvvvvvvvvvvvvvvvvvvv خطأ في الاتصال', "NETWORK_ERR",
           borderRadius: 0, snackPosition: SnackPosition.BOTTOM);
       print("MyProfileController error == ${err.toString()}");
       // ignore: unnecessary_brace_in_string_interps
