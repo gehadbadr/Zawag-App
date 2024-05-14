@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:effa/functions/checkInternet.dart';
 import 'package:effa/helper/dio_helper.dart';
 import 'package:effa/helper/http_exeption.dart';
 import 'package:effa/models/questions/questions.dart';
@@ -49,6 +48,9 @@ class QuestionsController extends GetxController {
     
     super.onInit();
   }
+
+
+  
 
   void fillList(List<Answer>? answers) {
     checklist = List<bool>.filled(answers!.length, listBool);
@@ -136,17 +138,14 @@ class QuestionsController extends GetxController {
   //get questions
   Future<QuestionsAndAnswers?> getQuestions() async {
     var map;
-    var res;
-    res = await CheckInternet.checkInternet();
-    if (res) {
-      try {
-        loader = true;
-        update();
-        final Dio.Response response = await dio().get(
-          'categories/get_questions/$categoryId/$level/$lastId',
-        );
+    try {
+      loader = true;
+      update();
+      final Dio.Response response = await dio().get(
+        'categories/get_questions/$categoryId/$level/$lastId',
+      );
 
-        print(response.data);
+      print(response.data);
 
       questions = QuestionsAndAnswers.fromJson(response.data);
       map = questions?.questions;
@@ -175,55 +174,46 @@ class QuestionsController extends GetxController {
     int qId,
     int answerId,
   ) async {
-    var res;
-    res = await CheckInternet.checkInternet();
-    if (res) {
-      try {
-        lastId = qId;
-        loaderAnswer = true;
-        update();
-        print("user_id------------------${user?.user?.id}");
-        Dio.Response response = await dio().post(
-          'questions/answer',
-          // options: Options(
-          //   followRedirects: false,
-          //   validateStatus: (status) => true,
-          // ),
-          data: Dio.FormData.fromMap({
-            'user_id': user?.user?.id,
-            'que_id': qId,
-            'one_choice': answerId,
-          }),
-        );
-        print("object${response.statusMessage}");
-        if (response.statusCode != 200) {
-          loaderAnswer = false;
-          update();
-          throw HttpExeption(
-              response.data['errors'] == "server error" ? "حاول مره اخري" : "");
-        }
-        if (response.statusCode == 200) {
-          changeIndexnN();
-          onTapP();
-          loaderAnswer = false;
-          update();
-        }
-      } on HttpExeption catch (e) {
-        Get.snackbar(e.message, "حاول مره اخري !",
-            borderRadius: 0,
-            showProgressIndicator: false,
-            duration: const Duration(seconds: 4));
-      } catch (error) {
+    try {
+      lastId = qId;
+      loaderAnswer = true;
+      update();
+      print("user_id------------------${user?.user?.id}");
+      Dio.Response response = await dio().post(
+        'questions/answer',
+        // options: Options(
+        //   followRedirects: false,
+        //   validateStatus: (status) => true,
+        // ),
+        data: Dio.FormData.fromMap({
+          'user_id': user?.user?.id,
+          'que_id': qId,
+          'one_choice': answerId,
+        }),
+      );
+      print("object${response.statusMessage}");
+      if (response.statusCode != 200) {
         loaderAnswer = false;
         update();
-        print(error);
-        throw (error);
+        throw HttpExeption(
+            response.data['errors'] == "server error" ? "حاول مره اخري" : "");
       }
-    } else {
-      Get.snackbar('خطأ في الخدمه', "تحقق من الاتصال بالانترنت",
-          backgroundColor: Colors.red,
+      if (response.statusCode == 200) {
+        changeIndexnN();
+        onTapP();
+        loaderAnswer = false;
+        update();
+      }
+    } on HttpExeption catch (e) {
+      Get.snackbar(e.message, "حاول مره اخري !",
           borderRadius: 0,
-          snackPosition: SnackPosition.BOTTOM);
+          showProgressIndicator: false,
+          duration: const Duration(seconds: 4));
+    } catch (error) {
+      loaderAnswer = false;
+      update();
+      print(error);
+      throw (error);
     }
   }
 
