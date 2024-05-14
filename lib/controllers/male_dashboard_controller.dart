@@ -1,4 +1,5 @@
-import 'package:effa/controllers/transition.dart';
+// ignore_for_file: library_prefixes
+
 import 'package:effa/ui/screens/account_setting/account_settings.dart';
 import 'package:effa/ui/screens/filter/filter.dart';
 import 'package:effa/ui/screens/home/home.dart';
@@ -14,7 +15,6 @@ class MaleDashboardController extends GetxController {
   @override
   void onInit() {
     fetchUserData();
-    // TODO: implement onInit
     super.onInit();
   }
 

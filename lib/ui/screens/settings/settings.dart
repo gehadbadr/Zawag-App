@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatelessWidget {
   Settings({Key? key}) : super(key: key);
-  SettingPageController controller =Get.put(SettingPageController(), permanent: false);
-
+  SettingPageController controller =
+      Get.put(SettingPageController(), permanent: false);
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +23,18 @@ class Settings extends StatelessWidget {
           backgroundColor: bGround,
           body: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: 25.0.h, horizontal: 15.w),
+              padding: EdgeInsets.symmetric(vertical: 25.0.h, horizontal: 15.w),
               child: Center(
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                                color: Colors.white70, width: 1),
+                            border: Border.all(color: Colors.white70, width: 1),
                             boxShadow: const [
                               BoxShadow(
                                   color: gGrey,
@@ -52,8 +50,8 @@ class Settings extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                     ImageIcon(
-                                       const AssetImage(
+                                    ImageIcon(
+                                      const AssetImage(
                                           "././assets/icon/nextto.png"),
                                       color: basicPink,
                                       size: 28.h,
@@ -71,8 +69,8 @@ class Settings extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                     ImageIcon(
-                                      const  AssetImage(
+                                    ImageIcon(
+                                      const AssetImage(
                                           "././assets/icon/notify.png"),
                                       color: basicPink,
                                       size: 24.h,
@@ -82,8 +80,7 @@ class Settings extends StatelessWidget {
                                     ),
                                     Text(
                                       "الاشعارات ",
-                                      style: GoogleFonts.cairo(
-                                          fontSize: 16.sp),
+                                      style: GoogleFonts.cairo(fontSize: 16.sp),
                                     ),
                                     const Spacer(),
                                     SizedBox(
@@ -95,7 +92,6 @@ class Settings extends StatelessWidget {
                                           value: controller.isSwitched,
                                           activeColor: basicPink,
                                           trackColor: grey,
-
                                         ),
                                       ),
                                     ),
@@ -114,16 +110,16 @@ class Settings extends StatelessWidget {
                                   onTap: () {
                                     Get.to(Share(), //next page class
                                         duration:
-                                        const Duration(milliseconds: 400),
+                                            const Duration(milliseconds: 400),
                                         //duration of transitions, default 1 sec
                                         transition: Transition
                                             .leftToRight //transition effect
-                                    );
+                                        );
                                   },
                                   child: Row(
                                     children: [
-                                       ImageIcon(
-                                         const AssetImage(
+                                      ImageIcon(
+                                        const AssetImage(
                                             "././assets/icon/share.png"),
                                         color: basicPink,
                                         size: 24.h,
@@ -133,8 +129,8 @@ class Settings extends StatelessWidget {
                                       ),
                                       Text(
                                         "مشاركة التطبيق ",
-                                        style: GoogleFonts.cairo(
-                                            fontSize: 16.sp),
+                                        style:
+                                            GoogleFonts.cairo(fontSize: 16.sp),
                                       ),
                                     ],
                                   ),
@@ -143,17 +139,14 @@ class Settings extends StatelessWidget {
                             ),
                           ),
                         ),
-
                         SizedBox(
                           height: 20.h,
                         ),
-
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                                color: Colors.white70, width: 1),
+                            border: Border.all(color: Colors.white70, width: 1),
                             boxShadow: [
                               BoxShadow(
                                   color: gGrey,
@@ -169,8 +162,8 @@ class Settings extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                     ImageIcon(
-                                       const AssetImage(
+                                    ImageIcon(
+                                      const AssetImage(
                                           "././assets/icon/nextto.png"),
                                       color: basicPink,
                                       size: 28.h,
@@ -189,17 +182,17 @@ class Settings extends StatelessWidget {
                                 GestureDetector(
                                   onTap: (() {
                                     Get.to(Contact(), //next page class
-                                        duration: const Duration(
-                                            milliseconds: 400),
+                                        duration:
+                                            const Duration(milliseconds: 400),
                                         //duration of transitions, default 1 sec
                                         transition: Transition
                                             .leftToRight //transition effect
-                                    );
+                                        );
                                   }),
                                   child: Row(
                                     children: [
-                                       ImageIcon(
-                                         const AssetImage(
+                                      ImageIcon(
+                                        const AssetImage(
                                             "././assets/icon/contact.png"),
                                         color: basicPink,
                                         size: 24.h,
@@ -209,8 +202,8 @@ class Settings extends StatelessWidget {
                                       ),
                                       Text(
                                         "تواصل معنا ",
-                                        style: GoogleFonts.cairo(
-                                            fontSize: 16.sp),
+                                        style:
+                                            GoogleFonts.cairo(fontSize: 16.sp),
                                       ),
                                     ],
                                   ),
@@ -225,17 +218,17 @@ class Settings extends StatelessWidget {
                                 GestureDetector(
                                   onTap: (() {
                                     Get.to(AboutApp(), //next page class
-                                        duration: const Duration(
-                                            milliseconds: 400),
+                                        duration:
+                                            const Duration(milliseconds: 400),
                                         //duration of transitions, default 1 sec
                                         transition: Transition
                                             .leftToRight //transition effect
-                                    );
+                                        );
                                   }),
                                   child: Row(
                                     children: [
-                                       ImageIcon(
-                                         const AssetImage(
+                                      ImageIcon(
+                                        const AssetImage(
                                             "././assets/icon/about.png"),
                                         color: basicPink,
                                         size: 24.h,
@@ -245,8 +238,8 @@ class Settings extends StatelessWidget {
                                       ),
                                       Text(
                                         "عن التطبيق ",
-                                        style: GoogleFonts.cairo(
-                                            fontSize: 16.sp),
+                                        style:
+                                            GoogleFonts.cairo(fontSize: 16.sp),
                                       ),
                                     ],
                                   ),
@@ -260,8 +253,9 @@ class Settings extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                     ImageIcon(
-                                      const  AssetImage("././assets/icon/rate.png"),
+                                    ImageIcon(
+                                      const AssetImage(
+                                          "././assets/icon/rate.png"),
                                       color: basicPink,
                                       size: 24.h,
                                     ),
@@ -270,8 +264,7 @@ class Settings extends StatelessWidget {
                                     ),
                                     Text(
                                       "تقييم التطبيق ",
-                                      style: GoogleFonts.cairo(
-                                          fontSize: 16.sp),
+                                      style: GoogleFonts.cairo(fontSize: 16.sp),
                                     ),
                                   ],
                                 ),
@@ -281,8 +274,7 @@ class Settings extends StatelessWidget {
                         ),
                         Center(
                           child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 18.0.h, bottom: 18.h),
+                            padding: EdgeInsets.only(top: 18.0.h, bottom: 18.h),
                             child: Text(
                               "كن علي اتصال",
                               style: GoogleFonts.cairo(fontSize: 16.sp),
@@ -294,28 +286,52 @@ class Settings extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image(
-                                image:
-                                const AssetImage("././assets/icon/insta.png"),
-                                width: 48.w,
-                                height: 48.h,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 3.0.w),
+                              InkWell(
+                                onTap: () {
+                                  // launchUrl(Uri.parse(
+                                  //    controller.socialsLinkModel!.insta));
+                                  launchUrl(
+                                      Uri.parse("https://www.instagram.com/"));
+                                },
                                 child: Image(
                                   image: const AssetImage(
-                                      "././assets/icon/messenger.png"),
+                                      "././assets/icon/insta.png"),
                                   width: 48.w,
                                   height: 48.h,
                                 ),
                               ),
-                              Image(
-                                image: const AssetImage(
-                                  "././assets/icon/whats.png",
+                              Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 3.0.w),
+                                child: InkWell(
+                                  onTap: () {
+                                    // launchUrl(Uri.parse(
+                                    //     controller.socialsLinkModel!.facebook));
+                                    launchUrl(
+                                        Uri.parse("https://www.facebook.com/"));
+                                  },
+                                  child: Image(
+                                    image: const AssetImage(
+                                        "././assets/icon/messenger.png"),
+                                    width: 48.w,
+                                    height: 48.h,
+                                  ),
                                 ),
-                                width: 48.w,
-                                height: 48.h,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  // launchUrl(Uri.parse(
+                                  //     controller.socialsLinkModel!.whats_app));
+                                  launchUrl(
+                                      Uri.parse("https://wa.me/201013924210"));
+                                },
+                                child: Image(
+                                  image: const AssetImage(
+                                    "././assets/icon/whats.png",
+                                  ),
+                                  width: 48.w,
+                                  height: 48.h,
+                                ),
                               ),
                             ],
                           ),
@@ -324,9 +340,7 @@ class Settings extends StatelessWidget {
                 ),
               ),
             ),
-          )
-      );
-    }
-    );
+          ));
+    });
   }
 }

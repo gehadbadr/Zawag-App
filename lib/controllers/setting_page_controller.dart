@@ -8,6 +8,7 @@ class SettingPageController extends GetxController {
   bool loader = false;
   TermsModel? aboutModel;
   ShareLinkModel? shareLinkModel;
+  SocialsLinkModel? socialsLinkModel;
   void onInit() {
     fetchAboutData();
     // TODO: implement onInit
@@ -34,10 +35,15 @@ class SettingPageController extends GetxController {
       Dio.Response responseLink = await dio().get(
         'share_link',
       );
+      Dio.Response responseSocials = await dio().get(
+        'socials',
+      );
       print("fetchAboutData == ${response.data}");
       aboutModel = TermsModelFromJson(response.toString());
       shareLinkModel = shareLinkModelFromJson(responseLink.toString());
-
+      socialsLinkModel =
+          SocialsLinkModel.fromJson(responseSocials as Map<String, dynamic>);
+      print("responseSocials===${responseSocials.data}");
       loader = false;
       update();
 
